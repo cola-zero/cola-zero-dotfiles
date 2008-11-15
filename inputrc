@@ -1,0 +1,15 @@
+# list the possibilities after an ambiguous completion
+#
+set show-all-if-ambiguous on
+
+# stop the beep
+#
+set bell-style none
+
+# historical backward search with linehead string binded to up-key
+#
+"\e[A": history-search-backward
+
+# historical forward search with linehead string binded to down-key
+#
+"\e[B": history-search-forward
