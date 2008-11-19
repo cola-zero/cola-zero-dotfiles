@@ -11,9 +11,9 @@ ulimit -c 0
 PS1='\[\e[01:33m\][\u@\h]\[\e[0m\]\[\e[00:32m\](\w)\[\e[0m\]$ '
 
 # for macport
-if [ $OSTYPE == drawin* ]; then
+#if [ $OSTYPE == "drawin9.0" ]; then
 export PATH=/usr/local/bin:$PATH 
-fi
+#fi
 
 # about history
 # history filename
