@@ -1,14 +1,7 @@
 escape ^t^t
 
-hardsatus on 
-hardstatus alwayslastline "screen | %w | %u %= %m/%d %D %c"
-
-bind -c REGION 2 split
-bind -c REGION 1 only
-bind -c REGION 0 remove
-bind -c REGION o focus
-bind -c REGION ^ resize
-bind x command -c REGION
+hardstatus on 
+hardstatus alwayslastline "screen | %w | %u %= %m/%d %c"
 
 idle 3600
 
