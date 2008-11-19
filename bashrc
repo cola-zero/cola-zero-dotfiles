@@ -49,7 +49,7 @@ fi
 
 # complete
 shopt -s no_empty_cmd_completion
-complete -d cd
+complete -d cd		
 complete -c man
 complete -c which
 complete -c whatis
