@@ -1,3 +1,5 @@
 [user]
 	name = Masahiro Koga
 	email = masahirokoga@gmail.com
+[core]
+	excludefiles = /Users/kogamasahiro/.gitignore
