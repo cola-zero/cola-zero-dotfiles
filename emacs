@@ -10,4 +10,7 @@
 ;; (set-frame-parameter nil 'alpha 0.85)
 (set-frame-parameter nil 'alpha 85)
 
-(load "color-theme")
+(when (require 'color-theme nil t)
+  (color-theme-initialize)
+  (color-theme-arjen))
+
