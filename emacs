@@ -1,6 +1,6 @@
 ;;;
 ;;; .emacs
-;;; 
+;;;
 
 
 ;; デフォルトの透明度を設定する (85%)
@@ -19,3 +19,7 @@
 ;;
 (autoload 'navi2ch "navi2ch" "Navigator for 2ch for Emacs" t)
 
+;; 行末にあるスペースを強調表示する
+(when (boundp 'show-trailing-whitespace) (setq-default show-trailing-whitespace t))
+(set-face-background 'trailing-whitespace "plum")
+(set-face-underline 'trailing-whitespace t)
