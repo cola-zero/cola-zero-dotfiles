@@ -14,3 +14,7 @@
   (color-theme-initialize)
   (color-theme-arjen))
 
+;;
+;; navi2ch
+;;
+(autoload 'navi2ch "navi2ch" "Navigator for 2ch for Emacs" t)
