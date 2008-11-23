@@ -23,3 +23,12 @@
 (when (boundp 'show-trailing-whitespace) (setq-default show-trailing-whitespace t))
 (set-face-background 'trailing-whitespace "plum")
 (set-face-underline 'trailing-whitespace t)
+
+;; ツールバーを消す
+(tool-bar-mode nil)
+
+;;
+;; git-emacs
+;;
+(add-to-list 'load-path "/Users/kogamasahiro/.emacs.d/elisp/git-emacs")
+(require 'git-emacs nil t)
