@@ -54,5 +54,6 @@ complete -c man
 complete -c which
 complete -c whatis
 complete -c sudo
+if [ -f /opt/local/share/doc/git-core/contrib/completion/git-completion.bash ]; then
 source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash
-
+fi
