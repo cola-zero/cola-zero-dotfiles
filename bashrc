@@ -54,3 +54,5 @@ complete -c man
 complete -c which
 complete -c whatis
 complete -c sudo
+source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash
+
