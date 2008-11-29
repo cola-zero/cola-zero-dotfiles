@@ -30,5 +30,5 @@
 ;;
 ;; git-emacs
 ;;
-(add-to-list 'load-path "/Users/kogamasahiro/.emacs.d/elisp/git-emacs")
+(add-to-list 'load-path "/$HOME/.emacs.d/elisp/git-emacs")
 (require 'git-emacs nil t)
