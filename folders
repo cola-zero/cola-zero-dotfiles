@@ -1,0 +1,5 @@
+# -*- mode: conf-unix ; Coding iso-2022-7bit -*-
+#
+%inbox "受信トレイ"
++Drafts "下書き"
+%/
