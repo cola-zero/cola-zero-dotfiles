@@ -32,3 +32,11 @@
 ;;
 (add-to-list 'load-path "/$HOME/.emacs.d/elisp/git-emacs")
 (require 'git-emacs nil t)
+
+;;
+;; wl
+;;
+(if (require 'wanderlust-startup nil t)
+    (autoload 'wl "wl" "Wanderlust" t)
+    (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+    (autoload 'wo-draft "wl-draft" "Write draft with Wanderlust." t))
