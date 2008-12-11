@@ -2,6 +2,10 @@
 ;;; .emacs
 ;;;
 
+;;ステータスバーの設定
+(display-time-mode 1)
+(line-number-mode 1)
+(column-number-mode 1)
 
 ;; デフォルトの透明度を設定する (85%)
 (add-to-list 'default-frame-alist '(alpha . 75))
@@ -10,8 +14,8 @@
 ;; (set-frame-parameter nil 'alpha 0.85)
 (set-frame-parameter nil 'alpha 75)
 
+;; color-theme の設定
 (when (require 'color-theme nil t)
-  (color-theme-initialize)
   (color-theme-arjen))
 
 ;;
@@ -40,3 +44,14 @@
     (autoload 'wl "wl" "Wanderlust" t)
     (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
     (autoload 'wo-draft "wl-draft" "Write draft with Wanderlust." t))
+
+;;
+;;anthy
+;;
+(set-language-environment "Japanese")
+; set load-path for anthy.el
+(push "/usr/share/emacs/site-lisp/anthy/" load-path)
+; load anth.el
+(load-library "anthy")
+; set default for japanese-anthy
+(setq default-input-method "japanese-anthy")
