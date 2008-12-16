@@ -30,6 +30,9 @@
 
 ;; ツールバーを消す
 (tool-bar-mode nil)
+;; メニューバーを消す
+(menu-bar-mode nil)
+
 
 ;;
 ;; git-emacs
@@ -55,3 +58,13 @@
 (load-library "anthy")
 ; set default for japanese-anthy
 (setq default-input-method "japanese-anthy")
+
+;; enable color in console
+(global-font-lock-mode t)
+
+
+;;
+;; TRAMP
+;;
+;; リモートのファイルを編集する
+(require 'tramp)
