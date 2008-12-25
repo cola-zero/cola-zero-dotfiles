@@ -68,3 +68,14 @@
 ;;
 ;; リモートのファイルを編集する
 (require 'tramp)
+
+;;
+;; multi-tty emacs
+;;
+(server-start)
+
+
+;;
+;; cscope
+;;
+(require 'xcscope)
