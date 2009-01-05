@@ -12,7 +12,7 @@ PS1='\[\e[01:33m\][\u@\h]\[\e[0m\]\[\e[00:32m\](\w)\[\e[0m\]$ '
 
 # for macport
 #if [ $OSTYPE == "drawin9.0" ]; then
-export PATH=/opt/local/bin:$PATH 
+export PATH=/opt/local/bin:$PATH
 #fi
 
 # about history
@@ -49,7 +49,7 @@ fi
 
 # complete
 shopt -s no_empty_cmd_completion
-complete -d cd		
+complete -d cd
 complete -c man
 complete -c which
 complete -c whatis
