@@ -1,19 +1,32 @@
 ## .bashrc
 ## Masahiro Koga
 
-# 新しいファイルは 644 で作成
-umask 022
+# Source global definitions
+if [ -f /etc/bash ]; then
+	. /etc/bashrc
+fi
 
-# do'nt make core file
+# User specific aliases and functions
+## File/Directory mask bits.
+## File: 644 (rw-r--r--)
+## Directory: 755 (rwxr-xr-x)
+umask   022
+
+# Don't make core files
 ulimit -c 0
 
 # prompt
 PS1='\[\e[01:33m\][\u@\h]\[\e[0m\]\[\e[00:32m\](\w)\[\e[0m\]$ '
 
 # for macport
-#if [ $OSTYPE == "drawin9.0" ]; then
+if [ $OSTYPE == "drawin9.0" ]; then
 export PATH=/opt/local/bin:$PATH
-#fi
+fi
+
+# LANG Setting
+if [ `uname` == 'SunOS' ]; then
+   export LNAG=ja;
+fi
 
 # about history
 # history filename
@@ -56,4 +69,10 @@ complete -c whatis
 complete -c sudo
 if [ -f /opt/local/share/doc/git-core/contrib/completion/git-completion.bash ]; then
 source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash
+fi
+
+# set PAGER
+if [ -f `which lv` ]; then
+   export PAGER='lv -i'
+   alias less='lv -s'
 fi
