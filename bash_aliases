@@ -1,6 +1,9 @@
 ## .bash_aliases
 ## Masahiro Koga
+# color option can't use in solaris
+if [ $OSTYPE == "linux-gnu" ]; then
 alias ls='ls -F --color=auto'
-alias la='ls -lag --color=auto'
-alias l='ls -F --color=auto'
+fi
+alias la='ls -lag'
+alias l='ls -F'
 alias ec='emacsclient'
