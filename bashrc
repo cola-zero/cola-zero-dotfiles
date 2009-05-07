@@ -21,6 +21,8 @@ PS1='\[\e[01:33m\][\u@\h]\[\e[0m\]\[\e[00:32m\](\w)\[\e[0m\]$ '
 # for macport
 if [ $OSTYPE == "drawin9.0" ]; then
 export PATH=/opt/local/bin:$PATH
+elif [ $OSTYPE == "linux-gnu" ]; then
+export PATH=$HOME/linux/local/bin:$PATH
 fi
 
 # LANG Setting
@@ -76,3 +78,4 @@ if [ -f `which lv` ]; then
    export PAGER='lv -i'
    alias less='lv -s'
 fi
+
