@@ -79,3 +79,7 @@
 ;; cscope
 ;;
 (require 'xcscope)
+
+;; C-H を一文字前を削除に変更
+;(define-key global-map "^H" 'backward-delete-char)
+(define-key global-map "" 'backward-delete-char)
