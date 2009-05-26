@@ -19,7 +19,7 @@ bind l windowlist
 # erase background with current bg color
 defbce "on"
 # do not use 'screen-bce'
-term xterm-256color
+term screen
 
 bind 'U' eval "encoding utf8" "stuff 'export LANG=ja_JP.UTF-8\012'"
 bind 'E' eval "encoding euc" "stuff 'export LANG=ja_JP.EUC-JP\012'"
