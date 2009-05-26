@@ -1,6 +1,7 @@
 ## .bashrc
 ## Masahiro Koga
 
+cd
 # Source global definitions
 if [ -f /etc/bash ]; then
 	. /etc/bashrc
@@ -28,6 +29,8 @@ fi
 # LANG Setting
 if [ `uname` == 'SunOS' ]; then
    export LNAG=ja;
+elif [ `hostname` == 'andLinux' ]; then
+   export LANG=ja_JP.UTF-8;
 fi
 
 # about history
@@ -79,3 +82,10 @@ if [ -f `which lv` ]; then
    alias less='lv -s'
 fi
 
+# set EDITOR
+export EDITOR="emacs -nw"
+
+# lanch screen
+if [ $TERM != "screen-bce" ]; then
+	exec screen -S main -xRR
+fi
