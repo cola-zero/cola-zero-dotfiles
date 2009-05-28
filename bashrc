@@ -23,7 +23,7 @@ PS1='\[\e[01:33m\][\u@\h]\[\e[0m\]\[\e[00:32m\](\w)\[\e[0m\]$ '
 if [ $OSTYPE == "drawin9.0" ]; then
 export PATH=$HOME/local/bin:$PATH
 elif [ $OSTYPE == "linux-gnu" ]; then
-export PATH=$HOME/linux/local/bin:$PATH
+export PATH=$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 fi
 
 # LANG Setting
@@ -86,6 +86,8 @@ fi
 export EDITOR="emacs -nw"
 
 # lanch screen
+if [ -f `which screen` ]; then
 if [ $TERM != "screen-bce" ]; then
 	exec screen -S main -xRR
+fi
 fi
