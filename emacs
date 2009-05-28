@@ -37,7 +37,7 @@
 ;;
 ;; git-emacs
 ;;
-(add-to-list 'load-path "/$HOME/.emacs.d/elisp/git-emacs")
+(add-to-list 'load-path "/home/masahiro/.emacs.d/site-lisp/")
 (require 'git-emacs nil t)
 
 ;;
@@ -83,3 +83,14 @@
 ;; C-H を一文字前を削除に変更
 ;(define-key global-map "^H" 'backward-delete-char)
 (define-key global-map "" 'backward-delete-char)
+
+;; text-translator
+;; http://d.hatena.ne.jp/khiker/20070503/emacs_text_translator
+(require 'text-translator)
+
+(global-set-key "\C-xt" 'text-translator)
+(global-set-key "\C-xT" 'test-translator-translate-last-string)
+
+;; translate by using eijiro
+(global-set-key "\C-cw" 'sdic-describe-word-at-point)
+(global-set-key "\C-cW" 'sdic-describe-word)
