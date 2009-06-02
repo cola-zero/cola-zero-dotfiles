@@ -87,7 +87,7 @@ export EDITOR="emacs -nw"
 
 # lanch screen
 if [ -f `which screen` ]; then
-if [ $TERM != "screen-bce" ]; then
+if [ $TERM != "screen" ]; then
 	exec screen -S main -xRR
 fi
 fi
