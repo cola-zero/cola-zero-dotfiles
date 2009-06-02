@@ -86,7 +86,7 @@
 
 ;; text-translator
 ;; http://d.hatena.ne.jp/khiker/20070503/emacs_text_translator
-(require 'text-translator)
+(require 'text-translator nil t)
 
 (global-set-key "\C-xt" 'text-translator)
 (global-set-key "\C-xT" 'test-translator-translate-last-string)
