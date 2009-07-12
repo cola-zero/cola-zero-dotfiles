@@ -17,19 +17,19 @@ umask   022
 ulimit -c 0
 
 # prompt
-PS1='\[\e[01:33m\][\u@\h]\[\e[0m\]\[\e[00:32m\](\w)\[\e[0m\]$ '
+PS1='\[[\u@\h](\w)\$ '
 
 # for macport
-if [ $OSTYPE == "drawin9.0" ]; then
-export PATH=$HOME/local/bin:$PATH
-elif [ $OSTYPE == "linux-gnu" ]; then
+if [ $OSTYPE=="drawin9.0" ]; then
+export PATH=/opt/local/sbin:/opt/local/bin:$HOME/local/bin:$PATH
+elif [ $OSTYPE=="linux-gnu" ]; then
 export PATH=$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 fi
 
 # LANG Setting
-if [ `uname` == 'SunOS' ]; then
+if [ `uname`=='SunOS' ]; then
    export LNAG=ja;
-elif [ `hostname` == 'andLinux' ]; then
+elif [ `hostname`=='andLinux' ]; then
    export LANG=ja_JP.UTF-8;
 fi
 
@@ -86,8 +86,8 @@ fi
 export EDITOR="emacs -nw"
 
 # lanch screen
-if [ -f `which screen` ]; then
-if [ $TERM != "screen" ]; then
-	exec screen -S main -xRR
-fi
-fi
+#if [ -f `which screen` ]; then
+#if [ $TERM != "screen" ]; then
+#	exec screen -S main -xRR
+#fi
+#fi
