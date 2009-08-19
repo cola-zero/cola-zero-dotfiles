@@ -20,16 +20,16 @@ ulimit -c 0
 PS1='\[[\u@\h](\w)\$ '
 
 # for macport
-if [ $OSTYPE=="drawin9.0" ]; then
+if [ $OSTYPE == "drawin9.0" ]; then
 export PATH=/opt/local/sbin:/opt/local/bin:$HOME/local/bin:$PATH
-elif [ $OSTYPE=="linux-gnu" ]; then
+elif [ $OSTYPE == "linux-gnu" ]; then
 export PATH=$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 fi
 
 # LANG Setting
-if [ `uname`=='SunOS' ]; then
+if [ `uname` == 'SunOS' ]; then
    export LNAG=ja;
-elif [ `hostname`=='andLinux' ]; then
+elif [ `hostname` == 'andLinux' ]; then
    export LANG=ja_JP.UTF-8;
 fi
 
