@@ -17,7 +17,7 @@ umask   022
 ulimit -c 0
 
 # prompt
-PS1='\[[\u@\h](\w)\$ '
+#PS1='\[[\u@\h](\w)\$ '
 
 # for macport
 if [ $OSTYPE == "drawin9.0" ]; then
@@ -83,7 +83,7 @@ if [ -f `which lv` ]; then
 fi
 
 # set EDITOR
-export EDITOR="emacs -nw"
+export EDITOR="vim"
 
 # lanch screen
 #if [ -f `which screen` ]; then
