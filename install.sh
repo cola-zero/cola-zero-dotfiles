@@ -1,5 +1,7 @@
 #!/bin/bash
-for file in ./
+
+for file in *
 do
-				ln --backup=t -s $file ../\.${file##*/}
+				ln --backup=t -s $PWD/$file ../\.${file##*/}
 done
+rm ../.README ../.install.sh
