@@ -2,6 +2,6 @@
 
 for file in *
 do
-				ln --backup=t -s $PWD/$file ../\.${file##*/}
+				ln --backup=t -s $PWD/$file $HOME/\.${file##*/}
 done
-rm ../.README ../.install.sh
+rm $HOME/.README $HOME/.install.sh
