@@ -16,11 +16,11 @@ umask   022
 ulimit -c 0
 
 # prompt
-PS1='\[\e[01:33m\][\u@\h]\[\e[0m\]\[\e[00:32m\](\w)\[\e[0m\]$ '
+PS1='[\u@\h](\w)\$ '
 
 # for macport
-if [ $OSTYPE == "drawin9.0" ]; then
-export PATH=$HOME/local/bin:$PATH
+if [ $OSTYPE == "darwin10.0" ]; then
+export PATH=/opt/local/sbin:/opt/local/bin:$HOME/local/bin:$PATH
 elif [ $OSTYPE == "linux-gnu" ]; then
 export PATH=$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 fi
@@ -82,11 +82,11 @@ if [ -f `which lv` ]; then
 fi
 
 # set EDITOR
-export EDITOR="emacs -nw"
+export EDITOR="vim"
 
 # lanch screen
-if [ -f `which screen` ]; then
-if [ $TERM != "screen" ]; then
-	exec screen -S main -xRR
-fi
-fi
+#if [ -f `which screen` ]; then
+#if [ $TERM != "screen" ]; then
+#	exec screen -S main -xRR
+#fi
+#fi
