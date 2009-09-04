@@ -1,7 +1,6 @@
 ## .bashrc
 ## Masahiro Koga
 
-cd
 # Source global definitions
 if [ -f /etc/bash ]; then
 	. /etc/bashrc
