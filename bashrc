@@ -17,10 +17,10 @@ umask   022
 ulimit -c 0
 
 # prompt
-#PS1='\[[\u@\h](\w)\$ '
+PS1='[\u@\h](\w)\$ '
 
 # for macport
-if [ $OSTYPE == "drawin9.0" ]; then
+if [ $OSTYPE == "darwin10.0" ]; then
 export PATH=/opt/local/sbin:/opt/local/bin:$HOME/local/bin:$PATH
 elif [ $OSTYPE == "linux-gnu" ]; then
 export PATH=$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
