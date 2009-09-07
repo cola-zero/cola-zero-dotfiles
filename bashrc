@@ -22,7 +22,7 @@ PS1='[\u@\h](\w)\$ '
 if [ $OSTYPE == "darwin10.0" ]; then
 export PATH=/opt/local/sbin:/opt/local/bin:$HOME/local/bin:$PATH
 elif [ $OSTYPE == "linux-gnu" ]; then
-export PATH=$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
+export PATH=/opt/ruby19/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1
 fi
 
 # LANG Setting
