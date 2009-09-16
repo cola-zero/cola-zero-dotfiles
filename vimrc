@@ -97,4 +97,4 @@ if exists('&ambiwidth')
 				set ambiwidth=double
 endif
 
-
+set foldmethod=syntax
