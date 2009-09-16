@@ -24,3 +24,4 @@ term screen
 bind 'U' eval "encoding utf8"
 bind 'E' eval "encoding euc"
 
+shelltitle "$ |bash"

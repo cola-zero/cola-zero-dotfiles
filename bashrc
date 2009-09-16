@@ -16,7 +16,7 @@ umask   022
 ulimit -c 0
 
 # prompt
-PS1='[\u@\h](\w)\$ '
+PS1='\033k\033\\[\u@\h](\w)\$ '
 
 # for macport
 if [ $OSTYPE == "darwin10.0" ]; then
