@@ -1,7 +1,7 @@
 set guifont=VL\ ゴシック\ 12
 
 set columns=90
-set lines=41
+set lines=31
 set cmdheight=2
 
 set mouse=a
