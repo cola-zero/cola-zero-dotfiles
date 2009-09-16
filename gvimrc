@@ -1,5 +1,4 @@
-source $HOME/linux/local/share/vim/vim72/gvimrc_example.vim
-set guifont="Sazanami Gothic:h12"
+set guifont=VL\ ゴシック\ 12
 
 set columns=90
 set lines=41
