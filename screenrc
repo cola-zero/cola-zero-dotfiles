@@ -1,5 +1,6 @@
 escape ^t^t
 
+shelltitle '> |tcsh'
 hardstatus on 
 hardstatus alwayslastline "screen | %w | %u %= %m/%d %c"
 
@@ -24,4 +25,3 @@ term screen
 bind 'U' eval "encoding utf8"
 bind 'E' eval "encoding euc"
 
-shelltitle "$ |bash"
