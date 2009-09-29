@@ -1,4 +1,4 @@
-set guifont=VL\ ゴシック\ 12
+set guifont=VL\ Gothic\ 12
 
 set columns=90
 set lines=31
