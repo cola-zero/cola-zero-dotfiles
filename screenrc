@@ -1,6 +1,6 @@
 escape ^t^t
 
-shelltitle '> |tcsh'
+shelltitle "$ |bash"
 hardstatus on 
 hardstatus alwayslastline "screen | %w | %u %= %m/%d %c"
 
