@@ -1,8 +1,9 @@
 escape ^t^t
 
-shelltitle "$ |bash"
+shelltitle "$ |tcsh"
 hardstatus on 
 hardstatus alwayslastline "screen | %w | %u %= %m/%d %c"
+startup_message off
 
 bind -c REGION 2 split
 bind -c REGION 1 only
