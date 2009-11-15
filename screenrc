@@ -11,7 +11,7 @@ bind -c REGION o focus
 bind -c REGION ^ resize
 bind x command -c REGION
 
-idle 3600
+#idle 3600
 
 bind l windowlist
 
