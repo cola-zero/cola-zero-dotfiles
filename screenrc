@@ -20,8 +20,12 @@ bind l windowlist
 # erase background with current bg color
 defbce "on"
 # do not use 'screen-bce'
-term screen
+term xterm
 
-bind 'U' eval "encoding utf8"
-bind 'E' eval "encoding euc"
+bind 'U' eval "encoding utf8" "stuff 'setenv LANG ja_JP.utf8\012'"
+bind 'E' eval "encoding euc" "stuff 'setenv LANG ja_JP.eucJP\012'"
 
+defscrollback 100000
+termcapinfo xterm|xterms|xs|rxvt ti@:te@
+
+defc1 off
