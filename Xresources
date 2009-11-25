@@ -1,0 +1,13 @@
+Xft.dpi: 96
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.hintstyle: hintmedium
+Emacs.FontBackend: xft
+Emacs.font: VL Gothic-12
+Emacs*useXIM: false
+
+URxvt*font: xft:VLGothic:pixelsize=12
+XTerm*faceName: VL Gothic:pixelsize=12
+
+xterm*background: black
+xterm*foreground: gray90
