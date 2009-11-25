@@ -29,9 +29,9 @@
 (set-face-underline 'trailing-whitespace t)
 
 ;; ツールバーを消す
-(tool-bar-mode nil)
+(tool-bar-mode -1)
 ;; メニューバーを消す
-(menu-bar-mode nil)
+(menu-bar-mode -1)
 
 
 ;;
