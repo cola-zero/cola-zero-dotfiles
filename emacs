@@ -53,11 +53,11 @@
 ;;
 (set-language-environment "Japanese")
 ; set load-path for anthy.el
-(push "/usr/share/emacs/site-lisp/anthy/" load-path)
+;(push "/usr/share/emacs/site-lisp/anthy/" load-path)
 ; load anth.el
-(load-library "anthy")
+;(load-library "anthy")
 ; set default for japanese-anthy
-(setq default-input-method "japanese-anthy")
+;(setq default-input-method "japanese-anthy")
 
 ;; enable color in console
 (global-font-lock-mode t)
