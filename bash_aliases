@@ -6,4 +6,5 @@ alias ls='ls -F --color=auto'
 fi
 alias la='ls -lag'
 alias l='ls -F'
-alias ec='emacsclient'
+alias ec='emacsclient -c -n'
+alias ecn='emacsclient -t'
