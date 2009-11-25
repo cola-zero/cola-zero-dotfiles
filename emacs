@@ -94,3 +94,20 @@
 ;; translate by using eijiro
 (global-set-key "\C-cw" 'sdic-describe-word-at-point)
 (global-set-key "\C-cW" 'sdic-describe-word)
+
+;;skk
+(require 'skk-auto)
+(global-set-key "\C-x\C-j" 'skk-mode)
+(global-set-key "\C-xj" 'skk-auto-fill-mode)
+(global-set-key "\C-xt" 'skk-tutorial)
+(setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L")
+
+;elscreen
+(require 'elscreen)
+(require 'elscreen-color-theme)
+(require 'elscreen-dired)
+(require 'elscreen-server)
+
+;howm
+(setq howm-menu-lang 'ja)
+(require 'howm-mode)
