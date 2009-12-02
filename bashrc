@@ -90,3 +90,6 @@ export EDITOR="vim"
 #	exec screen -S main -xRR
 #fi
 #fi
+
+bind '"\C-p": history-search-backward'
+bind '"\C-n": history-search-forward'
