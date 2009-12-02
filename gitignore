@@ -8,3 +8,6 @@
 .DS_Store
 *.sw[po]
 .gitignore
+xmonad-i386-linux
+xmonad.errors
+xmonad.hi
