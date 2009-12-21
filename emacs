@@ -173,7 +173,7 @@
 (define-key anything-map (kbd "C-n") 'anything-next-line)
 (define-key anything-map (kbd "C-v") 'anything-next-source)
 (define-key anything-map (kbd "M-v") 'anything-previous-source)
-(define-key global-map (kbd "C--") 'anything)
+(define-key global-map (kbd "C-;") 'anything)
 (setq anything-gtags-hijack-gtags-select-mode nil) ;error回避
 
 
