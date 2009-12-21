@@ -2,6 +2,8 @@
 ;;; .emacs
 ;;;
 
+(add-to-list 'load-path "/user/arch/koga/.emacs.d/site-lisp/")
+
 ;;ステータスバーの設定
 (display-time-mode 1)
 (line-number-mode 1)
@@ -16,6 +18,7 @@
 
 ;; color-theme の設定
 (when (require 'color-theme nil t)
+  (color-theme-initialize)
   (color-theme-arjen))
 
 ;;
