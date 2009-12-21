@@ -21,6 +21,53 @@
   (color-theme-initialize)
   (color-theme-arjen))
 
+;長い行を折り返して表示
+(setq trancate-partial-width-windows t)
+
+;; ステータスラインに時間を表示する
+(if (>= emacs-major-version 22)
+    (progn
+      (setq dayname-j-alist
+	    '(("Sun" . "日") ("Mon" . "月") ("Tue" . "火") ("Wed" . "水")
+	      ("Thu" . "木") ("Fri" . "金") ("Sat" . "土")))
+      (setq display-time-string-forms
+	    '((format "%s年%s月%s日(%s) %s:%s"
+		      year month day
+		      (cdr (assoc dayname dayname-j-alist))
+		      24-hours minutes)))
+))
+(display-time)
+
+;visual-bell
+(setq visible-bel t)
+
+;行番号を表示
+(line-number-mode t)
+
+;タブ幅の設定
+(setq default-tab-width 4)
+;indentにtabだけを使う
+(setq indent-tabs-mode nil)
+
+;; major mode
+(setq auto-mode-alist (append (list
+			       '("\\.[ch]" . c-mode)
+			       '(".emacs" . emacs-lisp-mode)
+			       '("\\.v" . verilog-mode)
+				   '("\\.[hg]s$"  . haskell-mode)
+				   '("\\.hi$"     . haskell-mode)
+				   '("\\.l[hg]s$" . literate-haskell-mode)
+			       auto-mode-alist)))
+
+;haskell-mode
+(autoload 'haskell-mode "haskell-mode"
+  "Major mode for editing Haskell scripts." t)
+(autoload 'literate-haskell-mode "haskell-mode"
+  "Major mode for editing literate Haskell scripts." t)
+
+
+
+
 ;;
 ;; navi2ch
 ;;
@@ -117,16 +164,78 @@
 
 ;anything
 (require 'anything-config)
+(require 'anything-gtags)
 (setq anything-sources
-      (list anything-c-source-buffers
-	    anything-c-source-files-in-current-dir
-	    anything-c-source-recentf
-	    anything-c-source-file-name-history
-	    anything-c-source-locate))
+      (list anything-c-source-gtags-select
+       anything-c-source-buffers
+       anything-c-source-files-in-current-dir
+       anything-c-source-recentf
+       anything-c-source-file-name-history
+       anything-c-source-locate))
 (define-key anything-map (kbd "C-p") 'anything-previous-line)
 (define-key anything-map (kbd "C-n") 'anything-next-line)
 (define-key anything-map (kbd "C-v") 'anything-next-source)
 (define-key anything-map (kbd "M-v") 'anything-previous-source)
-(define-key global-map (kbd "C-'") 'anything)
+(define-key global-map (kbd "C-;") 'anything)
+(setq anything-gtags-hijack-gtags-select-mode nil) ;error回避
+
 
 (require 'auto-install)
+
+;gtags
+(require 'gtags)
+(setq c-mode-hook
+      '(lambda ()
+	 (gtags-mode 1)))
+(setq gtags-mode-hook
+      '(lambda ()
+	 (local-set-key "\M-t" 'gtags-find-tag)
+	 (local-set-key "\M-r" 'gtags-find-rtag)
+	 (local-set-key "\M-s" 'gtags-find-symbol)
+	 (local-set-key "\C-t" 'gtags-pop-stack)
+	 ))
+
+;auto-complete
+(require 'auto-complete)
+(global-auto-complete-mode t)
+
+;debug
+;(setq debug-on-error t)
+
+;org-mode
+(require 'org-install)
+(setq org-startup-truncated nil)
+(setq org-return-follows-link t)
+(add-to-list `auto-mode-alist '("\\.org$" . org-mode))
+(org-remember-insinuate)
+(setq org-directory "~/memo/")
+(setq org-default-notes-file (concat org-directory "agenda.org"))
+(setq org-remember-templates
+	  '(("Todo" ?t "** TODO %?\n %i\n %a\n %t" nil "Inbox")
+		("Bug" ?b "** TODO %? :bug:\n %i\n %a\n %t" nil "Inbox")
+		("Idea" ?i "** %?\n %i\n %a\n %t" nil "New Ideas")
+		("Note" ?n "** NOTE %?\n %i\n %a\n %t" nil "Note")
+		))
+(global-set-key "\C-x\C-x" 'org-remember)
+(global-set-key "\C-x\C-r" 'org-remember-code-reading)
+
+(defvar org-code-reading-software-name nil)
+;; ~/memo/code-reading.org に記録する
+(defvar org-code-reading-file "code-reading.org")
+(defun org-code-reading-read-software-name ()
+  (set (make-local-variable 'org-code-reading-software-name)
+       (read-string "Code Reading Software: "
+                    (or org-code-reading-software-name
+                        (file-name-nondirectory
+                         (buffer-file-name))))))
+
+(defun org-code-reading-get-prefix (lang)
+  (concat "[" lang "]"
+          "[" (org-code-reading-read-software-name) "]"))
+(defun org-remember-code-reading ()
+  (interactive)
+  (let* ((prefix (org-code-reading-get-prefix (substring (symbol-name major-mode) 0 -5)))
+         (org-remember-templates
+          `(("CodeReading" ?r "** %(identity prefix)%?\n   \n   %a\n   %t"
+             ,org-code-reading-file "Memo"))))
+    (org-remember)))
