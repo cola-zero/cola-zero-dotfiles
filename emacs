@@ -214,7 +214,7 @@
 		("Note" ?n "** NOTE %?\n %i\n %a\n %t" nil "Note")
 		))
 (global-set-key "\C-x\C-x" 'org-remember)
-(global-set-key "\C-.\C-." 'org-remember-code-reading)
+(global-set-key "\C-x\C-r" 'org-remember-code-reading)
 
 (defvar org-code-reading-software-name nil)
 ;; ~/memo/code-reading.org に記録する
