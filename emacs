@@ -231,7 +231,8 @@
 
 (defun org-code-reading-get-prefix (lang)
   (concat "[" lang "]"
-          "[" (org-code-reading-read-software-name) "]"))
+          "[" (org-code-reading-read-software-name) "]"
+		  "[" hostname "]"))
 (defun org-remember-code-reading ()
   (interactive)
   (let* ((prefix (org-code-reading-get-prefix (substring (symbol-name major-mode) 0 -5)))
@@ -239,3 +240,12 @@
           `(("CodeReading" ?r "** %(identity prefix)%?\n   \n   %a\n   %t"
              ,org-code-reading-file "Memo"))))
     (org-remember)))
+
+;get hostname
+(setq hostname (system-name))
+(if (null hostname)
+    (setq hostname "no_host"))
+; 小文字に
+(setq hostname (downcase hostname))
+; ピリオド以下削除(ピリオドがなければ変更なし)
+(setq hostname (car (split-string hostname "\\.")))
