@@ -2,6 +2,9 @@
 ;;; .emacs
 ;;;
 
+
+(add-to-list 'load-path "/Users/masahiro/.emacs.d/site-lisp/")
+
 ;;ステータスバーの設定
 (display-time-mode 1)
 (line-number-mode 1)
