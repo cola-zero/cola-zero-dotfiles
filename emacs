@@ -217,6 +217,7 @@
 		))
 (global-set-key "\C-x\C-x" 'org-remember)
 (global-set-key "\C-x\C-r" 'org-remember-code-reading)
+(global-set-key "\C-ca" 'org-remember-code-reading)
 
 (defvar org-code-reading-software-name nil)
 ;; ~/memo/code-reading.org に記録する
@@ -238,3 +239,5 @@
           `(("CodeReading" ?r "** %(identity prefix)%?\n   \n   %a\n   %t"
              ,org-code-reading-file "Memo"))))
     (org-remember)))
+(setq org-agenda-files (list "~/memo/agenda.org"
+							 "~/memo/code-reading.org"))
