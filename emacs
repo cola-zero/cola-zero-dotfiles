@@ -2,7 +2,6 @@
 ;;; .emacs
 ;;;
 
-
 ;;ステータスバーの設定
 (display-time-mode 1)
 (line-number-mode 1)
@@ -17,6 +16,7 @@
 
 ;; color-theme の設定
 (when (require 'color-theme nil t)
+  (color-theme-initialize)
   (color-theme-arjen))
 
 ;長い行を折り返して表示
@@ -230,7 +230,8 @@
 
 (defun org-code-reading-get-prefix (lang)
   (concat "[" lang "]"
-          "[" (org-code-reading-read-software-name) "]"))
+          "[" (org-code-reading-read-software-name) "]"
+		  "[" hostname "]"))
 (defun org-remember-code-reading ()
   (interactive)
   (let* ((prefix (org-code-reading-get-prefix (substring (symbol-name major-mode) 0 -5)))
@@ -238,5 +239,15 @@
           `(("CodeReading" ?r "** %(identity prefix)%?\n   \n   %a\n   %t"
              ,org-code-reading-file "Memo"))))
     (org-remember)))
+;get hostname
+(setq hostname (system-name))
+(if (null hostname)
+    (setq hostname "no_host"))
+; 小文字に
+(setq hostname (downcase hostname))
+; ピリオド以下削除(ピリオドがなければ変更なし)
+(setq hostname (car (split-string hostname "\\.")))
+
 (setq org-agenda-files (list "~/memo/agenda.org"
 							 "~/memo/code-reading.org"))
+
