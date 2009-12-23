@@ -20,7 +20,7 @@ PS1='\[\033k\033\\\][\u@\h](\W)\$ '
 
 # for macport
 if [ $OSTYPE == "darwin10.0" ]; then
-export PATH=$HOME/.cabal/bin:/opt/local/sbin:/opt/local/bin:$HOME/local/bin:$PATH
+export PATH=/opt/local/sbin:/opt/local/bin:$HOME/local/bin:$PATH
 elif [ $OSTYPE == "linux-gnu" ]; then
 export PATH=$HOME/local/opt/firefox:$HOME/.cabal/bin:$HOME/local/bin:/opt/ruby19/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH
 fi
