@@ -229,7 +229,7 @@
 		))
 (global-set-key "\C-x\C-x" 'org-remember)
 (global-set-key "\C-x\C-r" 'org-remember-code-reading)
-(global-set-key "\C-ca" 'org-remember-code-reading)
+(global-set-key "\C-ca" 'org-agenda)
 
 (defvar org-code-reading-software-name nil)
 ;; ~/memo/code-reading.org に記録する
