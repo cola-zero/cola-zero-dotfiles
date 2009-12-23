@@ -7,8 +7,11 @@ Emacs.font: VL Gothic-12
 Emacs*useXIM: false
 
 URxvt*font: xft:VLGothic:pixelsize=12
-XTerm*faceName: VL Gothic:pixelsize=12
+URxvt*background: black
+URxvt*foreground: gray90
+URxvt*visualBell: true
 
+XTerm*faceName: VL Gothic:pixelsize=12
 xterm*background: black
 xterm*foreground: gray90
 xterm*visualBell: true
