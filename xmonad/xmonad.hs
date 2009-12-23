@@ -63,7 +63,7 @@ myWorkspaces    = ["local","remote","simvision","web","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#ffffff"
+myNormalBorderColor  = "#888888"
 myFocusedBorderColor = "#ff8000"
 
 ------------------------------------------------------------------------
