@@ -22,7 +22,7 @@ import System.IO
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "xterm"
+myTerminal      = "urxvt"
 
 -- Width of the window border in pixels.
 --
@@ -63,7 +63,7 @@ myWorkspaces    = ["local","remote","simvision","web","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#ffffff"
+myNormalBorderColor  = "#888888"
 myFocusedBorderColor = "#ff8000"
 
 ------------------------------------------------------------------------
