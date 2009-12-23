@@ -154,10 +154,10 @@
 (setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L")
 
 ;elscreen
-(require 'elscreen)
-(require 'elscreen-color-theme)
-(require 'elscreen-dired)
-(require 'elscreen-server)
+(require 'elscreen nil t)
+(require 'elscreen-color-theme nil t)
+(require 'elscreen-dired nil t)
+(require 'elscreen-server nil t)
 
 ;howm
 (setq howm-menu-lang 'ja)
