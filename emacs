@@ -4,6 +4,16 @@
 
 
 (add-to-list 'load-path "/Users/masahiro/.emacs.d/site-lisp/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/apel")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/autoconf")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/ddskk")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/dictionaries-common")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/elscreen")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-goodies-el")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/flim")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/semi")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/wl")
 
 ;;ステータスバーの設定
 (display-time-mode 1)
