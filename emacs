@@ -264,3 +264,11 @@
 (setq org-agenda-files (list "~/memo/agenda.org"
 							 "~/memo/code-reading.org"))
 
+;C-F C-B C-P C-Nでバッファの移動
+;http://d.hatena.ne.jp/authorNari/20091225/1261667956
+;
+(setq windmove-wrap-around t)
+(define-key global-map [(C shift n)] 'windmove-down)
+(define-key global-map [(C shift p)] 'windmove-up)
+(define-key global-map [(C shift b)] 'windmove-left)
+(define-key global-map [(C shift f)] 'windmove-right)
