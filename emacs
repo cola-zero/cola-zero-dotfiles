@@ -272,3 +272,8 @@
 (define-key global-map [(C shift p)] 'windmove-up)
 (define-key global-map [(C shift b)] 'windmove-left)
 (define-key global-map [(C shift f)] 'windmove-right)
+
+;uniquify
+;http://nlp.kuee.kyoto-u.ac.jp/~shibata/mt/archives/000116.html
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
