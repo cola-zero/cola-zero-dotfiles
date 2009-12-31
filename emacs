@@ -3,7 +3,10 @@
 ;;;
 
 
+(add-to-list 'load-path "/home/masahiro/.emacs.d/auto-install/")
+(add-to-list 'load-path "/home/masahiro/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/Users/masahiro/.emacs.d/site-lisp/")
+(add-to-list 'load-path "/Users/masahiro/.emacs.d/auto-install/")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/apel")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/autoconf")
