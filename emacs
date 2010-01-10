@@ -281,10 +281,10 @@
 ;http://d.hatena.ne.jp/authorNari/20091225/1261667956
 ;
 (setq windmove-wrap-around t)
-(define-key global-map [(C shift j)] 'windmove-down)
-(define-key global-map [(C shift k)] 'windmove-up)
-(define-key global-map [(C shift h)] 'windmove-left)
-(define-key global-map [(C shift l)] 'windmove-right)
+(define-key global-map [(C shift n)] 'windmove-down)
+(define-key global-map [(C shift p)] 'windmove-up)
+(define-key global-map [(C shift b)] 'windmove-left)
+(define-key global-map [(C shift f)] 'windmove-right)
 
 ;uniquify
 ;http://nlp.kuee.kyoto-u.ac.jp/~shibata/mt/archives/000116.html
