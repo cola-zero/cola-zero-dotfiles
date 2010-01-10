@@ -290,3 +290,7 @@
 ;http://nlp.kuee.kyoto-u.ac.jp/~shibata/mt/archives/000116.html
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+
+;twittering-mode
+(require 'twittering-mode nil t)
+(setq twittering-username "cola_zero")
