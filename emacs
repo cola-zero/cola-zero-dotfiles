@@ -123,6 +123,19 @@
 ; set default for japanese-anthy
 ;(setq default-input-method "japanese-anthy")
 
+;get hostname
+(setq hostname (system-name))
+(if (null hostname)
+    (setq hostname "no_host"))
+; 小文字に
+(setq hostname (downcase hostname))
+; ピリオド以下削除(ピリオドがなければ変更なし)
+(setq hostname (car (split-string hostname "\\.")))
+
+;japanese
+(when (string-match hostname "macbook")
+  (set-terminal-coding-system 'utf-8))
+
 ;; enable color in console
 (global-font-lock-mode t)
 
@@ -265,14 +278,6 @@
           `(("CodeReading" ?r "** %(identity prefix)%?\n   \n   %a\n   %t"
              ,org-code-reading-file "Memo"))))
     (org-remember)))
-;get hostname
-(setq hostname (system-name))
-(if (null hostname)
-    (setq hostname "no_host"))
-; 小文字に
-(setq hostname (downcase hostname))
-; ピリオド以下削除(ピリオドがなければ変更なし)
-(setq hostname (car (split-string hostname "\\.")))
 
 (setq org-agenda-files (list "~/memo/agenda.org"
 							 "~/memo/code-reading.org"))
