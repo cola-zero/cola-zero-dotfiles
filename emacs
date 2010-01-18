@@ -285,6 +285,10 @@
 (setq org-agenda-files (list "~/memo/agenda.org"
 							 "~/memo/code-reading.org"))
 
+;diary
+ (setq diary-file "~/memo/diary.gpg")
+
+
 ;C-F C-B C-P C-Nでウィンドウの移動
 ;http://d.hatena.ne.jp/authorNari/20091225/1261667956
 ;
