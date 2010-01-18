@@ -190,7 +190,7 @@
 
 ;howm
 (setq howm-menu-lang 'ja)
-(require 'howm-mode)
+(require 'howm-mode nil t)
 
 ;anything
 (require 'anything-config)
