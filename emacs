@@ -285,6 +285,11 @@
 (setq org-agenda-files (list "~/memo/agenda.org"
 							 "~/memo/code-reading.org"))
 
+;MobileOrg
+(setq org-mobile-directory "/Volumes/cola-zero/org/")
+(setq org-mobile-inbox-for-pull "~/memo/mobile.org")
+(setq org-todo-keywords '((list "TODO" "NEXT-ACTION" "WAIT" "DONE" "PROJECT")))
+
 ;diary
  (setq diary-file "~/memo/diary.gpg")
 
