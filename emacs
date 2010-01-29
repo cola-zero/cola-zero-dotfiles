@@ -135,9 +135,7 @@
 ;japanese
 (when (or (string-match hostname "macbook")
 		  (string-match hostname "debian" ))
-  (set-keyboard-coding-system 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-buffer-file-coding-system 'utf-8))
+  (prefer-coding-system 'utf-8))
 
 ;; enable color in console
 (global-font-lock-mode t)
