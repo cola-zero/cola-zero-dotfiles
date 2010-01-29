@@ -305,9 +305,18 @@
 
 ;uniquify
 ;http://nlp.kuee.kyoto-u.ac.jp/~shibata/mt/archives/000116.html
-(require 'uniquify)
+(require 'uniquify nil t)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 ;twittering-mode
 (require 'twittering-mode nil t)
 (setq twittering-username "cola_zero")
+
+;gdb
+(setq gdb-many-windows t)
+;;; 変数の上にマウスカーソルを置くと値を表示
+(add-hook 'gdb-mode-hook '(lambda () (gud-tooltip-mode t)))
+;;; I/O バッファを表示
+(setq gdb-use-separate-io-buffer t)
+;;; t にすると mini buffer に値が表示される
+(setq gud-tooltip-echo-area nil)
