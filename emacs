@@ -51,7 +51,7 @@
 		      24-hours minutes)))
 ))
 (display-time)
-
+(setq system-time-locale "C")
 ;visual-bell
 (setq visible-bel t)
 
