@@ -241,56 +241,7 @@
 ;(setq debug-on-error t)
 
 ;org-mode
-(require 'org-install)
-(setq org-startup-truncated nil)
-(setq org-return-follows-link t)
-(add-to-list `auto-mode-alist '("\\.org$" . org-mode))
-(org-remember-insinuate)
-(setq org-directory "~/memo/")
-(setq org-default-notes-file (concat org-directory "agenda.org"))
-(setq org-remember-templates
-	  '(("Todo" ?t "** TODO %?\n %i\n %a\n %t" nil "Inbox")
-		("Bug" ?b "** TODO %? :bug:\n %i\n %a\n %t" nil "Inbox")
-		("Idea" ?i "** %?\n %i\n %a\n %t" nil "New Ideas")
-		("Note" ?n "** NOTE %?\n %i\n %a\n %t" nil "Note")
-		))
-(global-set-key "\C-x\C-x" 'org-remember)
-(global-set-key "\C-x\C-r" 'org-remember-code-reading)
-(global-set-key "\C-ca" 'org-agenda)
-
-(defvar org-code-reading-software-name nil)
-;; ~/memo/code-reading.org に記録する
-(defvar org-code-reading-file "code-reading.org")
-(defun org-code-reading-read-software-name ()
-  (set (make-local-variable 'org-code-reading-software-name)
-       (read-string "Code Reading Software: "
-                    (or org-code-reading-software-name
-                        (file-name-nondirectory
-                         (buffer-file-name))))))
-
-(defun org-code-reading-get-prefix (lang)
-  (concat "[" lang "]"
-          "[" (org-code-reading-read-software-name) "]"
-		  "[" hostname "]"))
-(defun org-remember-code-reading ()
-  (interactive)
-  (let* ((prefix (org-code-reading-get-prefix (substring (symbol-name major-mode) 0 -5)))
-         (org-remember-templates
-          `(("CodeReading" ?r "** %(identity prefix)%?\n   \n   %a\n   %t"
-             ,org-code-reading-file "Memo"))))
-    (org-remember)))
-
-(setq org-agenda-files (list "~/memo/agenda.org"
-							 "~/memo/code-reading.org"))
-
-;MobileOrg
-(setq org-mobile-directory "/Volumes/cola-zero/org/")
-(setq org-mobile-inbox-for-pull "~/memo/mobile.org")
-(setq org-todo-keywords '((list "TODO" "NEXT-ACTION" "WAIT" "DONE" "PROJECT")))
-
-;diary
- (setq diary-file "~/memo/diary.gpg")
-
+(load "~/.my-org-mode.el")
 
 ;C-F C-B C-P C-Nでウィンドウの移動
 ;http://d.hatena.ne.jp/authorNari/20091225/1261667956
