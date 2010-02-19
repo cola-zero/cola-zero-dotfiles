@@ -99,10 +99,9 @@
 
 
 ;;
-;; git-emacs
+;; git
 ;;
-(add-to-list 'load-path "/home/masahiro/.emacs.d/site-lisp/")
-(require 'git-emacs nil t)
+(require 'git nil t)
 
 ;;
 ;; wl
@@ -269,3 +268,4 @@
 (setq gdb-use-separate-io-buffer t)
 ;;; t にすると mini buffer に値が表示される
 (setq gud-tooltip-echo-area nil)
+
