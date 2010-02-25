@@ -7,6 +7,6 @@ fi
 alias la='ls -lag'
 alias l='ls -F'
 alias emacs='emacs -geometry 80x30'
-alias ec='emacsclient -c -n'
-alias et='emacsclient -t -n'
+alias ec='emacsclient -c'
+alias et='emacsclient -t'
 alias ecn='emacsclient -t'

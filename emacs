@@ -24,11 +24,11 @@
 (column-number-mode 1)
 
 ;; デフォルトの透明度を設定する (85%)
-(add-to-list 'default-frame-alist '(alpha . 75))
+(add-to-list 'default-frame-alist '(alpha . 100))
 
 ;; カレントウィンドウの透明度を変更する (85%)
 ;; (set-frame-parameter nil 'alpha 0.85)
-(set-frame-parameter nil 'alpha 75)
+(set-frame-parameter nil 'alpha 100)
 
 ;; color-theme の設定
 (when (require 'color-theme nil t)
@@ -93,9 +93,9 @@
 (set-face-underline 'trailing-whitespace t)
 
 ;; ツールバーを消す
-(tool-bar-mode -1)
+ (tool-bar-mode nil)
 ;; メニューバーを消す
-(menu-bar-mode -1)
+ (menu-bar-mode nil)
 
 
 ;;
@@ -269,3 +269,4 @@
 ;;; t にすると mini buffer に値が表示される
 (setq gud-tooltip-echo-area nil)
 
+(setq mac-pass-control-to-system nil)
