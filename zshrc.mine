@@ -1,0 +1,12 @@
+# PATH setting
+# for macport
+case "${OSTYPE}" in
+darwin10.0)
+		export PATH=/opt/local/sbin:/opt/local/bin:$HOME/local/bin:$PATH
+		;;
+linux-gnu)
+		export PATH=$HOME/local/opt/firefox:$HOME/.cabal/bin:$HOME/local/bin:/opt/ruby19/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH
+		;;
+esac
+
+source ${HOME}/.zsh_aliases
