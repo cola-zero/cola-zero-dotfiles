@@ -1,8 +1,9 @@
 escape ^t^t
 
-shelltitle "$ |bash"
+shelltitle "$ |zsh"
 hardstatus on
-hardstatus alwayslastline "screen | %w | %u %= %m/%d %c"
+hardstatus alwayslastline "screen | %w | %h %u %= %m/%d %c"
+#hardstatus ignore "screen | %w | %h %u %= %m/%d %c"
 startup_message	off
 
 bind -c REGION 2 split
@@ -26,7 +27,8 @@ bind l windowlist
 # erase background with current bg color
 defbce "on"
 # do not use 'screen-bce'
-term xterm-256color
+#
+#term xterm-256color
 
 bind 'U' eval "encoding utf8" "stuff 'setenv LANG ja_JP.utf8\012'"
 bind 'E' eval "encoding euc" "stuff 'setenv LANG ja_JP.eucJP\012'"
