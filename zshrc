@@ -25,9 +25,9 @@ case ${UID} in
     SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
     ;;
 *)
-    PROMPT="%{${fg[red]}%}%/%%%{${reset_color}%} "
-    PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
-    SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
+    PROMPT="%{${fg[green]}%}%/%%%{${reset_color}%} "
+    PROMPT2="%{${fg[green]}%}%_%%%{${reset_color}%} "
+    SPROMPT="%{${fg[green]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
         PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
     ;;
@@ -110,32 +110,32 @@ autoload zed
 #predict-off
 
 
-## Alias configuration
-#
-# expand aliases before completing
-#
-setopt complete_aliases     # aliased ls needs if file/dir completions work
+# ## Alias configuration
+# #
+# # expand aliases before completing
+# #
+# setopt complete_aliases     # aliased ls needs if file/dir completions work
 
-alias where="command -v"
-alias j="jobs -l"
+# alias where="command -v"
+# alias j="jobs -l"
 
-case "${OSTYPE}" in
-freebsd*|darwin*)
-    alias ls="ls -G -w"
-    ;;
-linux*)
-    alias ls="ls --color"
-    ;;
-esac
+# case "${OSTYPE}" in
+# freebsd*|darwin*)
+#     alias ls="ls -G -w"
+#     ;;
+# linux*)
+#     alias ls="ls --color"
+#     ;;
+# esac
 
-alias la="ls -a"
-alias lf="ls -F"
-alias ll="ls -l"
+# alias la="ls -a"
+# alias lf="ls -F"
+# alias ll="ls -l"
 
-alias du="du -h"
-alias df="df -h"
+# alias du="du -h"
+# alias df="df -h"
 
-alias su="su -l"
+# alias su="su -l"
 
 
 ## terminal configuration
