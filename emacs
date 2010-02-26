@@ -189,6 +189,9 @@
 (setq howm-menu-lang 'ja)
 (require 'howm-mode nil t)
 
+;info
+(require 'info)
+
 ;anything
 (require 'anything-config)
 (require 'anything-gtags)
