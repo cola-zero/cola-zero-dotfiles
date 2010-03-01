@@ -3,3 +3,5 @@
 	email = masahirokoga@gmail.com
 [core]
 	excludefiles = /Users/kogamasahiro/.gitignore
+[push]
+	default = current
