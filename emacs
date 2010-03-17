@@ -236,8 +236,11 @@
 	 ))
 
 ;auto-complete
-(require 'auto-complete)
-(global-auto-complete-mode t)
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
+(ac-config-default)
+
+
 
 ;debug
 ;(setq debug-on-error t)
