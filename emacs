@@ -5,6 +5,8 @@
 
 (add-to-list 'load-path "/home/masahiro/.emacs.d/auto-install/")
 (add-to-list 'load-path "/home/masahiro/.emacs.d/site-lisp/")
+(add-to-list 'load-path "/user/arch/koga/.emacs.d/auto-install/")
+(add-to-list 'load-path "/user/arch/koga/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/Users/masahiro/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/Users/masahiro/.emacs.d/auto-install/")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
@@ -115,12 +117,12 @@
 ;;anthy
 ;;
 (set-language-environment "Japanese")
-; set load-path for anthy.el
-;(push "/usr/share/emacs/site-lisp/anthy/" load-path)
-; load anth.el
-;(load-library "anthy")
-; set default for japanese-anthy
-;(setq default-input-method "japanese-anthy")
+;; ; set load-path for anthy.el
+;; (push "/usr/share/emacs/site-lisp/anthy/" load-path)
+;; ; load anth.el
+;; (load-library "anthy")
+;; ; set default for japanese-anthy
+;; (setq default-input-method "japanese-anthy")
 
 ;get hostname
 (setq hostname (system-name))
@@ -144,7 +146,7 @@
 ;; TRAMP
 ;;
 ;; リモートのファイルを編集する
-(require 'tramp)
+(require 'tramp nil t)
 
 ;;
 ;; multi-tty emacs
@@ -155,7 +157,7 @@
 ;;
 ;; cscope
 ;;
-(require 'xcscope)
+(require 'xcscope nil t)
 
 ;; C-H を一文字前を削除に変更
 ;(define-key global-map "^H" 'backward-delete-char)
@@ -173,7 +175,7 @@
 (global-set-key "\C-cW" 'sdic-describe-word)
 
 ;;skk
-(require 'skk-auto)
+(require 'skk-auto nil t)
 (global-set-key "\C-x\C-j" 'skk-mode)
 (global-set-key "\C-xj" 'skk-auto-fill-mode)
 (global-set-key "\C-xt" 'skk-tutorial)
@@ -193,8 +195,8 @@
 (require 'info)
 
 ;anything
-(require 'anything-config)
-(require 'anything-gtags)
+(require 'anything-config nil t)
+(require 'anything-gtags nil t)
 (setq anything-sources
       (list anything-c-source-gtags-select
        anything-c-source-buffers
@@ -203,8 +205,8 @@
        anything-c-source-recentf
        anything-c-source-file-name-history
        anything-c-source-locate
-	   anything-c-source-info-pages
-	   anything-c-source-info-elisp
+;	   anything-c-source-info-pages
+;	   anything-c-source-info-elisp
 	   anything-c-source-man-pages
 	   anything-c-source-emacs-commands
 	   anything-c-source-find-files
@@ -216,14 +218,14 @@
 (define-key anything-map (kbd "C-n") 'anything-next-line)
 (define-key anything-map (kbd "C-v") 'anything-next-source)
 (define-key anything-map (kbd "M-v") 'anything-previous-source)
-(define-key global-map (kbd "C-;") 'anything)
+(define-key global-map (kbd "C-\\") 'anything)
 (setq anything-gtags-hijack-gtags-select-mode nil) ;error回避
 
 
-(require 'auto-install)
+(require 'auto-install nil t)
 
 ;gtags
-(require 'gtags)
+(require 'gtags nil t)
 (setq c-mode-hook
       '(lambda ()
 	 (gtags-mode 1)))
@@ -239,8 +241,6 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
 (ac-config-default)
-
-
 
 ;debug
 ;(setq debug-on-error t)

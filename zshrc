@@ -4,7 +4,7 @@
 #
 # LANG
 #
-export LANG=ja_JP.UTF-8
+export LANG=ja_JP.eucJP
 case ${UID} in
 0)
     LANG=C
