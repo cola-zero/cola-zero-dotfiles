@@ -155,7 +155,7 @@
 ;;
 ;; cscope
 ;;
-(require 'xcscope)
+(require 'xcscope nil t)
 
 ;; C-H を一文字前を削除に変更
 ;(define-key global-map "^H" 'backward-delete-char)
@@ -190,11 +190,11 @@
 (require 'howm-mode nil t)
 
 ;info
-(require 'info)
+(require 'info nil t)
 
 ;anything
-(require 'anything-config)
-(require 'anything-gtags)
+(require 'anything-config nil t)
+(require 'anything-gtags nil t)
 (setq anything-sources
       (list anything-c-source-gtags-select
        anything-c-source-buffers
@@ -220,10 +220,10 @@
 (setq anything-gtags-hijack-gtags-select-mode nil) ;error回避
 
 
-(require 'auto-install)
+(require 'auto-install nil t)
 
 ;gtags
-(require 'gtags)
+(require 'gtags nil t)
 (setq c-mode-hook
       '(lambda ()
 	 (gtags-mode 1)))
@@ -236,10 +236,9 @@
 	 ))
 
 ;auto-complete
-(require 'auto-complete-config)
+(require 'auto-complete-config nil t)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
 (ac-config-default)
-
 
 
 ;debug
