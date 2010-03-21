@@ -198,23 +198,26 @@
 ;anything
 (require 'anything-config nil t)
 (require 'anything-gtags nil t)
-(setq anything-sources
-      (list anything-c-source-gtags-select
-       anything-c-source-buffers
-	   anything-c-source-buffer-not-found
-       anything-c-source-files-in-current-dir
-       anything-c-source-recentf
-       anything-c-source-file-name-history
-       anything-c-source-locate
-	   anything-c-source-info-pages
-	   anything-c-source-info-elisp
-	   anything-c-source-man-pages
-	   anything-c-source-emacs-commands
-	   anything-c-source-find-files
-	   anything-c-source-file-cache
-	   anything-c-source-kill-ring
-	   anything-c-source-org-headline
-	   anything-c-source-elscreen))
+(require 'anything-search-file nil t)
+;; (setq anything-sources
+;;       (list anything-c-source-gtags-select
+;;        anything-c-source-buffers
+;; 	   anything-c-source-buffer-not-found
+;;        anything-c-source-files-in-current-dir
+;;        anything-c-source-recentf
+;;        anything-c-source-file-name-history
+;;        anything-c-source-locate
+;; 	   anything-c-source-info-pages
+;; 	   anything-c-source-info-elisp
+;; 	   anything-c-source-man-pages
+;; 	   anything-c-source-emacs-commands
+;; 	   anything-c-source-find-files
+;; 	   anything-c-source-file-cache
+;; 	   anything-c-source-kill-ring
+;; 	   anything-c-source-org-headline
+;; 	   anything-c-source-elscreen
+;; 	   anything-c-source-search-file))
+
 (define-key anything-map (kbd "C-p") 'anything-previous-line)
 (define-key anything-map (kbd "C-n") 'anything-next-line)
 (define-key anything-map (kbd "C-v") 'anything-next-source)
