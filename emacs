@@ -195,31 +195,39 @@
 (require 'info)
 
 ;anything
-(require 'anything-config)
-(require 'anything-gtags)
+(require 'anything-config nil t)
+(require 'anything-gtags nil t)
+(require 'anything-search-file nil t)
+(require 'resentf-ext nil t)
+(require 'anything-include nil t)
+(require 'anything-project)
 (setq anything-sources
       (list anything-c-source-gtags-select
-       anything-c-source-buffers
-	   anything-c-source-buffer-not-found
-       anything-c-source-files-in-current-dir
-       anything-c-source-recentf
-       anything-c-source-file-name-history
-       anything-c-source-locate
-	   anything-c-source-info-pages
-	   anything-c-source-info-elisp
-	   anything-c-source-man-pages
-	   anything-c-source-emacs-commands
-	   anything-c-source-find-files
-	   anything-c-source-file-cache
-	   anything-c-source-kill-ring
-	   anything-c-source-org-headline
-	   anything-c-source-elscreen))
+			anything-c-source-include
+			anything-c-source-buffers+
+			anything-c-source-recentf
+			anything-c-source-locate
+			anything-c-source-files-in-current-dir
+			anything-c-source-file-name-history
+			anything-c-source-info-pages
+			anything-c-source-info-elisp
+			anything-c-source-man-pages
+			anything-c-source-emacs-commands
+			anything-c-source-find-files
+			anything-c-source-file-cache
+			anything-c-source-kill-ring
+			anything-c-source-org-headline
+			anything-c-source-elscreen
+			anything-c-source-search-file))
 (define-key anything-map (kbd "C-p") 'anything-previous-line)
 (define-key anything-map (kbd "C-n") 'anything-next-line)
 (define-key anything-map (kbd "C-v") 'anything-next-source)
 (define-key anything-map (kbd "M-v") 'anything-previous-source)
+(global-set-key (kbd "C-c C-f") 'anything-project)
+(define-key global-map (kbd "C-x b") 'anything-for-buffers)
 (define-key global-map (kbd "C-;") 'anything)
-(setq anything-gtags-hijack-gtags-select-mode nil) ;error回避
+;; (setq anything-gtags-hijack-gtags-select-mode nil) ;error回避
+(setq anything-enable-shortcuts 'alphabet)
 
 
 (require 'auto-install)
