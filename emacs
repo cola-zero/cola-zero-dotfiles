@@ -278,3 +278,18 @@
 (setq gud-tooltip-echo-area nil)
 
 (setq mac-pass-control-to-system nil)
+
+;ruby-mode
+(autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
+(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+(add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
+
+;ruby-electric
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
+
+;; ruby-block
+(require 'ruby-block)
+(ruby-block-mode t)
+;; ミニバッファに表示し, かつ, オーバレイする.
+(setq ruby-block-highlight-toggle t)
