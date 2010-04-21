@@ -46,7 +46,7 @@
 ;MobileOrg
 (setq org-mobile-directory "/Volumes/cola-zero/org/")
 (setq org-mobile-inbox-for-pull "~/memo/mobile.org")
-(setq org-todo-keywords '((list "INBOX" "NEXT-ACTION" "WAIT" "DONE" "PROJECT")))
+(setq org-todo-keywords '((sequence "INBOX" "NEXT-ACTION" "WAIT" "PROJECT" "|" "DONE")))
 
 ;diary
  (setq diary-file "~/memo/diary.gpg")
