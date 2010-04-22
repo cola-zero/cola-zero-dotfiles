@@ -75,6 +75,7 @@
 				   '("\\.[hg]s$"  . haskell-mode)
 				   '("\\.hi$"     . haskell-mode)
 				   '("\\.l[hg]s$" . literate-haskell-mode)
+				   '("\\.el" . lisp-mode)
 			       auto-mode-alist)))
 
 ;haskell-mode
