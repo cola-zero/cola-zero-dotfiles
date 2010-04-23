@@ -7,6 +7,8 @@
 
 (add-to-list 'load-path "/home/masahiro/.emacs.d/auto-install/")
 (add-to-list 'load-path "/home/masahiro/.emacs.d/site-lisp/")
+(add-to-list 'load-path "/user/arch/koga/.emacs.d/auto-install/")
+(add-to-list 'load-path "/user/arch/koga/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/Users/masahiro/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/Users/masahiro/.emacs.d/auto-install/")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
@@ -32,10 +34,10 @@
 ;; (set-frame-parameter nil 'alpha 0.85)
 (set-frame-parameter nil 'alpha 100)
 
-;; color-theme の設定
+;; ;; color-theme の設定
 (when (require 'color-theme nil t)
   (color-theme-initialize)
-  (color-theme-arjen))
+  (color-theme-andreas))
 
 ;長い行を折り返して表示
 (setq trancate-partial-width-windows t)
@@ -73,6 +75,7 @@
 				   '("\\.[hg]s$"  . haskell-mode)
 				   '("\\.hi$"     . haskell-mode)
 				   '("\\.l[hg]s$" . literate-haskell-mode)
+				   '("\\.el" . lisp-mode)
 			       auto-mode-alist)))
 
 ;haskell-mode
@@ -117,12 +120,12 @@
 ;;anthy
 ;;
 (set-language-environment "Japanese")
-; set load-path for anthy.el
-;(push "/usr/share/emacs/site-lisp/anthy/" load-path)
-; load anth.el
-;(load-library "anthy")
-; set default for japanese-anthy
-;(setq default-input-method "japanese-anthy")
+;; ; set load-path for anthy.el
+;; (push "/usr/share/emacs/site-lisp/anthy/" load-path)
+;; ; load anth.el
+;; (load-library "anthy")
+;; ; set default for japanese-anthy
+;; (setq default-input-method "japanese-anthy")
 
 ;get hostname
 (setq hostname (system-name))
@@ -146,7 +149,7 @@
 ;; TRAMP
 ;;
 ;; リモートのファイルを編集する
-(require 'tramp)
+(require 'tramp nil t)
 
 ;;
 ;; multi-tty emacs
@@ -157,7 +160,7 @@
 ;;
 ;; cscope
 ;;
-(require 'xcscope)
+(require 'xcscope nil t)
 
 ;; C-H を一文字前を削除に変更
 ;(define-key global-map "^H" 'backward-delete-char)
@@ -175,7 +178,7 @@
 (global-set-key "\C-cW" 'sdic-describe-word)
 
 ;;skk
-(require 'skk-auto)
+(require 'skk-auto nil t)
 (global-set-key "\C-x\C-j" 'skk-mode)
 (global-set-key "\C-xj" 'skk-auto-fill-mode)
 (global-set-key "\C-xt" 'skk-tutorial)
@@ -192,7 +195,7 @@
 (require 'howm-mode nil t)
 
 ;info
-(require 'info)
+(require 'info nil t)
 
 ;anything
 (require 'anything-config nil t)
@@ -200,7 +203,7 @@
 (require 'anything-search-file nil t)
 (require 'resentf-ext nil t)
 (require 'anything-include nil t)
-(require 'anything-project)
+(require 'anything-project nil t)
 (setq anything-sources
       (list anything-c-source-gtags-select
 			anything-c-source-include
@@ -230,10 +233,10 @@
 (setq anything-enable-shortcuts 'alphabet)
 
 
-(require 'auto-install)
+(require 'auto-install nil t)
 
 ;gtags
-(require 'gtags)
+(require 'gtags nil t)
 (setq c-mode-hook
       '(lambda ()
 	 (gtags-mode 1)))
@@ -245,15 +248,13 @@
 	 (local-set-key "\C-t" 'gtags-pop-stack)
 	 ))
 
-;auto-complete
-(require 'auto-complete-config)
+;;auto-complete
+(require 'auto-complete-config nil t)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
 (ac-config-default)
 
-
-
 ;debug
-;(setq debug-on-error t)
+(setq debug-on-error t)
 
 ;org-mode
 (load "~/.my-org-mode.el")
@@ -301,3 +302,15 @@
 (ruby-block-mode t)
 ;; ミニバッファに表示し, かつ, オーバレイする.
 (setq ruby-block-highlight-toggle t)
+
+;; ispell
+(setq ispell-dictionary "US-xlg")
+(setq ispell-local-dictionary-alist
+  '((nil				; default (english.aff)
+     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B") nil iso-8859-1)
+    ("UK-xlg"				; english large version
+     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "UK-xlg") nil iso-8859-1)
+    ("US-xlg"				; american large version
+     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "US-xlg") nil iso-8859-1)
+   )
+)

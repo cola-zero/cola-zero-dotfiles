@@ -9,10 +9,12 @@
 (setq org-directory "~/memo/")
 (setq org-default-notes-file (concat org-directory "agenda.org"))
 (setq org-remember-templates
-	  '(("Todo" ?t "** INBOX %?\n %i\n %a\n %t" nil "Inbox")
-		("Idea" ?i "** %?\n %i\n %a\n %t" nil "New Ideas")
-		("Note" ?n "** NOTE %?\n %i\n %a\n %t" nil "Note")
-		("Shopping" ?s "** %? :@shopping:\n %i\n%t" nil "Inbox")
+	  '(("Inbox" ?i "** INBOX %?\n %i\n %a\n %t" nil "Inbox")
+		("NextAction" ?n "** NEXT-ACTION %?\n*** GOAL: \n%i\n %t" nil "NextAction")
+		("Project" ?p "** PROJECT %?\n*** GOAL: \n%i\n %t" nil "Project")
+		("Wait" ?w "** WAIT %?\n %i\n %t" nil "Wait")
+		("Idea" ?I "** %?\n %i\n %a\n %t" nil "New Ideas")
+		("Note" ?N "** NOTE %?\n %i\n %a\n %t" nil "Note")
 		))
 (global-set-key "\C-x\C-x" 'org-remember)
 (global-set-key "\C-x\C-r" 'org-remember-code-reading)
@@ -46,7 +48,7 @@
 ;MobileOrg
 (setq org-mobile-directory "/Volumes/cola-zero/org/")
 (setq org-mobile-inbox-for-pull "~/memo/mobile.org")
-(setq org-todo-keywords '((list "INBOX" "NEXT-ACTION" "WAIT" "DONE" "PROJECT")))
+(setq org-todo-keywords '((sequence "INBOX" "NEXT-ACTION" "INACTIVE" "WAIT" "PROJECT" "|" "DONE")))
 
 ;diary
  (setq diary-file "~/memo/diary.gpg")
