@@ -302,3 +302,15 @@
 (ruby-block-mode t)
 ;; ミニバッファに表示し, かつ, オーバレイする.
 (setq ruby-block-highlight-toggle t)
+
+;; ispell
+(setq ispell-dictionary "US-xlg")
+(setq ispell-local-dictionary-alist
+  '((nil				; default (english.aff)
+     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B") nil iso-8859-1)
+    ("UK-xlg"				; english large version
+     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "UK-xlg") nil iso-8859-1)
+    ("US-xlg"				; american large version
+     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "US-xlg") nil iso-8859-1)
+   )
+)
