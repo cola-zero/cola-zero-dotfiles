@@ -203,7 +203,7 @@
 (require 'anything-search-file nil t)
 (require 'resentf-ext nil t)
 (require 'anything-include nil t)
-(require 'anything-project)
+(require 'anything-project nil t)
 (setq anything-sources
       (list anything-c-source-gtags-select
 			anything-c-source-include
