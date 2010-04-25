@@ -176,6 +176,10 @@
 ;; translate by using eijiro
 (global-set-key "\C-cw" 'sdic-describe-word-at-point)
 (global-set-key "\C-cW" 'sdic-describe-word)
+(setq sdic-eiwa-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eijirou.sdic")
+								  (sdicf-client "~/.emacs.d/site-lisp/eedict.sdic")
+								  (sdicf-client "~/.emacs.d/site-lisp/gene.sdic")))
+(setq sdic-waei-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/waeijirou.sdic")))
 
 ;;skk
 (require 'skk-auto nil t)
