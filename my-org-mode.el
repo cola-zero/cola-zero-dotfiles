@@ -42,12 +42,17 @@
              ,org-code-reading-file "Memo"))))
     (org-remember)))
 
-(setq org-agenda-files (list "~/memo/agenda.org"
-							 "~/memo/code-reading.org"))
+(setq org-agenda-files (list "~/Documents/My Dropbox/memo/agenda.org"
+							 "~/Documents/My Dropbox/memo/code-reading.org"))
 
 ;MobileOrg
-(setq org-mobile-directory "/Volumes/cola-zero/org/")
-(setq org-mobile-inbox-for-pull "~/memo/mobile.org")
+(if (eq window-system 'w32)
+	(prog
+	 (setq org-mobile-directory "z:/org/")
+	 (setq org-mobile-inbox-for-pull "~/Documents/My Dropbox/memo/mobile.org"))
+	(prog
+	 (setq org-mobile-directory "/Volumes/cola-zero/org/")
+	 (setq org-mobile-inbox-for-pull "~/memo/mobile.org")))
 (setq org-todo-keywords '((sequence "INBOX" "NEXT-ACTION" "INACTIVE" "WAIT" "PROJECT" "|" "DONE")))
 
 ;diary
