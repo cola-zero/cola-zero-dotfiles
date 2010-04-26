@@ -22,6 +22,11 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/semi")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/wl")
 
+;;font設定
+(if (eq window-system 'w32)
+  (load-file "~/.emacs-font-w32.el"))
+
+
 ;;ステータスバーの設定
 (display-time-mode 1)
 (line-number-mode 1)
@@ -138,7 +143,8 @@
 
 ;japanese
 (when (or (string-match hostname "macbook")
-		  (string-match hostname "debian" ))
+		  (string-match hostname "debian" )
+		  (string-match hostname "koga_dr" ))
   (prefer-coding-system 'utf-8))
 
 ;; enable color in console
@@ -174,12 +180,15 @@
 (global-set-key "\C-xT" 'test-translator-translate-last-string)
 
 ;; translate by using eijiro
-(global-set-key "\C-cw" 'sdic-describe-word-at-point)
-(global-set-key "\C-cW" 'sdic-describe-word)
-(setq sdic-eiwa-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eijirou.sdic")
-								  (sdicf-client "~/.emacs.d/site-lisp/eedict.sdic")
-								  (sdicf-client "~/.emacs.d/site-lisp/gene.sdic")))
-(setq sdic-waei-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/waeijirou.sdic")))
+(if (eq window-system 'w32) (progn
+							  (setq sdic-eiwa-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eedict.sdic")
+																(sdicf-client "~/.emacs.d/site-lisp/gene.sdic")))
+							  (setq sdic-waei-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eijirou.sdic")
+																(sdicf-client "~/.emacs.d/site-lisp/waeijirou.sdic")))
+							  (autoload 'sdic-describe-word "sdic" "英単語の意味を調べる" t nil)
+							  (global-set-key "\C-cw" 'sdic-describe-word)
+							  (autoload 'sdic-describe-word-at-point "sdic" "カーソルの位置の英単語の意味を調べる" t nil)
+							  (global-set-key "\C-cW" 'sdic-describe-word-at-point)))
 
 ;;skk
 (require 'skk-auto nil t)
@@ -187,8 +196,10 @@
 (global-set-key "\C-xj" 'skk-auto-fill-mode)
 (global-set-key "\C-xt" 'skk-tutorial)
 (if (eq window-system 'w32)
-	(seqt skk-karge-jisyo "c:/Users/masahiro/AppData/Roaming/skkime/SKK-JISYO.L")
-	(setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L"))
+	(setq skk-large-jisyo "~/AppData/Roaming/skkime/SKK-JISYO.L")
+  (setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L"))
+
+
 
 ;elscreen
 (require 'elscreen nil t)
@@ -320,3 +331,13 @@
      "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "US-xlg") nil iso-8859-1)
    )
 )
+
+;;yatex mode
+(if (eq window-system 'w32)
+	(progn
+	  (setq auto-mode-alist
+			(cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
+      (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)))
+
+
+(cd "~/")
