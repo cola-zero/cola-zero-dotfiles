@@ -39,7 +39,7 @@
 ;; (set-frame-parameter nil 'alpha 0.85)
 (set-frame-parameter nil 'alpha 100)
 
-;; ;; color-theme の設定
+;; color-theme の設定
 (when (require 'color-theme nil t)
   (color-theme-initialize)
   (color-theme-andreas))
@@ -76,11 +76,12 @@
 (setq auto-mode-alist (append (list
 			       '("\\.[ch]" . c-mode)
 			       '(".emacs" . emacs-lisp-mode)
-			       '("\\.v" . verilog-mode)
+			       '("\\.v$" . verilog-mode)
 				   '("\\.[hg]s$"  . haskell-mode)
 				   '("\\.hi$"     . haskell-mode)
 				   '("\\.l[hg]s$" . literate-haskell-mode)
-				   '("\\.el" . lisp-mode)
+				   '("\\.el$" . lisp-mode)
+				   '("\\.org$" . org-mode)
 			       auto-mode-alist)))
 
 ;haskell-mode
