@@ -76,19 +76,24 @@
 (setq auto-mode-alist (append (list
 			       '("\\.[ch]" . c-mode)
 			       '(".emacs" . emacs-lisp-mode)
-			       '("\\.v$" . verilog-mode)
-				   '("\\.[hg]s$"  . haskell-mode)
-				   '("\\.hi$"     . haskell-mode)
-				   '("\\.l[hg]s$" . literate-haskell-mode)
-				   '("\\.el$" . lisp-mode)
-				   '("\\.org$" . org-mode)
+			       '("\\.v" . verilog-mode)
+				   '("\\.[hg]s"  . haskell-mode)
+				   '("\\.hi"     . haskell-mode)
+				   '("\\.hs"     . haskell-mode)
+				   '("\\.l[hg]s" . literate-haskell-mode)
+				   '("\\.el" . lisp-mode)
+				   '("\\.org" . org-mode)
 			       auto-mode-alist)))
 
 ;haskell-mode
-(autoload 'haskell-mode "haskell-mode"
-  "Major mode for editing Haskell scripts." t)
-(autoload 'literate-haskell-mode "haskell-mode"
-  "Major mode for editing literate Haskell scripts." t)
+;; (autoload 'haskell-mode "haskell-mode"
+;;   "Major mode for editing Haskell scripts." t)
+;; (autoload 'literate-haskell-mode "haskell-mode"
+;;   "Major mode for editing literate Haskell scripts." t)
+(require 'haskell-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(setq haskell-program-name "c:/Program Files/Haskell Platform/2010.1.0.0/bin/ghci.exe")
 
 
 
