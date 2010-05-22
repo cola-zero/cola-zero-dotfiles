@@ -47,10 +47,10 @@
 
 ;MobileOrg
 (if (eq window-system 'w32)
-	(prog
+	(progn
 	 (setq org-mobile-directory "z:/org/")
 	 (setq org-mobile-inbox-for-pull "~/Documents/My Dropbox/memo/mobile.org"))
-	(prog
+	(progn
 	 (setq org-mobile-directory "/Volumes/cola-zero/org/")
 	 (setq org-mobile-inbox-for-pull "~/memo/mobile.org")))
 (setq org-todo-keywords '((sequence "INBOX" "NEXT-ACTION" "INACTIVE" "WAIT" "PROJECT" "|" "DONE")))

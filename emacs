@@ -5,8 +5,8 @@
 (setq inhibit-startup-message -1)
 
 
-(add-to-list 'load-path "/home/masahiro/.emacs.d/auto-install/")
-(add-to-list 'load-path "/home/masahiro/.emacs.d/site-lisp/")
+(add-to-list 'load-path "/home/koga/.emacs.d/auto-install/")
+(add-to-list 'load-path "/home/koga/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/auto-install/")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/site-lisp/haskell-mode/")
@@ -43,8 +43,8 @@
 
 ;; color-theme の設定
 (when (require 'color-theme nil t)
-  (color-theme-initialize)
-  (color-theme-arjen))
+;  (color-theme-initialize)
+  (color-theme-andreas))
 
 ;長い行を折り返して表示
 (setq trancate-partial-width-windows t)
@@ -338,16 +338,16 @@
             (c-turn-on-eldoc-mode)
             ))
 ;; ispell
-(setq ispell-dictionary "US-xlg")
-(setq ispell-local-dictionary-alist
-  '((nil				; default (english.aff)
-     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B") nil iso-8859-1)
-    ("UK-xlg"				; english large version
-     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "UK-xlg") nil iso-8859-1)
-    ("US-xlg"				; american large version
-     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "US-xlg") nil iso-8859-1)
-   )
-)
+;; (setq ispell-dictionary "US-xlg")
+;; (setq ispell-local-dictionary-alist
+;;   '((nil				; default (english.aff)
+;;      "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B") nil iso-8859-1)
+;;     ("UK-xlg"				; english large version
+;;      "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "UK-xlg") nil iso-8859-1)
+;;     ("US-xlg"				; american large version
+;;      "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "US-xlg") nil iso-8859-1)
+;;    )
+;; )
 
 ;;yatex mode
 (if (eq window-system 'w32)
@@ -357,4 +357,8 @@
       (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)))
 
 
+<<<<<<< Updated upstream
 (cd "~/")
+=======
+;(cd "~/")
+>>>>>>> Stashed changes
