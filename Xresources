@@ -3,7 +3,7 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.hintstyle: hintmedium
 Emacs.FontBackend: xft
-Emacs.font: VL Gothic-12
+Emacs.font: VL Gothic-9
 Emacs*useXIM: false
 
 URxvt*font: xft:VLGothic:pixelsize=12

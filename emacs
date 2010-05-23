@@ -24,6 +24,11 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/wl")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/ecb-2.40")
 
+;;font設定
+(if (eq window-system 'w32)
+  (load-file "~/.emacs-font-w32.el"))
+
+
 ;;ステータスバーの設定
 (display-time-mode 1)
 (line-number-mode 1)
@@ -36,7 +41,7 @@
 ;; (set-frame-parameter nil 'alpha 0.85)
 (set-frame-parameter nil 'alpha 100)
 
-;; ;; color-theme の設定
+;; color-theme の設定
 (when (require 'color-theme nil t)
   (color-theme-initialize)
   (color-theme-arjen))
@@ -76,16 +81,21 @@
 			       '("\\.v" . verilog-mode)
 				   '("\\.[hg]s"  . haskell-mode)
 				   '("\\.hi"     . haskell-mode)
+				   '("\\.hs"     . haskell-mode)
 				   '("\\.l[hg]s" . literate-haskell-mode)
+				   '("\\.el" . lisp-mode)
+				   '("\\.org" . org-mode)
 			       auto-mode-alist)))
 
 ;haskell-mode
-(autoload 'haskell-mode "haskell-mode"
-  "Major mode for editing Haskell scripts." t)
-(autoload 'literate-haskell-mode "haskell-mode"
-  "Major mode for editing literate Haskell scripts." t)
+;; (autoload 'haskell-mode "haskell-mode"
+;;   "Major mode for editing Haskell scripts." t)
+;; (autoload 'literate-haskell-mode "haskell-mode"
+;;   "Major mode for editing literate Haskell scripts." t)
+(require 'haskell-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(setq haskell-program-name "c:/Program Files/Haskell Platform/2010.1.0.0/bin/ghci.exe")
 
 
 
@@ -141,7 +151,8 @@
 
 ;japanese
 (when (or (string-match hostname "macbook")
-		  (string-match hostname "debian" ))
+		  (string-match hostname "debian" )
+		  (string-match hostname "koga_dr" ))
   (prefer-coding-system 'utf-8))
 
 ;; enable color in console
@@ -177,18 +188,25 @@
 (global-set-key "\C-xT" 'test-translator-translate-last-string)
 
 ;; translate by using eijiro
-(global-set-key "\C-cw" 'sdic-describe-word-at-point)
-(global-set-key "\C-cW" 'sdic-describe-word)
+(if (eq window-system 'w32) (progn
+							  (setq sdic-eiwa-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eedict.sdic")
+																(sdicf-client "~/.emacs.d/site-lisp/gene.sdic")))
+							  (setq sdic-waei-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eijirou.sdic")
+																(sdicf-client "~/.emacs.d/site-lisp/waeijirou.sdic")))
+							  (autoload 'sdic-describe-word "sdic" "英単語の意味を調べる" t nil)
+							  (global-set-key "\C-cw" 'sdic-describe-word)
+							  (autoload 'sdic-describe-word-at-point "sdic" "カーソルの位置の英単語の意味を調べる" t nil)
+							  (global-set-key "\C-cW" 'sdic-describe-word-at-point)))
 
 ;;skk
 (require 'skk-auto nil t)
 (global-set-key "\C-x\C-j" 'skk-mode)
 (global-set-key "\C-xj" 'skk-auto-fill-mode)
 (global-set-key "\C-xt" 'skk-tutorial)
-;; (setq skk-large-jisyo "/Users/masahiro/Library/Application Support/AquaSKK/SKK-JISYO.L")
-(setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L")
-;; (setq skk-server-host "localhost")
-;; (setq skk-server-portnum 1178)
+(if (eq window-system 'w32)
+	(setq skk-large-jisyo "~/AppData/Roaming/skkime/SKK-JISYO.L")
+  (setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L"))
+
 
 
 ;elscreen
@@ -210,10 +228,7 @@
 (require 'anything-search-file nil t)
 (require 'resentf-ext nil t)
 (require 'anything-include nil t)
-(require 'anything-project)
-(require 'anything-rurima)
-(setq anything-rurima-index-file "~/work/ruby/rurema/rubydoc/rurema.e")
-(setq anything-enable-shortcuts 'alphabet)
+(require 'anything-project nil t)
 (setq anything-sources
       (list anything-c-source-gtags-select
 			anything-c-source-include
@@ -322,3 +337,24 @@
             (set (make-local-variable 'eldoc-idle-delay) 0.20)
             (c-turn-on-eldoc-mode)
             ))
+;; ispell
+(setq ispell-dictionary "US-xlg")
+(setq ispell-local-dictionary-alist
+  '((nil				; default (english.aff)
+     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B") nil iso-8859-1)
+    ("UK-xlg"				; english large version
+     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "UK-xlg") nil iso-8859-1)
+    ("US-xlg"				; american large version
+     "[A-Za-z]" "[^A-Za-z]" "[']" nil ("-B" "-d" "US-xlg") nil iso-8859-1)
+   )
+)
+
+;;yatex mode
+(if (eq window-system 'w32)
+	(progn
+	  (setq auto-mode-alist
+			(cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
+      (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)))
+
+
+(cd "~/")
