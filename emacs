@@ -9,6 +9,7 @@
 (add-to-list 'load-path "/home/masahiro/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/auto-install/")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/site-lisp/")
+(add-to-list 'load-path "/user/arch/koga/.emacs.d/site-lisp/haskell-mode/")
 (add-to-list 'load-path "/Users/masahiro/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/Users/masahiro/.emacs.d/auto-install/")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
@@ -21,6 +22,7 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/flim")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/semi")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/wl")
+(add-to-list 'load-path "/user/arch/koga/.emacs.d/ecb-2.40")
 
 ;;ステータスバーの設定
 (display-time-mode 1)
@@ -37,7 +39,7 @@
 ;; ;; color-theme の設定
 (when (require 'color-theme nil t)
   (color-theme-initialize)
-  (color-theme-andreas))
+  (color-theme-arjen))
 
 ;長い行を折り返して表示
 (setq trancate-partial-width-windows t)
@@ -69,12 +71,12 @@
 
 ;; major mode
 (setq auto-mode-alist (append (list
-			       '("\\.[ch]" . c-mode)
+			       '("\\.[ch]$" . c-mode)
 			       '(".emacs" . emacs-lisp-mode)
 			       '("\\.v" . verilog-mode)
-				   '("\\.[hg]s$"  . haskell-mode)
-				   '("\\.hi$"     . haskell-mode)
-				   '("\\.l[hg]s$" . literate-haskell-mode)
+				   '("\\.[hg]s"  . haskell-mode)
+				   '("\\.hi"     . haskell-mode)
+				   '("\\.l[hg]s" . literate-haskell-mode)
 			       auto-mode-alist)))
 
 ;haskell-mode
@@ -82,6 +84,8 @@
   "Major mode for editing Haskell scripts." t)
 (autoload 'literate-haskell-mode "haskell-mode"
   "Major mode for editing literate Haskell scripts." t)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 
 
@@ -181,7 +185,11 @@
 (global-set-key "\C-x\C-j" 'skk-mode)
 (global-set-key "\C-xj" 'skk-auto-fill-mode)
 (global-set-key "\C-xt" 'skk-tutorial)
+;; (setq skk-large-jisyo "/Users/masahiro/Library/Application Support/AquaSKK/SKK-JISYO.L")
 (setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L")
+;; (setq skk-server-host "localhost")
+;; (setq skk-server-portnum 1178)
+
 
 ;elscreen
 (require 'elscreen nil t)
@@ -203,6 +211,9 @@
 (require 'resentf-ext nil t)
 (require 'anything-include nil t)
 (require 'anything-project)
+(require 'anything-rurima)
+(setq anything-rurima-index-file "~/work/ruby/rurema/rubydoc/rurema.e")
+(setq anything-enable-shortcuts 'alphabet)
 (setq anything-sources
       (list anything-c-source-gtags-select
 			anything-c-source-include
@@ -215,7 +226,7 @@
 			anything-c-source-info-elisp
 			anything-c-source-man-pages
 			anything-c-source-emacs-commands
-			anything-c-source-find-files
+			;; anything-c-source-find-files
 			anything-c-source-file-cache
 			anything-c-source-kill-ring
 			anything-c-source-org-headline
@@ -229,10 +240,9 @@
 (define-key global-map (kbd "C-x b") 'anything-for-buffers)
 (define-key global-map (kbd "C-;") 'anything)
 ;; (setq anything-gtags-hijack-gtags-select-mode nil) ;error回避
-(setq anything-enable-shortcuts 'alphabet)
-
 
 (require 'auto-install nil t)
+(setq auto-install-update-emacswiki-package-name t)
 
 ;gtags
 (require 'gtags nil t)
@@ -253,7 +263,7 @@
 (ac-config-default)
 
 ;debug
-(setq debug-on-error t)
+(setq debug-on-error nil)
 
 ;org-mode
 (load "~/.my-org-mode.el")
@@ -301,3 +311,14 @@
 (ruby-block-mode t)
 ;; ミニバッファに表示し, かつ, オーバレイする.
 (setq ruby-block-highlight-toggle t)
+
+;; gccsence
+(require 'gccsense)
+
+;;c-eldoc.el
+(load "c-eldoc")
+(add-hook 'c-mode-hook
+          (lambda ()
+            (set (make-local-variable 'eldoc-idle-delay) 0.20)
+            (c-turn-on-eldoc-mode)
+            ))

@@ -5,7 +5,18 @@ darwin10.0)
 		export PATH=$HOME/opt/sbin:$HOME/opt/bin:$HOME/local/bin:$PATH
 		;;
 linux-gnu)
-		export PATH=$HOME/linux/opt/rurema:$HOME/linux/opt/ruby19/bin:$HOME/linux/opt/rsense-0.2/bin:$HOME/.cabal/bin:$HOME/local/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH
+		export PATH=$HOME/.cabal/bin:$HOME/linux/opt/ghc-6.12.1/bin:$HOME/linux/local/app/haskell-platform-2010.1.0.0/bin:$GOBIN:$HOME/linux/opt/rurema:$HOME/linux/opt/ruby19/bin:$HOME/linux/opt/rsense-0.2/bin:$HOME/.cabal/bin:$HOME/local/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH
+		export PATH=$HOME/linux/local/app/emacs-23.2/bin:$PATH
+		export PATH=$HOME/linux/local/app/ruby18/bin:$PATH
+		export PATH=$HOME/linux/local/app/gcc-code-assist-0.1.4.4.4/bin:$PATH
+		export PATH=$HOME/linux/local/app/global-5.8.2/bin:$PATH
+		export GOROOT=$HOME/linux/opt/go
+		export GOBIN=$GOROOT/bin
+		export GOOS=linux
+		export GOARCH=amd64
+		export PYTHONPATH=/user/arch/koga/linux/local/lib64/python2.4/site-packages
+		export LD_LIBRARY_PATH=/usr/lib64:/user/arch/koga/linux/local/lib
+		export GCC_SENSE_HOME=/home/project/vglc/koga
 		;;
 esac
 

@@ -30,8 +30,8 @@ defbce "on"
 #
 #term xterm-256color
 
-bind 'U' eval "encoding utf8" "stuff 'setenv LANG ja_JP.utf8\012'"
-bind 'E' eval "encoding euc" "stuff 'setenv LANG ja_JP.eucJP\012'"
+bind 'U' eval "encoding utf8" "stuff 'export LANG=ja_JP.utf8\012'"
+bind 'E' eval "encoding euc" "stuff 'export LANG=ja_JP.eucJP\012'"
 
 defscrollback 100000
 termcapinfo xterm|xterms|xs|rxvt ti@:te@
