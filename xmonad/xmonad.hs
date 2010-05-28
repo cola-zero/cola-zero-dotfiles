@@ -14,7 +14,25 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
--- import XMonad.Config.Gnome
+import XMonad.Config.Gnome
+
+import Control.OldException
+import Control.Monad
+import DBus
+import DBus.Connection
+import DBus.Message
+import XMonad
+import XMonad.Config.Gnome
+import XMonad.Hooks.DynamicLog
+
+getWellKnownName :: Connection -> IO ()
+getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) -> getWellKnownName dbus)
+ where
+  tryGetName = do
+    namereq <- newMethodCall serviceDBus pathDBus interfaceDBus "RequestName"
+    addArgs namereq [String "org.xmonad.Log", Word32 5]
+    sendWithReplyAndBlock dbus namereq 0
+    return ()
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -235,7 +253,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+-- myEventHook = mempty
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -243,7 +261,7 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+-- myLogHook = return ()
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -253,24 +271,20 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
-myStartupHook = return ()
+-- myStartupHook = return ()
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = defaultConfig {
+main = withConnection Session $ \ dbus -> do
+         putStrLn "Getting well-known name."
+         getWellKnownName dbus
+         putStrLn "Got name, starting XMonad."
+         xmonad $ gnomeConfig {
       -- simple stuff
-        terminal           = myTerminal,
+        terminal           = terminal gnomeConfig,
         focusFollowsMouse  = myFocusFollowsMouse,
         borderWidth        = myBorderWidth,
         modMask            = myModMask,
@@ -284,11 +298,42 @@ defaults = defaultConfig {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
---        manageHook         = myManageHook gnomeConfig,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
+--        layoutHook         = myLayout <+> layoutHook gnomeConfig,
+        manageHook         = manageHook gnomeConfig,
+--        manageHook         = myManageHook <+> manageHook gnomeConfig,
+        handleEventHook    = handleEventHook gnomeConfig,
 --        logHook            = myLogHook gnomeConfig,
-        logHook            = myLogHook,
-        startupHook        = myStartupHook
+        startupHook        = startupHook gnomeConfig,
+        logHook            = do
+          logHook gnomeConfig
+          dynamicLogWithPP $ defaultPP {
+                                 ppOutput   = \ str -> do
+                                                let str'  = "<span font=\"UmePlus P Gothic\" weight=\"bold\">" ++ str ++ "</span>"
+                                                msg <- newSignal "/org/xmonad/Log" "org.xmonad.Log" "Update"
+                                                addArgs msg [String str']
+                                                -- If the send fails, ignore it.
+                                                send dbus msg 0 `catchDyn` (\ (DBus.Error _name _msg) -> return 0)
+                                                return ()
+                               , ppTitle    = pangoColor "#003366" . shorten 60 . escape
+                               , ppCurrent  = pangoColor "#003366" . wrap "[" "]"
+                               , ppVisible  = pangoColor "#006666" . wrap "_" ""
+                               , ppHidden   = wrap "" ""
+                               , ppUrgent   = pangoColor "red"
+                               }
     }
+
+
+pangoColor :: String -> String -> String
+pangoColor fg = wrap left right
+ where
+  left  = "<span foreground=\"" ++ fg ++ "\">"
+  right = "</span>"
+
+escape :: String -> String
+escape = concatMap escapeChar
+escapeChar :: Char -> String
+escapeChar '<' = "&lt;"
+escapeChar '>' = "&gt;"
+escapeChar '&' = "&amp;"
+escapeChar '"' = "&quot;"
+escapeChar c = [c]
