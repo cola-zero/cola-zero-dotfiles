@@ -44,7 +44,7 @@
 ;; color-theme の設定
 (when (require 'color-theme nil t)
 ;  (color-theme-initialize)
-  (color-theme-andreas))
+  (color-theme-gray30))
 
 ;長い行を折り返して表示
 (setq trancate-partial-width-windows t)
@@ -357,7 +357,24 @@
       (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)))
 
 
-<<<<<<< Updated upstream
+;; 編集行を目立たせる
+;; 【Emacs】 カーソル行のハイライト: 日々此精進
+;; http://murakan.cocolog-nifty.com/blog/2009/01/emacs-tips-1d45.html
+(defface hlline-face
+  '((((class color)
+      (background dark))
+     (:background "dark slate gray"))
+    (((class color)
+      (background light))
+     (:background "DarkSeaGreen"))
+    (t
+     ()))
+  "*Face used by hl-line.")
+(setq hl-line-face 'hlline-face)
+;; (setq hl-line-face 'underline) ; 下線
+(global-hl-line-mode)
+
+
 (cd "~/")
 =======
 ;(cd "~/")
