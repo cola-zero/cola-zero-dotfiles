@@ -6,11 +6,13 @@
 (setq org-tag-alist
 	  '(("@work" . ?w) ("@home" . ?h) ("@shopping" . ?s)))
 (org-remember-insinuate)
-(setq org-directory "~/memo/")
+(if (eq window-system 'w32)
+	(setq org-directory "~/Documents/My Dropbox/memo/")
+  (setq org-directory "~/Dropbox/memo/"))
 (setq org-default-notes-file (concat org-directory "agenda.org"))
 (setq org-remember-templates
 	  '(("Inbox" ?i "** INBOX %?\n %i\n %a\n %t" nil "Inbox")
-		("NextAction" ?n "** NEXT-ACTION %?\n*** GOAL: \n%i\n %t" nil "NextAction")
+		("NextAction" ?n "** NEXT-ACTION %?\n*** GOAL: \n%i\n %t" nil "Next Action")
 		("Project" ?p "** PROJECT %?\n*** GOAL: \n%i\n %t" nil "Project")
 		("Wait" ?w "** WAIT %?\n %i\n %t" nil "Wait")
 		("Idea" ?I "** %?\n %i\n %a\n %t" nil "New Ideas")
@@ -42,8 +44,11 @@
              ,org-code-reading-file "Memo"))))
     (org-remember)))
 
-(setq org-agenda-files (list "~/Documents/My Dropbox/memo/agenda.org"
-							 "~/Documents/My Dropbox/memo/code-reading.org"))
+(if (eq window-system 'w32)
+	(setq org-agenda-files (list "~/Documents/My Dropbox/memo/agenda.org"
+								   "~/Documents/My Dropbox/memo/code-reading.org"))
+  (setq org-agenda-files (list "~/Dropbox/memo/agenda.org"
+							   "~/Dropbox/memo/code-reading.org")))
 
 ;MobileOrg
 (if (eq window-system 'w32)
