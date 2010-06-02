@@ -24,6 +24,7 @@ import DBus.Message
 import XMonad
 import XMonad.Config.Gnome
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers
 
 getWellKnownName :: Connection -> IO ()
 getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) -> getWellKnownName dbus)
@@ -239,11 +240,14 @@ myLayout = tiled ||| Mirror tiled ||| Full
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
+    [ manageHook gnomeConfig
+    , className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore]
 
+myManageHook_full = composeOne
+                    [ isFullscreen -?> doFullFloat ]
 ------------------------------------------------------------------------
 -- Event handling
 
@@ -299,7 +303,7 @@ main = withConnection Session $ \ dbus -> do
 
       -- hooks, layouts
 --        layoutHook         = myLayout <+> layoutHook gnomeConfig,
-        manageHook         = manageHook gnomeConfig,
+        manageHook         = manageHook gnomeConfig <+> myManageHook_full,
 --        manageHook         = myManageHook <+> manageHook gnomeConfig,
         handleEventHook    = handleEventHook gnomeConfig,
 --        logHook            = myLogHook gnomeConfig,
