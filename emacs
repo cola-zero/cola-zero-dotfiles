@@ -24,6 +24,15 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/wl")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/ecb-2.40")
 
+;get hostname
+(setq hostname (system-name))
+(if (null hostname)
+    (setq hostname "no_host"))
+; 小文字に
+(setq hostname (downcase hostname))
+; ピリオド以下削除(ピリオドがなければ変更なし)
+(setq hostname (car (split-string hostname "\\.")))
+
 ;;font設定
 (if (eq window-system 'w32)
   (load-file "~/.emacs-font-w32.el"))
@@ -43,7 +52,8 @@
 
 ;; color-theme の設定
 (when (require 'color-theme nil t)
-;  (color-theme-initialize)
+      (if (not (string-match hostname "whale"))
+	  (color-theme-initialize))
   (color-theme-gray30))
 
 ;長い行を折り返して表示
@@ -139,15 +149,6 @@
 ;; (load-library "anthy")
 ;; ; set default for japanese-anthy
 ;; (setq default-input-method "japanese-anthy")
-
-;get hostname
-(setq hostname (system-name))
-(if (null hostname)
-    (setq hostname "no_host"))
-; 小文字に
-(setq hostname (downcase hostname))
-; ピリオド以下削除(ピリオドがなければ変更なし)
-(setq hostname (car (split-string hostname "\\.")))
 
 ;japanese
 (when (or (string-match hostname "macbook")

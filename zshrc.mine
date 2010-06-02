@@ -15,7 +15,7 @@ linux-gnu)
 		export GOOS=linux
 		export GOARCH=amd64
 		export PYTHONPATH=/user/arch/koga/linux/local/lib64/python2.4/site-packages
-		export LD_LIBRARY_PATH=/usr/lib64:/user/arch/koga/linux/local/lib
+		export LD_LIBRARY_PATH=/user/arch/koga/linux/local/lib:/usr/lib64:/usr/local/bin/Mono/lib
 		export GCC_SENSE_HOME=/home/project/vglc/koga
 		;;
 esac
