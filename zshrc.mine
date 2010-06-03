@@ -1,8 +1,9 @@
 # PATH setting
 # for macport
 case "${OSTYPE}" in
-darwin10.0)
-		export PATH=$HOME/opt/sbin:$HOME/opt/bin:$HOME/local/bin:$PATH
+darwin10.3.0)
+		export PATH=$HOME/opt/sbin:$HOME/opt/bin:$HOME/local/bin:$HOME/.cabal/bin:$PATH
+		export PATH=/Applications/Emacs.app/Contents/MacOS:/Applications/Emacs.app/Contents/MacOS/bin:$PATH
 		;;
 linux-gnu)
 		export PATH=$HOME/.cabal/bin:$HOME/linux/opt/ghc-6.12.1/bin:$HOME/linux/local/app/haskell-platform-2010.1.0.0/bin:$GOBIN:$HOME/linux/opt/rurema:$HOME/linux/opt/ruby19/bin:$HOME/linux/opt/rsense-0.2/bin:$HOME/.cabal/bin:$HOME/local/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH

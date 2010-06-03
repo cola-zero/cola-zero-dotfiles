@@ -23,6 +23,7 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/semi")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/wl")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/ecb-2.40")
+(add-to-list 'load-path "/Applications/Emacs.app/Contents/Resources/share/emacs/site-lisp/")
 
 ;get hostname
 (setq hostname (system-name))
@@ -36,7 +37,6 @@
 ;;font設定
 (if (eq window-system 'w32)
   (load-file "~/.emacs-font-w32.el"))
-
 
 ;;ステータスバーの設定
 (display-time-mode 1)
@@ -98,16 +98,12 @@
 			       auto-mode-alist)))
 
 ;haskell-mode
-;; (autoload 'haskell-mode "haskell-mode"
-;;   "Major mode for editing Haskell scripts." t)
-;; (autoload 'literate-haskell-mode "haskell-mode"
-;;   "Major mode for editing literate Haskell scripts." t)
-(require 'haskell-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(require 'haskell-mode nil t)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (setq haskell-program-name "c:/Program Files/Haskell Platform/2010.1.0.0/bin/ghci.exe")
-
-
 
 
 ;;
@@ -123,7 +119,7 @@
 ;; ツールバーを消す
  (tool-bar-mode -1)
 ;; メニューバーを消す
- (menu-bar-mode -1)
+ (menu-bar-mode 1)
 
 
 ;;
@@ -231,7 +227,7 @@
 (require 'anything-include nil t)
 (require 'anything-project nil t)
 (setq anything-sources
-      (list anything-c-source-gtags-select
+      (list ;anything-c-source-gtags-select
 			anything-c-source-include
 			anything-c-source-buffers+
 			anything-c-source-recentf
@@ -319,12 +315,12 @@
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
 ;ruby-electric
-(require 'ruby-electric)
+(require 'ruby-electric nil t)
 (add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
 
 ;; ruby-block
-(require 'ruby-block)
-(ruby-block-mode t)
+(require 'ruby-block nil t)
+;(ruby-block-mode t)
 ;; ミニバッファに表示し, かつ, オーバレイする.
 (setq ruby-block-highlight-toggle t)
 
@@ -375,5 +371,12 @@
 ;; (setq hl-line-face 'underline) ; 下線
 (global-hl-line-mode)
 
+
+(if (eq window-system 'ns)
+	(progn
+	  (define-key global-map [?¥] [?\\])
+	  (define-key global-map [?\C-¥] [?\C-\\])
+	  (define-key global-map [?\M-¥] [?\M-\\])
+	  (define-key global-map [?\C-\M-¥] [?\C-\M-\\])))
 
 (cd "~/")
