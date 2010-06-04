@@ -22,6 +22,8 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/flim")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/semi")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/wl")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/ecb-2.40")
 (add-to-list 'load-path "/Applications/Emacs.app/Contents/Resources/share/emacs/site-lisp/")
 
@@ -94,6 +96,7 @@
 				   '("\\.hs"     . haskell-mode)
 				   '("\\.l[hg]s" . literate-haskell-mode)
 				   '("\\.el" . lisp-mode)
+				   '("\\.lisp" . lisp-mode)
 				   '("\\.org" . org-mode)
 			       auto-mode-alist)))
 
@@ -185,15 +188,17 @@
 (global-set-key "\C-xT" 'test-translator-translate-last-string)
 
 ;; translate by using eijiro
-(if (eq window-system 'w32) (progn
-							  (setq sdic-eiwa-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eedict.sdic")
-																(sdicf-client "~/.emacs.d/site-lisp/gene.sdic")))
-							  (setq sdic-waei-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eijirou.sdic")
-																(sdicf-client "~/.emacs.d/site-lisp/waeijirou.sdic")))
-							  (autoload 'sdic-describe-word "sdic" "英単語の意味を調べる" t nil)
-							  (global-set-key "\C-cw" 'sdic-describe-word)
-							  (autoload 'sdic-describe-word-at-point "sdic" "カーソルの位置の英単語の意味を調べる" t nil)
-							  (global-set-key "\C-cW" 'sdic-describe-word-at-point)))
+(if (or (eq window-system 'w32)
+		(eq window-system 'x))
+	(progn
+	  (setq sdic-eiwa-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eedict.sdic")
+										(sdicf-client "~/.emacs.d/site-lisp/gene.sdic")))
+	  ;; (setq sdic-waei-dictionary-list '((sdicf-client "~/.emacs.d/site-lisp/eijirou.sdic")
+	  ;; 									(sdicf-client "~/.emacs.d/site-lisp/waeijirou.sdic")))
+	  (autoload 'sdic-describe-word "sdic" "英単語の意味を調べる" t nil)
+	  (global-set-key "\C-cw" 'sdic-describe-word)
+	  (autoload 'sdic-describe-word-at-point "sdic" "カーソルの位置の英単語の意味を調べる" t nil)
+	  (global-set-key "\C-cW" 'sdic-describe-word-at-point)))
 
 ;;skk
 (require 'skk-auto nil t)
@@ -378,5 +383,48 @@
 	  (define-key global-map [?\C-¥] [?\C-\\])
 	  (define-key global-map [?\M-¥] [?\M-\\])
 	  (define-key global-map [?\C-\M-¥] [?\C-\M-\\])))
+
+;; slime
+(setq inferior-lisp-program "sbcl")
+(require 'slime nil t)
+(slime-setup)
+;;HyperSpec
+(require 'hyperspec)
+;; (setq common-lisp-hyperspec-root
+;; 	  "file::///usr/share/doc/hyperspec/")
+(setq common-lisp-hyperspec-root
+	  "/usr/share/doc/hyperspec/"
+	  common-lisp-hyperspec-symbol-table
+	  "/usr/share/doc/hyperspec/Data/Map_Sym.txt")
+
+;w3m
+;(require 'w3m-load nil t)
+;use w3m as browser in emacs;
+(setq browse-url-browser-function 'w3m-browse-url)
+
+;; lookup hyperspec by using w3m
+(defadvice common-lisp-hyperspec
+  (around hyperspec-lookup-w3m () activate)
+  (let* ((window-configuration (current-window-configuration))
+		 (brouse-url-browser-function
+		  '(lamdba (url new-window)
+				   (w3m-browse-url url nil)
+				   (let ((hs-map (copy-keymap w3m-mode-map)))
+					 (define-key hs-map (kbd "q")
+					   (lambda ()
+						 (interactive)
+						 (kill-buffer nil)
+						 (set-window-configuration ,window-configuration)))
+					 (use-local-map hs-map)))))
+    ad-do-it))
+
+;use japanese
+(setq slime-net-coding-system 'utf-8-unix)
+
+;; auto display information
+(slime-autodoc-mode)
+
+(show-paren-mode)
+
 
 (cd "~/")
