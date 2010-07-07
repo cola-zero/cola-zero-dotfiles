@@ -152,7 +152,8 @@
 ;japanese
 (when (or (string-match hostname "macbook")
 		  (string-match hostname "debian" )
-		  (string-match hostname "koga_dr" ))
+		  (string-match hostname "koga_dr" )
+		  (string-match hostname "whale"))
   (prefer-coding-system 'utf-8))
 
 ;; enable color in console
@@ -426,5 +427,44 @@
 
 (show-paren-mode)
 
+; rsense
+(setq rsense-home "/home/koga/opt/rsense-0.3")
+(add-to-list 'load-path (concat rsense-home "/etc/"))
+(require 'rsense)
+(add-hook 'ruby-mode-hook
+		  (lambda ()
+			(local-set-key (kbd "C-c .") 'ac-complete-rsense)))
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (add-to-list 'ac-sources 'ac-source-rsense-method)
+            (add-to-list 'ac-sources 'ac-source-rsense-constant)))
+(setq rsense-rurema-home "~/src/rurema")
+
+; anything-rurima
+(require 'anything-rurima)
+(setq anything-rurima-index-file "~/work/ruby/rubydoc/rurima.e")
+
+
+;; gccsense
+(require 'gccsense nil t)
+
+;; auto-complete-verilog
+;;(require 'auto-complete-verilog nil t)
+
+;; diary-mode
+(setq view-diary-entries t
+	  mark-diary-entries-in-calendar t
+	  number-of-diary-entries 7)
+(add-hook 'diary-display-hook 'fancy-diary-display)
+(add-hook 'today-visible-calendar-hook 'calendar-mark-today)
+
+; simple-hatena-mode
+(require 'simple-hatena-mode)
+(setq simple-hatena-default-id "cola-zero")
+(setq simple-hatena-bin "~/opt/hatena-diary-writer/hw.pl")
+(require 'hatenahelper-mode)
+(add-hook 'simple-hatena-mode-hook
+		  '(lambda ()
+			 (hatenahelper-mode 1)))
 
 (cd "~/")
