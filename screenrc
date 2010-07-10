@@ -1,10 +1,10 @@
 escape ^t^t
 
-shelltitle "$ |zsh"
-hardstatus on
-hardstatus alwayslastline "screen | %w | %h %u %= %m/%d %c"
+# shelltitle "$ |zsh"
+# hardstatus on
+# hardstatus alwayslastline "screen | %w | %h %u %= %m/%d %c"
 #hardstatus ignore "screen | %w | %h %u %= %m/%d %c"
-startup_message	off
+# startup_message	off
 
 bind -c REGION 2 split
 bind -c REGION 3 eval 'split -v'
@@ -25,15 +25,15 @@ bind l windowlist
 #enable 256color
 ## http://frexx.de/xterm-256-notes/
 # erase background with current bg color
-defbce "on"
+# defbce "on"
 # do not use 'screen-bce'
 #
-#term xterm-256color
+term xterm-256color
 
 bind 'U' eval "encoding utf8" "stuff 'export LANG=ja_JP.utf8\012'"
 bind 'E' eval "encoding euc" "stuff 'export LANG=ja_JP.eucJP\012'"
 
-defscrollback 100000
-termcapinfo xterm|xterms|xs|rxvt ti@:te@
+# defscrollback 100000
+# termcapinfo xterm|xterms|xs|rxvt ti@:te@
 
-defc1 off
+# defc1 off

@@ -7,6 +7,7 @@
 
 (add-to-list 'load-path "/home/koga/.emacs.d/auto-install/")
 (add-to-list 'load-path "/home/koga/.emacs.d/site-lisp/")
+(add-to-list 'load-path "/home/koga/.emacs.d/site-lisp/org-mode")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/auto-install/")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/site-lisp/")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/site-lisp/haskell-mode/")
@@ -24,21 +25,22 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/wl")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/slime")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m")
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (add-to-list 'load-path "/user/arch/koga/.emacs.d/ecb-2.40")
 (add-to-list 'load-path "/Applications/Emacs.app/Contents/Resources/share/emacs/site-lisp/")
 
-;get hostname
+;; get hostname
 (setq hostname (system-name))
 (if (null hostname)
     (setq hostname "no_host"))
-; 小文字に
+;;  小文字に
 (setq hostname (downcase hostname))
-; ピリオド以下削除(ピリオドがなければ変更なし)
+;;  ピリオド以下削除(ピリオドがなければ変更なし)
 (setq hostname (car (split-string hostname "\\.")))
 
 ;;font設定
 (if (eq window-system 'w32)
-  (load-file "~/.emacs-font-w32.el"))
+	(load-file "~/.emacs-font-w32.el"))
 
 ;;ステータスバーの設定
 (display-time-mode 1)
@@ -54,53 +56,54 @@
 
 ;; color-theme の設定
 (when (require 'color-theme nil t)
-      (if (not (string-match hostname "whale"))
-	  (color-theme-initialize))
+  ;;   (color-theme-initialize)
   (color-theme-gray30))
 
-;長い行を折り返して表示
+;; 長い行を折り返して表示
 (setq trancate-partial-width-windows t)
 
 ;; ステータスラインに時間を表示する
 (if (>= emacs-major-version 22)
     (progn
       (setq dayname-j-alist
-	    '(("Sun" . "日") ("Mon" . "月") ("Tue" . "火") ("Wed" . "水")
-	      ("Thu" . "木") ("Fri" . "金") ("Sat" . "土")))
+			'(("Sun" . "日") ("Mon" . "月") ("Tue" . "火") ("Wed" . "水")
+			  ("Thu" . "木") ("Fri" . "金") ("Sat" . "土")))
       (setq display-time-string-forms
-	    '((format "%s年%s月%s日(%s) %s:%s"
-		      year month day
-		      (cdr (assoc dayname dayname-j-alist))
-		      24-hours minutes)))
-))
+			'((format "%s年%s月%s日(%s) %s:%s"
+					  year month day
+					  (cdr (assoc dayname dayname-j-alist))
+					  24-hours minutes)))
+	  ))
 (display-time)
 (setq system-time-locale "C")
-;visual-bell
+;; visual-bell
 (setq visible-bel t)
 
-;行番号を表示
+;; 行番号を表示
 (line-number-mode t)
 
-;タブ幅の設定
+;; タブ幅の設定
 (setq default-tab-width 4)
-;indentにtabだけを使う
+;; indentにtabだけを使う
 (setq indent-tabs-mode nil)
 
 ;; major mode
-(setq auto-mode-alist (append (list
-			       '("\\.[ch]$" . c-mode)
-			       '(".emacs" . emacs-lisp-mode)
-			       '("\\.v" . verilog-mode)
-				   '("\\.[hg]s"  . haskell-mode)
-				   '("\\.hi"     . haskell-mode)
-				   '("\\.hs"     . haskell-mode)
-				   '("\\.l[hg]s" . literate-haskell-mode)
-				   '("\\.el" . lisp-mode)
-				   '("\\.lisp" . lisp-mode)
-				   '("\\.org" . org-mode)
-			       auto-mode-alist)))
+(setq auto-mode-alist
+	  (append '(("\\.[ch]$" . c-mode)
+				(".emacs" . emacs-lisp-mode)
+				("diary" . org-mode)
+				("\\.v" . verilog-mode)
+				("\\.[hg]s"  . haskell-mode)
+				("\\.hi"     . haskell-mode)
+				("\\.hs"     . haskell-mode)
+				("\\.l[hg]s" . literate-haskell-mode)
+				("\\.el" . emacs-lisp-mode)
+				("\\.lisp" . lisp-mode)
+				("\\.org" . org-mode)
+				("\\.rb" . ruby-mode))
+			  auto-mode-alist))
 
-;haskell-mode
+;; haskell-mode
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (require 'haskell-mode nil t)
@@ -120,9 +123,9 @@
 (set-face-underline 'trailing-whitespace t)
 
 ;; ツールバーを消す
- (tool-bar-mode -1)
+(tool-bar-mode -1)
 ;; メニューバーを消す
- (menu-bar-mode 1)
+(menu-bar-mode -1)
 
 
 ;;
@@ -133,10 +136,10 @@
 ;;
 ;; wl
 ;;
-; (if (require 'wanderlust-startup nil t)
-;     (autoload 'wl "wl" "Wanderlust" t)
-;     (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-;     (autoload 'wo-draft "wl-draft" "Write draft with Wanderlust." t))
+;; (if (require 'wanderlust-startup nil t)
+;; 	(autoload 'wl "wl" "Wanderlust" t)
+;;   (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+;;   (autoload 'wo-draft "wl-draft" "Write draft with Wanderlust." t))
 
 ;;
 ;;anthy
@@ -149,7 +152,7 @@
 ;; ; set default for japanese-anthy
 ;; (setq default-input-method "japanese-anthy")
 
-;japanese
+										;japanese
 (when (or (string-match hostname "macbook")
 		  (string-match hostname "debian" )
 		  (string-match hostname "koga_dr" )
@@ -178,7 +181,7 @@
 (require 'xcscope nil t)
 
 ;; C-H を一文字前を削除に変更
-;(define-key global-map "^H" 'backward-delete-char)
+										;(define-key global-map "^H" 'backward-delete-char)
 (define-key global-map "" 'backward-delete-char)
 
 ;; text-translator
@@ -212,20 +215,20 @@
 
 
 
-;elscreen
+;; elscreen
 (require 'elscreen nil t)
 (require 'elscreen-color-theme nil t)
 (require 'elscreen-dired nil t)
 (require 'elscreen-server nil t)
 
-;howm
+;; howm
 (setq howm-menu-lang 'ja)
 (require 'howm-mode nil t)
 
-;info
+;; info
 (require 'info nil t)
 
-;anything
+;; anything
 (require 'anything-config nil t)
 (require 'anything-gtags nil t)
 (require 'anything-search-file nil t)
@@ -234,22 +237,22 @@
 (require 'anything-project nil t)
 (setq anything-sources
       (list ;anything-c-source-gtags-select
-			anything-c-source-include
-			anything-c-source-buffers+
-			anything-c-source-recentf
-			anything-c-source-locate
-			anything-c-source-files-in-current-dir
-			anything-c-source-file-name-history
-			anything-c-source-info-pages
-			anything-c-source-info-elisp
-			anything-c-source-man-pages
-			anything-c-source-emacs-commands
-			;; anything-c-source-find-files
-			anything-c-source-file-cache
-			anything-c-source-kill-ring
-			anything-c-source-org-headline
-			anything-c-source-elscreen
-			anything-c-source-search-file))
+	   anything-c-source-include
+	   anything-c-source-buffers+
+	   anything-c-source-recentf
+	   anything-c-source-locate
+	   anything-c-source-files-in-current-dir
+	   anything-c-source-file-name-history
+	   anything-c-source-info-pages
+	   anything-c-source-info-elisp
+	   anything-c-source-man-pages
+	   anything-c-source-emacs-commands
+	   ;; anything-c-source-find-files
+	   anything-c-source-file-cache
+	   anything-c-source-kill-ring
+	   anything-c-source-org-headline
+	   anything-c-source-elscreen
+	   anything-c-source-search-file))
 (define-key anything-map (kbd "C-p") 'anything-previous-line)
 (define-key anything-map (kbd "C-n") 'anything-next-line)
 (define-key anything-map (kbd "C-v") 'anything-next-source)
@@ -262,49 +265,50 @@
 (require 'auto-install nil t)
 (setq auto-install-update-emacswiki-package-name t)
 
-;gtags
+;; gtags
 (require 'gtags nil t)
 (setq c-mode-hook
       '(lambda ()
-	 (gtags-mode 1)))
+		 (gtags-mode 1)))
 (setq gtags-mode-hook
       '(lambda ()
-	 (local-set-key "\M-t" 'gtags-find-tag)
-	 (local-set-key "\M-r" 'gtags-find-rtag)
-	 (local-set-key "\M-s" 'gtags-find-symbol)
-	 (local-set-key "\C-t" 'gtags-pop-stack)
-	 ))
+		 (local-set-key "\M-t" 'gtags-find-tag)
+		 (local-set-key "\M-r" 'gtags-find-rtag)
+		 (local-set-key "\M-s" 'gtags-find-symbol)
+		 (local-set-key "\C-t" 'gtags-pop-stack)
+		 ))
 
 ;;auto-complete
 (require 'auto-complete-config nil t)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
 (ac-config-default)
+(add-to-list 'ac-modes 'ruby-mode)
 
-;debug
+;; debug
 (setq debug-on-error nil)
 
-;org-mode
+;; org-mode
 (load "~/.my-org-mode.el")
 
-;C-F C-B C-P C-Nでウィンドウの移動
-;http://d.hatena.ne.jp/authorNari/20091225/1261667956
-;
+;; C-F C-B C-P C-Nでウィンドウの移動
+;; http://d.hatena.ne.jp/authorNari/20091225/1261667956
+;;
 (setq windmove-wrap-around t)
 (define-key global-map [(C shift n)] 'windmove-down)
 (define-key global-map [(C shift p)] 'windmove-up)
 (define-key global-map [(C shift b)] 'windmove-left)
 (define-key global-map [(C shift f)] 'windmove-right)
 
-;uniquify
-;http://nlp.kuee.kyoto-u.ac.jp/~shibata/mt/archives/000116.html
+										;uniquify
+;; http://nlp.kuee.kyoto-u.ac.jp/~shibata/mt/archives/000116.html
 (require 'uniquify nil t)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
-;twittering-mode
+;; twittering-mode
 (require 'twittering-mode nil t)
 (setq twittering-username "cola_zero")
 
-;gdb
+;; gdb
 (setq gdb-many-windows t)
 ;;; 変数の上にマウスカーソルを置くと値を表示
 (add-hook 'gdb-mode-hook '(lambda () (gud-tooltip-mode t)))
@@ -315,18 +319,18 @@
 
 (setq mac-pass-control-to-system nil)
 
-;ruby-mode
+;; ruby-mode
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
-;ruby-electric
+;; ruby-electric
 (require 'ruby-electric nil t)
 (add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
 
 ;; ruby-block
 (require 'ruby-block nil t)
-;(ruby-block-mode t)
+										;(ruby-block-mode t)
 ;; ミニバッファに表示し, かつ, オーバレイする.
 (setq ruby-block-highlight-toggle t)
 
@@ -398,9 +402,9 @@
 	  common-lisp-hyperspec-symbol-table
 	  "/usr/share/doc/hyperspec/Data/Map_Sym.txt")
 
-;w3m
-;(require 'w3m-load nil t)
-;use w3m as browser in emacs;
+;; w3m
+;; (require 'w3m-load nil t)
+;; use w3m as browser in emacs;
 (setq browse-url-browser-function 'w3m-browse-url)
 
 ;; lookup hyperspec by using w3m
@@ -419,7 +423,7 @@
 					 (use-local-map hs-map)))))
     ad-do-it))
 
-;use japanese
+;; use japanese
 (setq slime-net-coding-system 'utf-8-unix)
 
 ;; auto display information
@@ -427,7 +431,7 @@
 
 (show-paren-mode)
 
-; rsense
+;; rsense
 (setq rsense-home "/home/koga/opt/rsense-0.3")
 (add-to-list 'load-path (concat rsense-home "/etc/"))
 (require 'rsense)
@@ -440,7 +444,7 @@
             (add-to-list 'ac-sources 'ac-source-rsense-constant)))
 (setq rsense-rurema-home "~/src/rurema")
 
-; anything-rurima
+;; anything-rurima
 (require 'anything-rurima)
 (setq anything-rurima-index-file "~/work/ruby/rubydoc/rurima.e")
 
@@ -458,7 +462,7 @@
 (add-hook 'diary-display-hook 'fancy-diary-display)
 (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
 
-; simple-hatena-mode
+;; simple-hatena-mode
 (require 'simple-hatena-mode)
 (setq simple-hatena-default-id "cola-zero")
 (setq simple-hatena-bin "~/opt/hatena-diary-writer/hw.pl")

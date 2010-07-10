@@ -48,7 +48,8 @@
 	(setq org-agenda-files (list "~/Documents/My Dropbox/memo/agenda.org"
 								   "~/Documents/My Dropbox/memo/code-reading.org"))
   (setq org-agenda-files (list "~/Dropbox/memo/agenda.org"
-							   "~/Dropbox/memo/code-reading.org")))
+							   "~/Dropbox/memo/code-reading.org"
+							   "~/diary")))
 
 ;MobileOrg
 (if (eq window-system 'w32)
@@ -61,7 +62,8 @@
 (setq org-todo-keywords '((sequence "INBOX" "NEXT-ACTION" "INACTIVE" "WAIT" "PROJECT" "|" "DONE")))
 
 ;diary
- (setq diary-file "~/memo/diary.gpg")
+;; (setq diary-file "~/memo/diary.gpg")
+(setq org-agenda-include-diary t)
 
 ;custom agenda view
 (setq org-agenda-custom-commands

@@ -79,7 +79,8 @@ myNumlockMask   = mod2Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+-- myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+myWorkspaces    = ["1:local","2:web","3:remote","4:VM","5:mail","6:music","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -244,7 +245,9 @@ myManageHook = composeAll
     , className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore]
+    , resource  =? "kdesktop"       --> doIgnore
+    , resource  =? "rhythmbox"      --> doF (W.shift "music")
+    ]
 
 myManageHook_full = composeOne
                     [ isFullscreen -?> doFullFloat ]
@@ -318,9 +321,9 @@ main = withConnection Session $ \ dbus -> do
                                                 -- If the send fails, ignore it.
                                                 send dbus msg 0 `catchDyn` (\ (DBus.Error _name _msg) -> return 0)
                                                 return ()
-                               , ppTitle    = pangoColor "#003366" . shorten 60 . escape
-                               , ppCurrent  = pangoColor "#003366" . wrap "[" "]"
-                               , ppVisible  = pangoColor "#006666" . wrap "_" ""
+                               , ppTitle    = pangoColor "#Ffd700" . shorten 100 . escape
+                               , ppCurrent  = pangoColor "#Ffd700" . wrap "[" "]"
+                               , ppVisible  = pangoColor "#Ff6347" . wrap "_" ""
                                , ppHidden   = wrap "" ""
                                , ppUrgent   = pangoColor "red"
                                }

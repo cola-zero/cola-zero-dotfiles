@@ -11,6 +11,8 @@ linux-gnu)
 		export PATH=$HOME/linux/local/app/ruby18/bin:$PATH
 		export PATH=$HOME/linux/local/app/gcc-code-assist-0.1.4.4.4/bin:$PATH
 		export PATH=$HOME/linux/local/app/global-5.8.2/bin:$PATH
+		export PATH=$HOME/opt/hatena-diary-writer:$PATH
+		export PATH=$HOME/.gem/ruby/1.8/bin:$PATH
 		export GOROOT=$HOME/linux/opt/go
 		export GOBIN=$GOROOT/bin
 		export GOOS=linux
