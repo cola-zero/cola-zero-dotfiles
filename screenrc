@@ -36,4 +36,6 @@ bind 'E' eval "encoding euc" "stuff 'export LANG=ja_JP.eucJP\012'"
 # defscrollback 100000
 # termcapinfo xterm|xterms|xs|rxvt ti@:te@
 
+source ~/.byobu/profile
+
 # defc1 off
