@@ -12,7 +12,7 @@ URxvt*foreground: gray90
 URxvt*visualBell: true
 URxvt*VT100*EightBitInput: false
 
-XTerm*faceName: 'VL Gothic'
+XTerm*faceName: 'Monospace'
 XTerm*faceSize: 9
 XTerm*cjkWidth: true
 xterm*background: black
