@@ -80,7 +80,7 @@ myNumlockMask   = mod2Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 -- myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces    = ["1:local","2:web","3:remote","4:VM","5:mail","6:music","7","8","9"]
+myWorkspaces    = ["1:term","2:emacs","3:web","4:win","5:vm","6:mail","7:music","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
