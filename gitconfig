@@ -5,3 +5,5 @@
 	excludefiles = /Users/kogamasahiro/.gitignore
 [push]
 	default = current
+[github]
+	user = cola-zero

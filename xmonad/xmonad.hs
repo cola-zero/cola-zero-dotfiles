@@ -10,35 +10,17 @@
 import XMonad
 import Data.Monoid
 import System.Exit
+import XMonad.Hooks.DynamicLog
+import XMonad.Layout.NoBorders
+import XMonad.Hooks.ManageHelpers
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-import XMonad.Config.Gnome
-
-import Control.OldException
-import Control.Monad
-import DBus
-import DBus.Connection
-import DBus.Message
-import XMonad
-import XMonad.Config.Gnome
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageHelpers
-
-getWellKnownName :: Connection -> IO ()
-getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) -> getWellKnownName dbus)
- where
-  tryGetName = do
-    namereq <- newMethodCall serviceDBus pathDBus interfaceDBus "RequestName"
-    addArgs namereq [String "org.xmonad.Log", Word32 5]
-    sendWithReplyAndBlock dbus namereq 0
-    return ()
-
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "xterm"
+myTerminal      = "urxvt"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -80,7 +62,7 @@ myNumlockMask   = mod2Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 -- myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces    = ["1:term","2:emacs","3:web","4:win","5:vm","6:mail","7:music","8","9"]
+myWorkspaces    = ["1:term","2:im & IRC", "3:emacs", "4:web","5:win","6:vm","7:mail","8:music","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -211,7 +193,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = smartBorders $ (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -240,17 +222,24 @@ myLayout = tiled ||| Mirror tiled ||| Full
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
+-- myManageHook = composeAll
+--     [ className =? "MPlayer"        --> doFloat
+--     , className =? "Gimp"           --> doFloat
+--     , resource  =? "desktop_window" --> doIgnore
+--     , resource  =? "kdesktop"       --> doIgnore ]
 myManageHook = composeAll
-    [ manageHook gnomeConfig
+    [ className =? "Emacs"          --> doShift "3:emacs"
+    , className =? "Empathy"        --> doShift "2:im & IRC"
+    , className =? "VirtualBox"     --> doShift "5:win"
+    , className =? "Firefox"        --> doShift "4:web"
     , className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
-    , resource  =? "rhythmbox"      --> doF (W.shift "music")
+    , resource  =? "Rhythmbox"      --> doShift "8:music"
+    , isFullscreen                  --> doFullFloat
     ]
 
-myManageHook_full = composeOne
-                    [ isFullscreen -?> doFullFloat ]
 ------------------------------------------------------------------------
 -- Event handling
 
@@ -285,15 +274,23 @@ myManageHook_full = composeOne
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = withConnection Session $ \ dbus -> do
-         putStrLn "Getting well-known name."
-         getWellKnownName dbus
-         putStrLn "Got name, starting XMonad."
-         xmonad $ gnomeConfig {
+-- main = xmonad defaults
+
+-- A structure containing your configuration settings, overriding
+-- fields in the default config. Any you don't override, will
+-- use the defaults defined in xmonad/XMonad/Config.hs
+--
+-- No need to modify this.
+--
+-- defaults = defaultConfig {
+-- main = dzen $ \conf -> xmonad $ conf {
+main = do
+  conf <- dzen defaultConfig
+  xmonad $ conf{
       -- simple stuff
-        terminal           = terminal gnomeConfig,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        borderWidth        = myBorderWidth,
+        terminal           = myTerminal,
+        -- focusFollowsMouse  = myFocusFollowsMouse,
+        -- borderWidth        = myBorderWidth,
         modMask            = myModMask,
         numlockMask        = myNumlockMask,
         workspaces         = myWorkspaces,
@@ -305,42 +302,10 @@ main = withConnection Session $ \ dbus -> do
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
---        layoutHook         = myLayout <+> layoutHook gnomeConfig,
-        manageHook         = manageHook gnomeConfig <+> myManageHook_full,
---        manageHook         = myManageHook <+> manageHook gnomeConfig,
-        handleEventHook    = handleEventHook gnomeConfig,
---        logHook            = myLogHook gnomeConfig,
-        startupHook        = startupHook gnomeConfig,
-        logHook            = do
-          logHook gnomeConfig
-          dynamicLogWithPP $ defaultPP {
-                                 ppOutput   = \ str -> do
-                                                let str'  = "<span font=\"UmePlus P Gothic\" weight=\"bold\">" ++ str ++ "</span>"
-                                                msg <- newSignal "/org/xmonad/Log" "org.xmonad.Log" "Update"
-                                                addArgs msg [String str']
-                                                -- If the send fails, ignore it.
-                                                send dbus msg 0 `catchDyn` (\ (DBus.Error _name _msg) -> return 0)
-                                                return ()
-                               , ppTitle    = pangoColor "#Ffd700" . shorten 100 . escape
-                               , ppCurrent  = pangoColor "#Ffd700" . wrap "[" "]"
-                               , ppVisible  = pangoColor "#Ff6347" . wrap "_" ""
-                               , ppHidden   = wrap "" ""
-                               , ppUrgent   = pangoColor "red"
-                               }
+        -- layoutHook         = myLayout,
+        layoutHook         = smartBorders (layoutHook conf)
+        -- manageHook         = myManageHook,
+        -- handleEventHook    = myEventHook,
+        -- logHook            = myLogHook,
+        -- startupHook        = myStartupHook
     }
-
-
-pangoColor :: String -> String -> String
-pangoColor fg = wrap left right
- where
-  left  = "<span foreground=\"" ++ fg ++ "\">"
-  right = "</span>"
-
-escape :: String -> String
-escape = concatMap escapeChar
-escapeChar :: Char -> String
-escapeChar '<' = "&lt;"
-escapeChar '>' = "&gt;"
-escapeChar '&' = "&amp;"
-escapeChar '"' = "&quot;"
-escapeChar c = [c]

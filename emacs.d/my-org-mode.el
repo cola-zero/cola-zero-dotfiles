@@ -1,4 +1,6 @@
 ;org-mode
+(add-to-list 'load-path "~/work/emacs/org-mode/lisp")
+(add-to-list 'load-path "~/work/emacs/org-mode/contrib/lisp")
 (require 'org-install)
 (setq org-startup-truncated nil)
 (setq org-return-follows-link t)
@@ -59,11 +61,14 @@
 	(progn
 	 (setq org-mobile-directory "~/Dropbox/MobileOrg/")
 	 (setq org-mobile-inbox-for-pull "~/Dropbox/memo/mobile.org")))
-(setq org-todo-keywords '((sequence "INBOX" "NEXT-ACTION" "INACTIVE" "WAIT" "PROJECT" "|" "DONE")))
+(setq org-todo-keywords '((sequence "INBOX(i)" "NEXT-ACTION(n)" "INACTIVE(I)" "WAIT(W)" "PROJECT(p)" "|" "DONE(d)")))
+(setq org-fast-tag-selection-include-todo t)
 
 ;diary
 ;; (setq diary-file "~/memo/diary.gpg")
 (setq org-agenda-include-diary t)
+(setq auto-mode-alist
+	  (cons (cons "diary" 'org-mode) auto-mode-alist))
 
 ;custom agenda view
 (setq org-agenda-custom-commands

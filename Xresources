@@ -3,14 +3,41 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.hintstyle: hintmedium
 Emacs.FontBackend: xft
-Emacs.font: VL Gothic-9
+Emacs.font: TakaoGothic-9
 Emacs*useXIM: false
 
-URxvt*font: xft:VLGothic:pixelsize=12
-URxvt*background: black
-URxvt*foreground: gray90
-URxvt*visualBell: true
-URxvt*VT100*EightBitInput: false
+URxvt*font: xft:TakaoGothic:pixelsize=16:antialias=true
+URxvt*scrollBar: false
+! URxvt*VT100*EightBitInput: false
+! URxvt*background: black
+! URxvt*foreground: gray90
+! URxvt*visualBell: true
+! URxvt*color0: black
+! URxvt*color1: red3
+! URxvt*color2: green3
+! URxvt*color3: yellow3
+! URxvt*color4: DodgerBlue1
+! URxvt*color5: magenta3
+! URxvt*color6: cyan3
+! URxvt*color7: gray90
+! URxvt*color8: gray50
+! URxvt*color9: red
+! URxvt*color10: green
+! URxvt*color11: yellow
+! URxvt*color12: blue
+! URxvt*color13: magenta
+! URxvt*color14: cyan
+! URxvt*color15: white
+! URxvt*colorUL: yellow
+! URxvt*colorBD: white
+! URxvt*termName: rxvt
+
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: google-chrome
+URxvt.matcher.button: 3
+URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+
+xscreensaver*mode: blank
 
 XTerm*faceName: 'Monospace'
 XTerm*faceSize: 9
