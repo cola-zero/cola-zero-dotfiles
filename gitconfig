@@ -3,6 +3,7 @@
 	email = masahirokoga@gmail.com
 [core]
 	excludefiles = /Users/kogamasahiro/.gitignore
+    editor=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
 [push]
 	default = current
 [github]
