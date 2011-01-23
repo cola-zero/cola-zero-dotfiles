@@ -1,9 +1,23 @@
 # PATH setting
 # for macport
 case "${OSTYPE}" in
-darwin10.3.0)
+darwin10.*)
 		export PATH=$HOME/opt/sbin:$HOME/opt/bin:$HOME/local/bin:$HOME/.cabal/bin:$PATH
 		export PATH=/Applications/Emacs.app/Contents/MacOS:/Applications/Emacs.app/Contents/MacOS/bin:$PATH
+        export PATH=$HOME/opt/sbcl/bin:$PATH
+        export PATH=$HOME/perl5/perlbrew/bin:$PATH
+        export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+        export PATH=$HOME/opt/sshfs/bin:$PATH
+        export PATH=/usr/texbin:$PATH
+        export PATH=$HOME/opt/ocaml/bin:$PATH
+        export PATH=$HOME/opt/screen-git/bin:$PATH
+        export LANG=ja_JP.UTF-8
+        export TERM=xterm-color
+        export GOROOT=$HOME/opt/go
+        export GOBIN=$GOROOT/bin
+        export GOOS=darwin
+        export GOARCH=amd64
+        export PATH=/Users/masahirokoga/opt/go/bin:$PATH
 		;;
 linux-gnu)
 		export PATH=$HOME/.cabal/bin:$HOME/linux/opt/ghc-6.12.1/bin:$HOME/linux/local/app/haskell-platform-2010.1.0.0/bin:$GOBIN:$HOME/linux/opt/rurema:$HOME/linux/opt/ruby19/bin:$HOME/linux/opt/rsense-0.2/bin:$HOME/.cabal/bin:$HOME/local/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH
@@ -31,6 +45,8 @@ esac
 source ${HOME}/.zsh_aliases
 
  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+source /Users/masahirokoga/.pythonbrew/etc/bashrc
+source /Users/masahirokoga/perl5/perlbrew/etc/bashrc
 
 
 if [ "$TERM" = "screen-bce" ]; then
