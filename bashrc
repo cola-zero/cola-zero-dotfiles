@@ -93,3 +93,7 @@ export EDITOR="vim"
 
 bind '"\C-p": history-search-backward'
 bind '"\C-n": history-search-forward'
+
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
