@@ -1,17 +1,21 @@
 ## .zsh_aliases
 ## Masahiro Koga
-source /usr/local/Cellar/coreutils/8.5/aliases
-# color option can't use in solaris
-if [[ $OSTYPE == "linux-gnu" || $OSTYPE == "darwin10.4.3" || $OSTYPE == "darwin10.0" ]]; then
+if [[ $OSTYPE == "darwin*" ]]; then
+alias awk='gawk'
 alias ls='/usr/local/bin/gls -F --color=auto'
-fi
-alias la='ls -lag'
-alias l='ls -F'
+source /usr/local/Cellar/coreutils/8.5/aliases
 alias emacs='emacs -geometry 80x30'
 alias ec='/usr/local/bin/emacsclient -c -n'
 alias et='/usr/local/bin/emacsclient -t -n'
 alias ecn='/usr/local/bin/emacsclient -t'
+fi
+
+# color option can't use in solaris
+if [[ $OSTYPE == "linux-gnu" ]]; then
+alias ls='ls -F --color=auto'
+fi
+alias la='ls -lag'
+alias l='ls -F'
 alias eterm='xterm -en euc-jp'
 alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
 alias screen='screen -s /bin/zsh'
-alias awk='gawk'
