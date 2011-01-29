@@ -36,7 +36,7 @@ linux-gnu)
 		export PYTHONPATH=/user/arch/koga/linux/local/lib64/python2.4/site-packages
 		export LD_LIBRARY_PATH=/user/arch/koga/linux/local/lib:/usr/lib64:/usr/local/bin/Mono/lib
 		export GCC_SENSE_HOME=/home/project/vglc/koga
-		export TERM=rxvt-256color
+    export TERM=xterm-color
 		export RSPEC=true
 		export EDITOR=emacs
 		;;
