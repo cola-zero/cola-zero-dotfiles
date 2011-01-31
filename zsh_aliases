@@ -13,6 +13,9 @@ fi
 # color option can't use in solaris
 if [[ $OSTYPE == "linux-gnu" ]]; then
 alias ls='ls -F --color=auto'
+alias ec='emacsclient -c -n'
+alias et='emacsclient -t -n'
+alias ecn='emacsclient -t'
 fi
 alias la='ls -lag'
 alias l='ls -F'
