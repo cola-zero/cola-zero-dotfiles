@@ -165,38 +165,6 @@
 (global-font-lock-mode t)
 
 
-;;font
-;;http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
-;(set-default-font "Inconsolata-11")
-;; (set-face-font 'variable-pitch "Inconsolata-11")
-(add-hook 'window-setup-hook
-		  (lambda nil
-                    ;; font setting
-                    ;; (set-default-font "Inconsolata-12")
-                    ;; (set-face-font 'variable-pitch "Inconsolata-12")
-                    (set-face-font 'variable-pitch "Droid Sans Mono Slashed-12")
-                    (set-fontset-font (frame-parameter nil 'font)
-                                      'japanese-jisx0208
-                                      ;; '("Takaoゴシック" . "unicode-bmp"))
-                                      '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
-                    ;; 半角カナのために↓を追加
-                    (set-fontset-font
-                     (frame-parameter nil 'font)
-                     'katakana-jisx0201
-                     '("Hiragino Maru Gothic Pro" . "iso10646-1"))
-
-                    ;; asciiと日本語fontを1:2にするために
-                    (setq face-font-rescale-alist
-                          '(("^-apple-hiragino.*" . 1.2)
-                            (".*osaka-bold.*" . 1.2)
-                            (".*osaka-medium.*" . 1.2)
-                            (".*courier-bold-.*-mac-roman" . 1.0)
-                            (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
-                            (".*monaco-bold-.*-mac-roman" . 0.9)
-                            ("-cdac$" . 1.3)
-                            (".*Takao*" . 2.0)))
-                    ))
-
 ;; my-setup-ascii.el
 (autoload 'my-sample-ascii "my-sample-ascii" "" t)
 (autoload 'my-sample-face-size "my-sample-ascii" "" t)
@@ -208,8 +176,10 @@
 (display-time-mode -1)
 (line-number-mode 1)
 (column-number-mode 1)
-(menu-bar-mode 1)
 (tool-bar-mode -1)
+(if (eq window-system 'ns)
+    (menu-bar-mode 1)
+    (menu-bar-mode -1))
 
 ;; title-time.el
 ;; http://valvallow.blogspot.com/2011/01/emacs.html
@@ -313,9 +283,10 @@
 ;; (setq ibus-prediction-window-position t)
 
 ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc/")
-;; (require 'mozc)  ; or (load-file "path-to-mozc.el")
-;; (set-language-environment "Japanese")
-;; (setq default-input-method "japanese-mozc")
+(require 'mozc)  ; or (load-file "path-to-mozc.el")
+(set-language-environment "Japanese")
+(setq default-input-method "japanese-mozc")
+
 
 ;; emacs-daemon
 (server-start)
@@ -326,6 +297,24 @@
 (require 'elscreen-dired nil t)
 (require 'elscreen-server nil t)
 (require 'elscreen-howm nil t)
+(setq elscreen-display-tab nil)
+(defun elscreen-frame-title-update ()
+  (when (elscreen-screen-modified-p 'elscreen-frame-title-update)
+    (let* ((screen-list (sort (elscreen-get-screen-list) '<))
+	   (screen-to-name-alist (elscreen-get-screen-to-name-alist))
+	   (title (mapconcat
+		   (lambda (screen)
+		     (format "%d%s %s"
+			     screen (elscreen-status-label screen)
+			     (get-alist screen screen-to-name-alist)))
+		   screen-list " ")))
+      (if (fboundp 'set-frame-name)
+	  (set-frame-name title)
+	(setq frame-title-format title)))))
+
+(eval-after-load "elscreen"
+  '(add-hook 'elscreen-screen-update-hook 'elscreen-frame-title-update))
+
 
 ;; Google Chrome Edit with Emacs
 ;; (require 'edit-server)
@@ -447,9 +436,9 @@
 ;;       browse-url-generic-program "/usr/bin/google-chrome")
 
 ;; w3m
-(add-to-list 'exec-path "/usr/local/bin")
-(add-to-list 'load-path (expand-file-name "~/opt/emacs-w3m/share/emacs/site-lisp/w3m/"))
-(require 'w3m-load)
+;; (add-to-list 'exec-path "/usr/local/bin")
+;; (add-to-list 'load-path (expand-file-name "~/opt/emacs-w3m/share/emacs/site-lisp/w3m/"))
+;; (require 'w3m-load)
 
 
 ;; 編集行を目立たせる
@@ -524,7 +513,7 @@
 ;; migemo
 (require 'anything-migemo)
 (load "migemo.el")
-(if 'window-system 'ns
+(if (eq window-system 'ns)
 	(progn
 		(setq migemo-command "/usr/bin/ruby")
 		(setq migemo-command "cmigemo")
@@ -548,7 +537,7 @@
 (setq w3m-default-display-inline-images t)
 
 ;; emacs-evernote-mode
-(require 'evernote-mode)
+(require 'evernote-mode nil t)
 (global-set-key "\C-cec" 'evernote-create-note)
 (global-set-key "\C-ceo" 'evernote-open-note)
 (global-set-key "\C-ces" 'evernote-search-notes)
@@ -574,7 +563,7 @@
 
 ;; calfw.el
 ;; http://d.hatena.ne.jp/kiwanami/20110107/1294404952
-(add-to-list 'load-path (expand-file-name "/Users/masahirokoga/work/emacs/emacs-calfw"))
+(add-to-list 'load-path (expand-file-name "~/work/emacs/emacs-calfw"))
 (require 'calfw)
 ;; calfw-howm.el
 (defvar my-howm-schedule-page "2011-todo"); 予定を入れるメモのタイトル
@@ -713,44 +702,44 @@
             (c-turn-on-eldoc-mode)
             ))
 ;; http://www.emacswiki.org/emacs/ElDoc
-(defadvice eldoc-highlight-function-argument
-  (around my-formatting (sym args index) compile activate preactivate)
-  "Replace original to apply my style of formatting."
-  ;; HACK: intercept the call to eldoc-docstring-format-sym-doc at the
-  ;; end of the adviced function. This is obviously brittle, but the
-  ;; alternative approach of copy/pasting the original also has
-  ;; downsides...
-  (flet ((eldoc-docstring-format-sym-doc
-          (sym doc face)
-          (let* ((function-name (propertize (symbol-name sym)
-                                            'face face))
-                 (spec (format "%s %s" function-name doc))
-                 (docstring (or (eldoc-docstring-first-line
-                                 (documentation sym t))
-                                "Undocumented."))
-                 (docstring (propertize docstring
-                                        'face 'font-lock-doc-face))
-                 ;; TODO: currently it strips from the start of spec by
-                 ;; character instead of whole arguments at a time.
-                 (fulldoc (format "%s: %s" spec docstring))
-                 (ea-width (1- (window-width (minibuffer-window)))))
-            (cond ((or (<= (length fulldoc) ea-width)
-                       (eq eldoc-echo-area-use-multiline-p t)
-                       (and eldoc-echo-area-use-multiline-p
-                            (> (length docstring) ea-width)))
-                   fulldoc)
-                  ((> (length docstring) ea-width)
-                   (substring docstring 0 ea-width))
-                  ((>= (- (length fulldoc) (length spec)) ea-width)
-                   docstring)
-                  (t
-                   ;; Show the end of the partial symbol name, rather
-                   ;; than the beginning, since the former is more likely
-                   ;; to be unique given package namespace conventions.
-                   (setq spec (substring spec (- (length fulldoc) ea-width)))
-                   (format "%s: %s" spec docstring))))))
-    ad-do-it))
-
+(if (eq window-system 'ns)
+    (defadvice eldoc-highlight-function-argument
+      (around my-formatting (sym args index) compile activate preactivate)
+      "Replace original to apply my style of formatting."
+      ;; HACK: intercept the call to eldoc-docstring-format-sym-doc at the
+      ;; end of the adviced function. This is obviously brittle, but the
+      ;; alternative approach of copy/pasting the original also has
+      ;; downsides...
+      (flet ((eldoc-docstring-format-sym-doc
+              (sym doc face)
+              (let* ((function-name (propertize (symbol-name sym)
+                                                'face face))
+                     (spec (format "%s %s" function-name doc))
+                     (docstring (or (eldoc-docstring-first-line
+                                     (documentation sym t))
+                                    "Undocumented."))
+                     (docstring (propertize docstring
+                                            'face 'font-lock-doc-face))
+                     ;; TODO: currently it strips from the start of spec by
+                     ;; character instead of whole arguments at a time.
+                     (fulldoc (format "%s: %s" spec docstring))
+                     (ea-width (1- (window-width (minibuffer-window)))))
+                (cond ((or (<= (length fulldoc) ea-width)
+                           (eq eldoc-echo-area-use-multiline-p t)
+                           (and eldoc-echo-area-use-multiline-p
+                                (> (length docstring) ea-width)))
+                       fulldoc)
+                      ((> (length docstring) ea-width)
+                       (substring docstring 0 ea-width))
+                      ((>= (- (length fulldoc) (length spec)) ea-width)
+                       docstring)
+                      (t
+                       ;; Show the end of the partial symbol name, rather
+                       ;; than the beginning, since the former is more likely
+                       ;; to be unique given package namespace conventions.
+                       (setq spec (substring spec (- (length fulldoc) ea-width)))
+                       (format "%s: %s" spec docstring))))))
+        ad-do-it)))
 
 
 ;;yatex mode
@@ -872,77 +861,6 @@ and source-file directory for your debugger." t)
 ;;recent-ext
 (require 'recentf-ext nil t)
 
-;; haml-mode
-(add-to-list 'load-path (expand-file-name "~/work/emacs/haml-mode/"))
-(require 'haml-mode)
-
-
-;; slime
-(load "~/.emacs.d/my-slime.el")
-;; (setq inferior-lisp-program "~/opt/sbcl/bin/sbcl") ; your Lisp system
-;; (add-to-list 'load-path "~/work/emacs/slime/") ; your SLIME directory
-;; (require 'slime)
-;; (slime-setup)
-
-;Hyperspec
-;; (require 'hyperspec)
-;; (setq common-lisp-hyeprspec-root (concat "file://" (expand-file-name "~/opt/doc/Hyperspec/"))
-;;       common-lisp-hyperspec-symbol-table (expand-file-name "~/doc/HyperSpec/Data/Map_Sym.txt"))
-
-;; HyperSpecをw3mで見る
-;; http://d.hatena.ne.jp/khiker/20061231/1167567844
-;; (defadvice common-lisp-hyperspec
-;;   (around hyperspec-lookup-w3m () activate)
-;;   (let* ((window-configuration (current-window-configuration))
-;;          (browse-url-browser-function
-;;           `(lambda (url new-window)
-;;              (w3m-browse-url url nil)
-;;              (let ((hs-map (copy-keymap w3m-mode-map)))
-;;                (define-key hs-map (kbd "q")
-;;                  (lambda ()
-;;                    (interactive)
-;;                    (kill-buffer nil)
-;;                    (set-window-configuration ,window-configuration)))
-;;                (use-local-map hs-map)))))
-;;     ad-do-it))
-;; (custom-set-variables
-;;   ;; custom-set-variables was added by Custom.
-;;   ;; If you edit it by hand, you could mess it up, so be careful.
-;;   ;; Your init file should contain only one such instance.
-;;   ;; If there is more than one, they won't work right.
-;;  '(org-agenda-files nil))
-;; (custom-set-faces
-;;   ;; custom-set-faces was added by Custom.
-;;   ;; If you edit it by hand, you could mess it up, so be careful.
-;;   ;; Your init file should contain only one such instance.
-;;   ;; If there is more than one, they won't work right.
-;;  )
-
-
-;; haskell-mode
-(load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'font-lock-mode)
-(setq haskell-program-name "/usr/local/bin/ghci")
-
-;; go-mode
-;; (add-to-list 'load-path (expand-file-name "~/opt/go/misc/emacs/"))
-;; (require 'go-mode-load)
-
-
-;; scala-mode
-(add-to-list 'load-path "/usr/local/Cellar/scala/2.8.1/libexec/misc/scala-tool-support/emacs")
-(require 'scala-mode-auto)
-;; (scala-mode-electric)
-
-;; ocaml-mode
-(add-to-list 'load-path (expand-file-name "~/opt/src/ocaml-3.12.0/emacs/"))
-(setq auto-mode-alist
-      (cons '("\\.ml[iylp]?$" . caml-mode) auto-mode-alist))
-(autoload 'caml-mode "caml" "Major mode for editing Caml code." t)
-(autoload 'run-caml "inf-caml" "Run an inferior Caml process." t)
-;; tuareg-mode
-(add-to-list 'load-path (expand-file-name "~/opt/src/ocaml-3.12.0/emacs/tuareg-mode"))
-(load (expand-file-name "~/opt/src/ocaml-3.12.0/emacs/tuareg-mode/append-tuareg.el"))
-(add-to-list 'exec-path (expand-file-name "~/opt/ocaml/bin"))
+;; load init file for darwin
+(if (eq window-system 'ns)
+    (load (expand-file-name "~/.emacs.d/darwin-init.el")))
