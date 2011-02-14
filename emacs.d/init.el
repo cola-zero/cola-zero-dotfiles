@@ -284,9 +284,11 @@
 ;; (setq ibus-prediction-window-position t)
 
 ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc/")
-(require 'mozc)  ; or (load-file "path-to-mozc.el")
-(set-language-environment "Japanese")
-(setq default-input-method "japanese-mozc")
+(if (eq window-system 'x)
+    (progn
+      (require 'mozc)  ; or (load-file "path-to-mozc.el")
+      (set-language-environment "Japanese")
+      (setq default-input-method "japanese-mozc")))
 
 
 ;; emacs-daemon
