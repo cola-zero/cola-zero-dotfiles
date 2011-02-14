@@ -158,14 +158,14 @@
 (setq haskell-program-name "/usr/local/bin/ghci")
 
 ;; go-mode
-(add-to-list 'load-path (expand-file-name "~/opt/go/misc/emacs/"))
-(require 'go-mode-load)
+;; (add-to-list 'load-path (expand-file-name "~/opt/go/misc/emacs/"))
+;; (require 'go-mode-load)
 
 
 ;; scala-mode
-(add-to-list 'load-path "/usr/local/Cellar/scala/2.8.1/libexec/misc/scala-tool-support/emacs")
-(require 'scala-mode-auto)
-(scala-mode-electric)
+;; (add-to-list 'load-path "/usr/local/Cellar/scala/2.8.1/libexec/misc/scala-tool-support/emacs")
+;; (require 'scala-mode-auto)
+;; (scala-mode-electric)
 
 ;; ocaml-mode
 (add-to-list 'load-path (expand-file-name "~/opt/src/ocaml-3.12.0/emacs/"))
