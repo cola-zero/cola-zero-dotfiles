@@ -627,6 +627,20 @@
 (add-to-list 'popwin:special-display-config '("*YaTeX-typesetting*"))
 (add-to-list 'popwin:special-display-config '("*anything moccur*" :position top))
 
+;; grep-a-lot
+(require 'grep-a-lot nil t)
+(grep-a-lot-setup-keys)
+;;http://d.hatena.ne.jp/kitokitoki/20110213/p1
+(defvar my-grep-a-lot-search-word nil)
+(defun grep-a-lot-buffer-name (position)
+  "Return name of grep-a-lot buffer at POSITION."
+  (concat "*grep*<" my-grep-a-lot-search-word ">"))
+(defadvice rgrep (before my-rgrep (regexp &optional files dir) activate)
+  (setq my-grep-a-lot-search-word regexp))
+(defadvice lgrep (before my-lgrep (regexp &optional files dir) activate)
+  (setq my-grep-a-lot-search-word regexp))
+
+
 ;;
 ;; develop tool
 ;;
