@@ -1,3 +1,78 @@
+
+(prefer-coding-system 'utf-8)
+
+
+
+;; exec-path を設定しないと実行できない場合があります
+(setq exec-path
+     (append
+      (list "/usr/local/bin" "/sw/bin" "/usr/bin" "~/bin") exec-path)
+     )
+;; PATHが正しくとおっていないとフルパスで呼ばないといけなくなります
+(setenv "PATH"
+       (concat '"/usr/local/bin:/sw/bin:" (getenv "PATH"))
+       )
+;; dictionary.app
+(defun dictionary ()
+  "dictionary.app"
+  (interactive)
+
+ (let ((editable (not buffer-read-only))
+       (pt (save-excursion (mouse-set-point last-nonmenu-event)))
+       beg end)
+
+   (if (and mark-active
+            (<= (region-beginning) pt) (<= pt (region-end)) )
+       (setq beg (region-beginning)
+             end (region-end))
+     (save-excursion
+       (goto-char pt)
+       (setq end (progn (forward-word) (point)))
+       (setq beg (progn (backward-word) (point)))
+       ))
+
+   (setq word (buffer-substring-no-properties beg end))
+   (let ((win (selected-window))
+         (tmpbuf " * dict-process *"))
+     (pop-to-buffer tmpbuf)
+     (erase-buffer)
+     (insert word "\n")
+     (start-process "dict-process" tmpbuf "dict.py" word)
+     (select-window win)
+     )
+ ))
+ (define-key global-map (kbd "C-c w") 'dictionary)
+
+;; 辞書の結果をpopwin.elで表示
+(push '(" * dict-process *" :height 30 :noselect t) popwin:special-display-config)
+
+;; ツールチップで表示
+;; http://d.hatena.ne.jp/tomoya/20091218/1261138091
+(defun ns-popup-dictionary ()
+   "カーソル付近の単語を Mac の辞書でひく"
+   (interactive)
+   (let ((word (substring-no-properties (thing-at-point 'word)))
+	 (old-buf (current-buffer))
+	 (dict-buf (get-buffer-create "*dictionary.app*"))
+	 (view-mode-p)
+	 (dict))
+     (set-buffer dict-buf)
+     (erase-buffer)
+     (call-process "dict.py"
+		   nil "*dictionary.app*" t word
+		   "Japanese-English" "Japanese" "Japanese Synonyms")
+     (setq dict (buffer-string))
+     (set-buffer old-buf)
+     (when view-mode
+       (view-mode)
+       (setq view-mode-p t))
+     (popup-tip dict)
+     (when view-mode-p
+       (view-mode))))
+
+(define-key global-map (kbd "C-M-d") 'ns-popup-dictionary)
+
+
 ;;font
 ;;http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
 ;(set-default-font "Inconsolata-11")
