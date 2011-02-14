@@ -762,18 +762,18 @@
 
 ;;yatex mode
 (if (eq window-system 'w32)
-	(progn
-	  (setq auto-mode-alist
-			(cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
+    (progn
+      (setq auto-mode-alist
+            (cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
       (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t))
-  (progn
-    (add-to-list 'load-path "/usr/local/Cellar/emacs/23.2/share/emacs/site-lisp/yatex/")
-    (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
-    (setq tex-command "platex")
-    (setq dvi2-command "open")
-    ;; (add-to-list 'YaTeX-dvi2-command-ext-alist
-    ;;              ("open" . ".dvi"))
-    (add-to-list 'auto-mode-alist '("\\.tex\\'" . yatex-mode))))
+    (progn
+      (add-to-list 'load-path "/usr/local/Cellar/emacs/23.2/share/emacs/site-lisp/yatex/")
+      (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
+      (setq tex-command "platex")
+      (setq dvi2-command "open")
+      ;; (add-to-list 'YaTeX-dvi2-command-ext-alist
+      ;;              ("open" . ".dvi"))
+      (add-to-list 'auto-mode-alist '("\\.tex\\'" . yatex-mode))))
 
 
 ;; mode-compile.el
