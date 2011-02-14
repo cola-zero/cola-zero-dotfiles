@@ -48,10 +48,10 @@
     (org-remember)))
 
 (if (eq window-system 'w32)
-	(setq org-agenda-files (list "~/Documents/My Dropbox/memo/agenda.org"
-								   "~/Documents/My Dropbox/memo/code-reading.org"))
-  (setq org-agenda-files (list "~/Dropbox/memo/mygtd.org"
-							   "~/Dropbox/memo/journal.org")))
+    (setq org-agenda-files (list "~/Documents/My Dropbox/memo/agenda.org"
+                                 "~/Documents/My Dropbox/memo/code-reading.org"))
+    (setq org-agenda-files (list "~/Dropbox/memo/mygtd.org"
+                                 "~/Dropbox/memo/journal.org")))
 
 
 ;MobileOrg
