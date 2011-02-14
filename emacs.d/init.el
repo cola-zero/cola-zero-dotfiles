@@ -623,8 +623,9 @@
 (add-to-list 'load-path (expand-file-name "~/work/emacs/popwin-el"))
 (require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
-
-
+(add-to-list 'popwin:special-display-config '(" *auto-async-byte-compile*" :height 5 :noselect t))
+(add-to-list 'popwin:special-display-config '("*YaTeX-typesetting*"))
+(add-to-list 'popwin:special-display-config '("*anything moccur*" :position top))
 
 ;;
 ;; develop tool
