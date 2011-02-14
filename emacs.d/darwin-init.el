@@ -75,36 +75,33 @@
 
 ;;font
 ;;http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
-;(set-default-font "Inconsolata-11")
+;; (set-default-font "Inconsolata-11")
 ;; (set-face-font 'variable-pitch "Inconsolata-11")
 (add-hook 'window-setup-hook
-		  (lambda nil
-                    ;; font setting
-                    ;; (set-default-font "Inconsolata-12")
-                    ;; (set-face-font 'variable-pitch "Inconsolata-12")
-                    (set-face-font 'variable-pitch "Droid Sans Mono Slashed-12")
-                    (set-fontset-font (frame-parameter nil 'font)
-                                      'japanese-jisx0208
-                                      ;; '("Takaoゴシック" . "unicode-bmp"))
-                                      '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
-                    ;; 半角カナのために↓を追加
-                    (set-fontset-font
-                     (frame-parameter nil 'font)
-                     'katakana-jisx0201
-                     '("Hiragino Maru Gothic Pro" . "iso10646-1"))
-
-                    ;; asciiと日本語fontを1:2にするために
-                    (setq face-font-rescale-alist
-                          '(("^-apple-hiragino.*" . 1.2)
-                            (".*osaka-bold.*" . 1.2)
-                            (".*osaka-medium.*" . 1.2)
-                            (".*courier-bold-.*-mac-roman" . 1.0)
-                            (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
-                            (".*monaco-bold-.*-mac-roman" . 0.9)
-                            ("-cdac$" . 1.3)
-                            (".*Takao*" . 2.0)))
-                    ))
-
+          (lambda nil
+            ;; font setting
+            ;; (set-default-font "Inconsolata-12")
+            ;; (set-face-font 'variable-pitch "Inconsolata-12")
+            (set-face-font 'variable-pitch "Droid Sans Mono Slashed-12")
+            (set-fontset-font (frame-parameter nil 'font)
+                              'japanese-jisx0208
+                              ;; '("Takaoゴシック" . "unicode-bmp"))
+                              '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
+            ;; 半角カナのために↓を追加
+            (set-fontset-font
+             (frame-parameter nil 'font)
+             'katakana-jisx0201
+             '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+            ;; asciiと日本語fontを1:2にするために
+            (setq face-font-rescale-alist
+                  '(("^-apple-hiragino.*" . 1.2)
+                    (".*osaka-bold.*" . 1.2)
+                    (".*osaka-medium.*" . 1.2)
+                    (".*courier-bold-.*-mac-roman" . 1.0)
+                    (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
+                    (".*monaco-bold-.*-mac-roman" . 0.9)
+                    ("-cdac$" . 1.3)
+                    (".*Takao*" . 2.0)))))
 
 ;; haml-mode
 (add-to-list 'load-path (expand-file-name "~/work/emacs/haml-mode/"))
@@ -158,7 +155,7 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'font-lock-mode)
-(setq haskell-program-name "/usr/local/bin/ghci")))
+(setq haskell-program-name "/usr/local/bin/ghci")
 
 ;; go-mode
 (add-to-list 'load-path (expand-file-name "~/opt/go/misc/emacs/"))
