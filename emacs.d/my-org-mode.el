@@ -23,16 +23,6 @@
         ("w" "Want" entry (file+datetree "~/Dropbox/memo/journal.org")
          "* %? :Want:\nEntered on %U\n %i\n %a")))
 
-;; (setq org-remember-templates
-;; 	  '(("Inbox" ?i "** INBOX %?\n %i\n %a\n %t" nil "Inbox")
-;; 		("NextAction" ?n "** NEXT-ACTION %?\n*** GOAL: \n%i\n %t" nil "Next Action")
-;; 		("Project" ?p "** PROJECT %?\n*** GOAL: \n%i\n %t" nil "Project")
-;; 		("Wait" ?w "** WAIT %?\n %i\n %t" nil "Wait")
-;; 		("Idea" ?I "** %?\n %i\n %a\n %t" nil "New Ideas")
-;; 		("Note" ?N "** NOTE %?\n %i\n %a\n %t" nil "Note")
-;; 		))
-;; (global-set-key "\C-x\C-x" 'org-remember)
-;; (global-set-key "\C-x\C-r" 'org-remember-code-reading)
 (global-set-key "\C-ca" 'org-agenda)
 
 (defvar org-code-reading-software-name nil)
