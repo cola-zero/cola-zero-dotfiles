@@ -178,6 +178,14 @@
 (load (expand-file-name "~/opt/src/ocaml-3.12.0/emacs/tuareg-mode/append-tuareg.el"))
 (add-to-list 'exec-path (expand-file-name "~/opt/ocaml/bin"))
 
+;; xml-rpc
+(require 'xml-rpc nil t)
+
+;; weblogger-el
+(require 'weblogger nil t)
+(setq weblogger-save-password t)
+(setq weblogger-save-entry t)
+;; (load (expand-file-name "~/.emacs.d/local.elc"))
 
 ;; js2-mode
 (autoload 'js2-mode "js2" nil t)
