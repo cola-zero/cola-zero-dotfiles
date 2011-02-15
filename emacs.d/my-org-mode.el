@@ -17,7 +17,7 @@
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline (concat org-directory "mygtd.org") "Tasks")
-         "* TODO %?\n %i\n %a")
+         "* INBOX %?\n %i\n %a")
         ("j" "Journal" entry (file+datetree "~/Dropbox/memo/journal.org")
          "* %?\nEntered on %U\n %i\n %a")
         ("w" "Want" entry (file+datetree "~/Dropbox/memo/journal.org")
