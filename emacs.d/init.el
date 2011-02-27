@@ -436,6 +436,8 @@
     ))
       
 
+;; vc-git
+(require 'vc-git)
 
 ;; term-mode
 ;; (add-hook 'term-mode-hook
@@ -826,6 +828,74 @@ and source-file directory for your debugger." t)
 
 ;;recent-ext
 (require 'recentf-ext nil t)
+
+
+;; eshell
+;; http://d.hatena.ne.jp/kitokitoki/20100821/p1
+(require 'pcomplete)
+
+(add-to-list 'ac-modes 'eshell-mode)
+
+(ac-define-source pcomplete
+  '((candidates . pcomplete-completions)))
+
+(defun my-ac-eshell-mode ()
+  (setq ac-sources
+        '(ac-source-pcomplete
+          ac-source-words-in-buffer
+          ac-source-dictionary)))
+
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (my-ac-eshell-mode)
+            (define-key eshell-mode-map (kbd "C-i") 'auto-complete)))
+
+;; http://valvallow.blogspot.com/2011/02/eshell.html
+(setq eshell-cmpl-ignore-case t)
+(setq eshell-prompt-function
+      (lambda ()
+        (concat
+         "[" (format-time-string "%Y/%m/%d(%a) %H:%M") "]"
+         "["
+         (user-login-name) "@" (system-name) " "
+         (eshell/pwd)
+         "(" (vc-git-mode-line-string (eshell/pwd)) ")"
+         "]\n"
+         (if (= (user-uid) 0)
+             "#"
+           "$")
+         " "
+         )))
+(setq eshell-prompt-regexp "^[^#$]*[#$] ")
+
+(add-hook 'eshell-mode-hook
+          '(lambda ()
+             (progn
+               (define-key eshell-mode-map "\C-a" 'eshell-bol)
+               (define-key eshell-mode-map "\C-p" 'eshell-previous-matching-input-from-input)
+               (define-key eshell-mode-map "\C-n" 'eshell-next-matching-input-from-input)
+               )
+             ))
+
+;;http://sheephead.homelinux.org/2011/02/21/6612/
+;; (defun pcomplete/sudo ()
+;;   "Completion rules for the `sudo' command."
+;;   (let ((pcomplete-help "complete after sudo"))
+;;     (pcomplete-here (pcomplete-here (eshell-complete-commands-list)))))
+(defalias 'pcomplete/sudo 'pcomplete/xargs)
+
+
+
+;;http://oldtype.sumibi.org/show-page/kiyoka.2011_02_22#10
+(defun eshell-cd-default-directory ()
+  (interactive)
+  (let ((dir default-directory))
+    (eshell)
+    (cd dir)
+    (eshell-interactive-print (concat "cd " dir "\n"))
+    (eshell-emit-prompt)))
+(global-set-key "\C-cd" 'eshell-cd-default-directory)
+
 
 ;; load init file for darwin
 (if (eq window-system 'ns)
