@@ -41,6 +41,8 @@
 ;; anything-hatena-bookmark.el
 (add-to-list 'load-path (expand-file-name "~/work/emacs/anything-hatena-bookmark"))
 (require 'anything-hatena-bookmark)
+(global-set-key (kbd "C-c C-b") 'anything-hatena-bookmark)
+(setq anything-hatena-bookmark-samewindow t)
 
 ;; descbinds-anything.el
 (require 'descbinds-anything)
