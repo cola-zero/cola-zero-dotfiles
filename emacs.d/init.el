@@ -24,7 +24,7 @@
 (require 'anything-startup nil t)
 (define-key global-map (kbd "C-x b") 'anything-filelist+)
 (define-key global-map (kbd "C-x C-f") 'anything-filelist+)
-(setq anything-c-filelist-file-name "/tmp/mnt/all.filelist")
+(setq anything-c-filelist-file-name "/tmp/all.filelist")
 (setq anything-grep-candidates-fast-directory-regexp "^/tmp\/mnt")
 (add-to-list 'anything-c-source-buffers '(migemo))
 (when (eq system-type 'darwin)

@@ -2,6 +2,10 @@
 (prefer-coding-system 'utf-8)
 (set-frame-parameter nil 'alpha 90)
 
+;; anything find file
+(setq anything-c-filelist-file-name "/tmp/mnt/all.filelist")
+
+
 ;; growl
 ;; http://mitukiii.jp/2010/11/01/twittering-mode/
 (setq growl-program "/usr/local/bin/growlnotify")
