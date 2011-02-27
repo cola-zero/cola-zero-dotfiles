@@ -436,10 +436,10 @@
 (defface hlline-face
   '((((class color)
       (background dark))
-     (:background "gridColor"))
+     (:background "DarkSlateGray"))
     (((class color)
       (background light))
-     (:background "gridColor"))
+     (:background "DarkSlateGray"))
     (t
      ()))
   "*Face used by hl-line.")
