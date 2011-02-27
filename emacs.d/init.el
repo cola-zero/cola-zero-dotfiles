@@ -425,9 +425,9 @@
 ;;       browse-url-generic-program "/usr/bin/google-chrome")
 
 ;; w3m
-;; (add-to-list 'exec-path "/usr/local/bin")
-;; (add-to-list 'load-path (expand-file-name "~/opt/emacs-w3m/share/emacs/site-lisp/w3m/"))
-;; (require 'w3m-load)
+(add-to-list 'exec-path "/usr/local/bin")
+(add-to-list 'load-path (expand-file-name "~/opt/emacs-w3m/share/emacs/site-lisp/w3m/"))
+(require 'w3m-load)
 
 
 ;; 編集行を目立たせる
