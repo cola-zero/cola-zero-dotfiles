@@ -280,7 +280,7 @@
 (require 'elscreen-dired nil t)
 (require 'elscreen-server nil t)
 (require 'elscreen-howm nil t)
-(setq elscreen-display-tab nil)
+(setq elscreen-display-tab t)
 (defun elscreen-frame-title-update ()
   (when (elscreen-screen-modified-p 'elscreen-frame-title-update)
     (let* ((screen-list (sort (elscreen-get-screen-list) '<))
@@ -296,7 +296,7 @@
 	(setq frame-title-format title)))))
 
 (eval-after-load "elscreen"
-  '(add-hook 'elscreen-screen-update-hook 'elscreen-frame-title-update))
+    '(add-hook 'elscreen-screen-update-hook 'elscreen-frame-title-update))
 
 
 ;; Google Chrome Edit with Emacs
