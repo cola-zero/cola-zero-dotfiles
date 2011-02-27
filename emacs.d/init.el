@@ -305,28 +305,34 @@
 
 
 ;; org-mode
-(load "~/.emacs.d/my-org-mode.el")
+(load (expand-file-name "~/.emacs.d/my-org-mode.elc"))
+(load "~/.emacs.d/my-org-mode.elc")
 
 ;; howm
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/howm"))
-(setq howm-menu-lang 'ja)
+;; (setq howm-menu-lang 'ja)
 (require 'howm)
-(define-key global-map (kbd "C-c C-c") 'howm-create)
+;; (define-key global-map (kbd "C-c C-c") 'howm-create)
+;; ;; (defun 'open-todo-file ()
+;; ;;   (find-file (expand-file-name "~/howm/2011/2011-todo.howm")))
+;; ;; (define-key global-map (kbd "C-c C-n") 'open-todo-file)
+;; ;; http://yamashita.dyndns.org/blog/hide-closed-todo-on-howm/
+;; (setq howm-todo-menu-types "[-+~!]")
 
-(eval-after-load "calendar"
-  '(progn
-     (define-key calendar-mode-map
-       "\C-m" 'my-insert-day)
-     (defun my-insert-day ()
-       (interactive)
-       (let ((day nil)
-             (calendar-date-display-form
-         '("[" year "-" (format "%02d" (string-to-int month))
-           "-" (format "%02d" (string-to-int day)) "]")))
-         (setq day (calendar-date-string
-                    (calendar-cursor-to-date t)))
-         (exit-calendar)
-         (insert day)))))
+;; (eval-after-load "calendar"
+;;   '(progn
+;;      (define-key calendar-mode-map
+;;        "\C-m" 'my-insert-day)
+;;      (defun my-insert-day ()
+;;        (interactive)
+;;        (let ((day nil)
+;;              (calendar-date-display-form
+;;          '("[" year "-" (format "%02d" (string-to-int month))
+;;            "-" (format "%02d" (string-to-int day)) "]")))
+;;          (setq day (calendar-date-string
+;;                     (calendar-cursor-to-date t)))
+;;          (exit-calendar)
+;;          (insert day)))))
 
 ;; (setq howm-file-name-format "%Y/%m/%Y_%m_%d.howm")
 
