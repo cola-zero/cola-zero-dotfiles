@@ -475,6 +475,14 @@
 (require 'e2wm nil t)
 (global-set-key (kbd "M-+") 'e2wm:start-management)
 
+(setq e2wm:c-dashboard-plugins
+  '(clock top
+    (open :plugin-args (:command multi-term :buffer "*terminal*"))
+    (open :plugin-args (:command doctor :buffer "*doctor*"))
+    ))
+      
+
+
 ;; term-mode
 ;; (add-hook 'term-mode-hook
 ;; 		  '(lambda ()
