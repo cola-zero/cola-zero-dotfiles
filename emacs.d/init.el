@@ -14,7 +14,7 @@
 (setq make-backup-files nil)
 
 ;; http://d.hatena.ne.jp/tototoshi/20101202/1291289625
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; auto-install
 (require 'auto-install nil t)
