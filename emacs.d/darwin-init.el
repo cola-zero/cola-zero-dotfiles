@@ -1,6 +1,53 @@
 
 (prefer-coding-system 'utf-8)
+(set-frame-parameter nil 'alpha 90)
 
+;; growl
+;; http://mitukiii.jp/2010/11/01/twittering-mode/
+(setq growl-program "/usr/local/bin/growlnotify")
+(defun growl (title message &optional app)
+  (start-process "Growl" "*Growl*" growl-program
+                 "-t" title
+                 "-m" message
+                 "-a" app))
+
+;; twittering-mode
+(add-to-list 'load-path "~/work/emacs/twittering-mode/")
+(require 'twittering-mode nil t)
+(setq twittering-use-master-password t)
+;;http://mitukiii.jp/2010/11/01/twittering-mode/
+(setq twittering-initial-timeline-spec-string
+      '(":home"
+        ":replies"
+        "cola_zero/kumamoto"
+        ":favorites"
+        ":direct_messages"))
+;; replyとdmをgrowlで出す
+(add-hook 'twittering-new-tweets-hook
+          '(lambda ()
+             (let ((spec (car twittering-new-tweets-spec))
+                   (title-format nil))
+               (cond ((eq spec 'replies)
+                      (setq title-format "%sから関連ツイート"))
+                     ((eq spec 'direct_messages)
+                      (setq title-format "%sから新規メッセージ")))
+               (unless (eq title-format nil)
+                 (dolist (el (reverse twittering-new-tweets-statuses))
+                   (growl (format title-format (cdr (assoc 'user-screen-name el)))
+                          (format "%s" (cdr (assoc 'text el)))
+                          "Emacs")
+                   (sleep-for 0 50))))))
+
+;; キーを設定
+(add-hook 'twittering-mode-hook
+          '(lambda ()
+             (define-key twittering-mode-map (kbd "F") 'twittering-favorite)
+             (define-key twittering-mode-map (kbd "R") 'twittering-reply-to-user)
+             (define-key twittering-mode-map (kbd "Q") 'twittering-organic-retweet)
+             (define-key twittering-mode-map (kbd "T") 'twittering-native-retweet)
+             (define-key twittering-mode-map (kbd "M") 'twittering-direct-message)
+             (define-key twittering-mode-map (kbd "N") 'twittering-update-status-interactive)
+             (define-key twittering-mode-map (kbd "C-c C-f") 'twittering-home-timeline)))
 
 
 ;; exec-path を設定しないと実行できない場合があります
