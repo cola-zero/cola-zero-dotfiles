@@ -125,4 +125,4 @@
 (load "config/packages")
 
 (if (eq system-type 'darwin)
-    (load "config/darwin"))
+    (load "config/darwin.el"))
