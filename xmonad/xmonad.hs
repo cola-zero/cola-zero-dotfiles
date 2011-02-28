@@ -142,6 +142,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+
+    -- Lock screen
+    , ((modm .|. shiftMask, xK_z    ), spawn "xscreensaver-command -lock")
     ]
     ++
 
