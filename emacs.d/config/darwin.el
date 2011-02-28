@@ -18,7 +18,6 @@
                (setq previous-buffer (current-buffer))))))))
 
 (menu-bar-mode 1)
-(menu-bar-mode -1)
 
 (define-key global-map [?¥] [?\\])
 (define-key global-map [?\C-¥] [?\C-\\])
