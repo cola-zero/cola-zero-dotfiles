@@ -306,8 +306,8 @@ main = do
 
       -- hooks, layouts
         -- layoutHook         = myLayout,
-        layoutHook         = smartBorders (layoutHook conf)
-        -- manageHook         = myManageHook,
+        layoutHook         = smartBorders (layoutHook conf),
+        manageHook         = myManageHook
         -- handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
         -- startupHook        = myStartupHook
