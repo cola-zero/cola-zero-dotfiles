@@ -1,19 +1,21 @@
-;; mac¤Ë¤ª¤±¤ëIME¤ÎÀßÄê
-;; http://tezfm.blogspot.com/2009/11/cocoa-emacs.html
-(set-language-environment "Japanese")
-(setq default-input-method "MacOSX")
-;; minibuffer¤Ï±Ñ¿ô¥â¡¼¥É¤Ç»Ï¤á¤ë
-(add-hook 'minibuffer-setup-hook 'mac-change-language-to-us)
-(load "cl")
-(add-hook
- 'post-command-hook
- (lexical-let ((previous-buffer nil))
-   #'(lambda ()
-       (unless (eq (current-buffer) previous-buffer)
-         ;; (message "Change IM %S -> %S" previous-buffer (current-buffer))
-         (if (bufferp previous-buffer) (mac-handle-input-method-change))
-         (setq previous-buffer (current-buffer))))))
-
+;; -*- coding: utf-8 -*-
+;; ;; macã«ãŠã‘ã‚‹IMEã®è¨­å®š
+;; ;; http://tezfm.blogspot.com/2009/11/cocoa-emacs.html
+(if (eq window-system 'ns)
+    (progn
+      (set-language-environment "Japanese")
+      (setq default-input-method "MacOSX")
+      ;; minibufferã¯è‹±æ•°ãƒ¢ãƒ¼ãƒ‰ã§å§‹ã‚ã‚‹
+      (add-hook 'minibuffer-setup-hook 'mac-change-language-to-us)
+      (load "cl")
+      (add-hook
+       'post-command-hook
+       (lexical-let ((previous-buffer nil))
+         #'(lambda ()
+             (unless (eq (current-buffer) previous-buffer)
+               ;; (message "Change IM %S -> %S" previous-buffer (current-buffer))
+               (if (bufferp previous-buffer) (mac-handle-input-method-change))
+               (setq previous-buffer (current-buffer))))))))
 
 (menu-bar-mode 1)
 (menu-bar-mode -1)
