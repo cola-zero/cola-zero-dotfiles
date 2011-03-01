@@ -18,15 +18,10 @@
 (menu-bar-mode 1)
 (menu-bar-mode -1)
 
-(define-key global-map [?(J\] [?\\])(B
-(define-key global-map [?\C-(J\] [?\C-\\])(B
-(define-key global-map [?\M-(J\] [?\M-\\])(B
-(define-key global-map [?\C-\M-(J\] [?\C-\M-\\])(B
-(define-key global-map [?(J\] [?\\])(B
-(define-key global-map [?\C-(J\] [?\C-\\])(B
-(define-key global-map [?\M-(J\] [?\M-\\])(B
-(define-key global-map [?\C-\M-(J\] [?\C-\M-\\])(B
-
+(define-key global-map [?¥] [?\\])
+(define-key global-map [?\C-¥] [?\C-\\])
+(define-key global-map [?\M-¥] [?\M-\\])
+(define-key global-map [?\C-\M-¥] [?\C-\M-\\])
 
 (global-set-key (kbd "M-<RET>") 'ns-toggle-fullscreen)
 (setq mac-pass-control-to-system nil)
