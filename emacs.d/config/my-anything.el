@@ -1,17 +1,21 @@
 ;;; Anything
-(setq warning-suppress-types nil)
-(let ((original-browse-url-browser-function browse-url-browser-function))
-  (setq anything-command-map-prefix-key "C-c C-<SPC>")
-  (package-install 'repo.or.cz '((files . ("anything-config"))
-                                 (additional-paths . ("extensions")))
-                   'anything-startup)
-  (define-key global-map (kbd "C-x b") 'anything-filelist+)
-  (define-key global-map (kbd "C-x C-f") 'anything-filelist+)
-  (global-set-key (kbd "C-M-y") 'anything-show-kill-ring)
-  (setq anything-c-filelist-filen-ame "/tmp/all.filelist")
-  (setq anything-grep-candidates-fast-directory-regexp "^/tmp\/mnt")
-  (add-to-list 'anything-c-source-buffers '(migemo))
-  (setq browse-url-browser-function original-browse-url-browser-function))
+;; (setq warning-suppress-types nil)
+(setq anything-command-map-prefix-key "C-c C-<SPC>")
+(package-install 'repo.or.cz '((files . ("anything-config"))
+                               (additional-paths . ("extensions")))
+                 'anything-startup)
+(require 'anything-startup)
+(define-key global-map (kbd "C-x b") 'anything-filelist+)
+(define-key global-map (kbd "C-x C-f") 'anything-filelist+)
+(global-set-key (kbd "C-M-y") 'anything-show-kill-ring)
+(if (eq system-type 'darwin)
+    (progn
+      (setq anything-c-filelist-file-name "/tmp/mnt/all.filelist")
+      (setq anything-grep-candidates-fast-directory-regexp "^/tmp\/mnt"))
+  (progn
+    (setq anything-c-filelist-file-name "/tmp/all.filelist")
+    (setq anything-grep-candidates-fast-directory-regexp "^/tmp")))
+(add-to-list 'anything-c-source-buffers '(migemo))
 ;; anything-hatena-bookmark
 (package-install 'github "k1LoW/anything-hatena-bookmark" 'anything-hatena-bookmark)
 (global-set-key (kbd "C-c C-b") 'anything-hatena-bookmark)
@@ -23,7 +27,7 @@
 ;; http://d.hatena.ne.jp/yaotti/20101202/1291295796
 (when (eq system-type 'darwin)
   (progn
-    (package-install 'gist "725271" 'anything-hatena-bookmark)
+    (package-install 'gist "725271" 'anything-mac-itunes)
     (global-set-key (kbd "C-c i m") 'anything-mac-itunes)
     (global-set-key (kbd "C-c i b") 'anything-mac-itunes-back-track)
     (global-set-key (kbd "C-c i n") 'anything-mac-itunes-next-track)
