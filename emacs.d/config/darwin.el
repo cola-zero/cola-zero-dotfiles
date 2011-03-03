@@ -1,4 +1,36 @@
 ;; -*- coding: utf-8 -*-
+
+;; font
+;; http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
+;; (set-default-font "Inconsolata-11")
+;; (set-face-font 'variable-pitch "Inconsolata-11")
+(add-hook 'window-setup-hook
+          (lambda nil
+            ;; font setting
+            ;; (set-default-font "Inconsolata-12")
+            ;; (set-face-font 'variable-pitch "Inconsolata-12")
+            (set-face-font 'variable-pitch "Droid Sans Mono Slashed-12")
+            (set-fontset-font (frame-parameter nil 'font)
+                              'japanese-jisx0208
+                              ;; '("Takaoゴシック" . "unicode-bmp"))
+                              '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
+            ;; 半角カナのために↓を追加
+            (set-fontset-font
+             (frame-parameter nil 'font)
+             'katakana-jisx0201
+             '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+            ;; asciiと日本語fontを1:2にするために
+            (setq face-font-rescale-alist
+                  '(("^-apple-hiragino.*" . 1.2)
+                    (".*osaka-bold.*" . 1.2)
+                    (".*osaka-medium.*" . 1.2)
+                    (".*courier-bold-.*-mac-roman" . 1.0)
+                    (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
+                    (".*monaco-bold-.*-mac-roman" . 0.9)
+                    ("-cdac$" . 1.3)
+                    (".*Takao*" . 2.0)))))
+
+
 ;; ;; macにおけるIMEの設定
 ;; ;; http://tezfm.blogspot.com/2009/11/cocoa-emacs.html
 (if (eq window-system 'ns)
