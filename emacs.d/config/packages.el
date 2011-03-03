@@ -117,21 +117,6 @@
 (auto-install-compatibility-setup)
 (add-to-list 'load-path "~/.emacs.d/auto-install")
 
-;; migemo
-;; not auto-installed
-(when (require 'anything-migemo nil t)
-  (progn
-    (load "migemo.el")
-    (if (eq window-system 'ns)
-	(progn
-          (setq migemo-command "/usr/bin/ruby")
-          (setq migemo-command "/usr/local/bin/cmigemo")
-          (setq migemo-options '("-q" "--emacs" "-i" "\a"))
-          (setq migemo-dictionary "/usr/local/share/migemo/euc-jp/migemo-dict")
-          (setq migemo-user-dictionary nil)
-          (setq migemo-regex-dictionary nil)
-          ))
-    (migemo-init)))
 
 
 ;; emacs-deferred
@@ -351,3 +336,18 @@
 (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
 (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
+;; migemo
+;; not auto-installed
+(when (require 'anything-migemo nil t)
+  (progn
+    (load "migemo.el")
+    (if (eq system-type 'darwin)
+        (progn
+          (setq migemo-command "/usr/bin/ruby")
+          (setq migemo-command "/usr/local/bin/cmigemo")
+          (setq migemo-options '("-q" "--emacs" "-i" "\a"))
+          (setq migemo-dictionary "/usr/local/share/migemo/euc-jp/migemo-dict")
+          (setq migemo-user-dictionary nil)
+          (setq migemo-regex-dictionary nil)
+          ))
+    (migemo-init)))
