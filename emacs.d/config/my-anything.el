@@ -1,5 +1,5 @@
 ;;; Anything
-;; (setq warning-suppress-types nil)
+(setq warning-suppress-types nil)
 (setq anything-command-map-prefix-key "C-c C-<SPC>")
 (package-install 'repo.or.cz '((files . ("anything-config"))
                                (additional-paths . ("extensions")))
