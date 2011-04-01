@@ -351,3 +351,27 @@
           (setq migemo-regex-dictionary nil)
           ))
     (migemo-init)))
+
+;; slime
+(load "config/my-slime")
+
+;; navi2ch
+(add-to-list 'load-path (concat package-base-dir "/navi2ch"))
+(autoload 'navi2ch "navi2ch" "Navigator for 2ch for Emacs" t)
+
+;; id-manager.el
+(package-install 'github "kiwanami/emacs-id-manager" 'id-manager)
+
+;; rvm.el
+(package-install 'github "senny/rvm.el" 'rvm)
+
+
+;; evernote-mode
+(setq evernote-enml-formatter-command '("w3m" "-dump" "-I" "UTF8" "-O" "UTF8"))
+(add-to-list 'load-path (concat package-base-dir "/evernote-mode"))
+(require 'evernote-mode)
+(global-set-key "\C-cec" 'evernote-create-node)
+(global-set-key "\C-ceo" 'evernote-open-note)
+(global-set-key "\C-ces" 'evernote-search-notes)
+(global-set-key "\C-ceS" 'evernote-do-saved-search)
+(global-set-key "\C-cew" 'evernote-write-note)
