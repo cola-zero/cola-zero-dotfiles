@@ -151,10 +151,10 @@
 
 ;; color-theme
 ;; not auto-installed.
-(when (require 'color-theme nil t)
-  (color-theme-initialize)
-  ;; http://elpa.gnu.org/themes/3LokbOLb
-  (load "~/.emacs.d/site-lisp/misterioso-theme"))
+;; (when (require 'color-theme nil t)
+;;   (color-theme-initialize)
+;;   ;; http://elpa.gnu.org/themes/3LokbOLb
+;;   (load "~/.emacs.d/site-lisp/misterioso-theme"))
 
 ;; mozc
 (if (eq window-system 'x)
