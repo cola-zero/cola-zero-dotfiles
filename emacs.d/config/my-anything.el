@@ -52,3 +52,9 @@
 (package-install 'github "imakado/anything-project" 'anything-project)
 (global-set-key (kbd "C-c C-f") 'anything-project)
  
+;; http://d.hatena.ne.jp/mtym/20110319/p1
+(defadvice agp-command-line (after insert-LANG=C-into-agp-command-line)
+  (while (string-match "\\(^\\|| \\)\\(grep -ih\\)" ad-return-value)
+    (setq ad-return-value (replace-match "LANG=C \\2" t nil ad-return-value 2))))
+
+(ad-activate 'agp-command-line)
