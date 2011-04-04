@@ -382,3 +382,8 @@
 (setq rsense-home (expand-file-name "~/opt/rsense-0.3"))
 (add-to-list 'load-path (concat rsense-home "/etc"))
 (require 'rsense)
+
+
+
+;; https://github.com/philjackson/magit.git
+(package-install 'github "philjackson/magit" 'magit)
