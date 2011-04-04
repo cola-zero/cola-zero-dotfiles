@@ -1,0 +1,12 @@
+emacs.d/site-lisp
+emacs.d/packages
+emacs.d/auto-install
+emacs.d/auto-save-list
+emacs.d/anything-c-adaptive-history
+emacs.d/history
+*.elc
+xmonad/xmonad-i386-darwin
+xmonad/xmonad.errors
+xmonad/*.hi
+xmonad/*.o
+
