@@ -383,7 +383,12 @@
 (add-to-list 'load-path (concat rsense-home "/etc"))
 (require 'rsense)
 
-
+;; hiki-mode
+(setq hiki-site-list
+      '(("whale" "http://whale/hiki/hiki.cgi")))
+(setq hiki-browser-function 'browser-url)
+(autoload 'hiki-edit "hiki-mode" nil t)
+(autoload 'hiki-edit-url "hiki-mode" nil t)
 
 ;; https://github.com/philjackson/magit.git
 (package-install 'github "philjackson/magit" 'magit)
