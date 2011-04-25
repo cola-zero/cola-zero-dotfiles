@@ -430,4 +430,3 @@
 (add-to-list 'exec-path (expand-file-name "~/opt/bin"))
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
->>>>>>> origin/rewrite-dot-emacs
