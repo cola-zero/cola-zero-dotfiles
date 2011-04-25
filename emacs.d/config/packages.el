@@ -395,3 +395,39 @@
 
 ;; gccsense
 (require 'gccsense nil t)
+
+;; twittering-mode
+(package-install 'github "hayamiz/twittering-mode" 'twittering-mode)
+(setq twittering-use-master-password t)
+;;http://mitukiii.jp/2010/11/01/twittering-mode/
+(setq twittering-initial-timeline-spec-string
+      '(":home"
+        ":replies"
+        "cola_zero/kumamoto"
+        ":favorites"
+        ":direct_messages"))
+;; キーを設定
+(add-hook 'twittering-mode-hook
+          '(lambda ()
+             (define-key twittering-mode-map (kbd "F") 'twittering-favorite)
+             (define-key twittering-mode-map (kbd "R") 'twittering-reply-to-user)
+             (define-key twittering-mode-map (kbd "Q") 'twittering-organic-retweet)
+             (define-key twittering-mode-map (kbd "T") 'twittering-native-retweet)
+             (define-key twittering-mode-map (kbd "M") 'twittering-direct-message)
+             (define-key twittering-mode-map (kbd "N") 'twittering-update-status-interactive)
+             (define-key twittering-mode-map (kbd "C-c C-f") 'twittering-home-timeline)))
+
+
+
+
+;; scala-mode
+(add-to-list 'load-path (expand-file-name "~/opt/scala-2.8.1.final/misc/scala-tool-support/emacs/"))
+(require 'scala-mode-auto)
+(add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
+
+;; ENSLIME
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/ensime_2.8.1-0.5.0/elisp"))
+(add-to-list 'exec-path (expand-file-name "~/opt/bin"))
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+>>>>>>> origin/rewrite-dot-emacs
