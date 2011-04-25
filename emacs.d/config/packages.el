@@ -392,3 +392,6 @@
 
 ;; https://github.com/philjackson/magit.git
 (package-install 'github "philjackson/magit" 'magit)
+
+;; gccsense
+(require 'gccsense nil t)
