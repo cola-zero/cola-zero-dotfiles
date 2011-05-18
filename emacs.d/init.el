@@ -34,7 +34,7 @@
 (auto-image-file-mode t)
 
 (menu-bar-mode -1)
-(tool-bar-mode -1)
+; (tool-bar-mode -1)
 (blink-cursor-mode 0)
 
 ;; print all eval expression
