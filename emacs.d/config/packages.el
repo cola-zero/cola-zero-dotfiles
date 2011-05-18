@@ -431,3 +431,24 @@
 (add-to-list 'exec-path (expand-file-name "~/opt/bin"))
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+;; http://launchpad.net/xml-rpc-el
+;; http://launchpadlibrarian.net/40270196/xml-rpc.el
+(require 'xml-rpc nil t)
+
+;; org2blog
+;; http://www.rlazo.org/2010/10/28/org-mode-wordpress-org2blog-awesomeness/
+;; http://github.com/punchagan/org2blog
+(package-install 'github "punchagan/org2blog" 'org2blog)
+(setq org2blog/wp-blog-alist
+      '(("wordpress"
+         :url "http://cola0.wordpress.com/xmlrpc.php"
+         :username "colazero1986"
+         :default-title "Hello World"
+         :default-categories ("org2blog" "emacs")
+         :tags-as-categories nil
+         :keep-new-lines t)))
+(defun my-org2blog/wp-post-and-publish-subtree ()
+  (interactive)
+  (org2blog/wp-post-subtree t))
+(define-key global-map "\C-cd" 'org2blog/wp-post-subtree)
