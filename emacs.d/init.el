@@ -70,7 +70,7 @@
 (setq completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
 ;; partial completion
-(partial-completion-mode t)
+;; (partial-completion-mode t)
 (icomplete-mode 1)
 
 ;; history
