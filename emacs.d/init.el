@@ -1,5 +1,7 @@
 ;; ~/.emacs.d/init.el
 
+(setq inhibit-startup-screen t)
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
