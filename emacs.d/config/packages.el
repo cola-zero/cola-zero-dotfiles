@@ -386,9 +386,13 @@
 ;; hiki-mode
 (setq hiki-site-list
       '(("whale" "http://whale/hiki/hiki.cgi")))
+(setq hiki-site-info
+      '("whale" "http://whale/hiki/hiki.cgi"))
 (setq hiki-browser-function 'browser-url)
 (autoload 'hiki-edit "hiki-mode" nil t)
 (autoload 'hiki-edit-url "hiki-mode" nil t)
+(autoload 'hiki-index "hiki-mode" nil t)
+(require 'hiki-mode)
 
 ;; https://github.com/philjackson/magit.git
 (package-install 'github "philjackson/magit" 'magit)
