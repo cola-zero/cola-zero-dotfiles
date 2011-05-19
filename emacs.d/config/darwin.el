@@ -62,6 +62,7 @@
                (setq previous-buffer (current-buffer))))))))
 
 (menu-bar-mode 1)
+(tool-bar-mode 0)
 
 (define-key global-map [?¥] [?\\])
 (define-key global-map [?\C-¥] [?\C-\\])
