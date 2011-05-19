@@ -1,6 +1,8 @@
 ; -*- coding: utf-8 -*-
 ;org-mode
-(package-install 'orgmode "org-mode" 'org-install)
+(package-install 'orgmode '((files . ("org-mode"))
+                            (additional-paths . ("lisp" "contrib")))
+                 'org-install)
 (setq org-startup-truncated nil)
 (setq org-return-follows-link t)
 (add-to-list `auto-mode-alist '("\\.org$" . org-mode))
@@ -19,7 +21,9 @@
         ("j" "Journal" entry (file+datetree "~/Dropbox/memo/journal.org")
          "* %?\nEntered on %U\n %i\n %a")
         ("w" "Want" entry (file+datetree "~/Dropbox/memo/journal.org")
-         "* %? :Want:\nEntered on %U\n %i\n %a")))
+         "* %? :Want:\nEntered on %U\n %i\n %a")
+        ("b" "Blog" entry (file+headline (concat org-directory "blog.org") "Entry")
+         "* %?\n")))
 
 (defun open-gtd-file ()
   (interactive)
@@ -51,12 +55,9 @@
              ,org-code-reading-file "Memo"))))
     (org-remember)))
 
-(if (eq window-system 'w32)
-    (setq org-agenda-files (list "~/Documents/My Dropbox/memo/agenda.org"
-                                 "~/Documents/My Dropbox/memo/code-reading.org"))
-    (setq org-agenda-files (list "~/Dropbox/memo/mygtd.org"
-                                 "~/Dropbox/memo/journal.org")))
-
+(setq org-agenda-files (list (concat org-directory "agenda.org")
+                             (concat org-directory "code-reading.org")
+                             (concat org-directory "blog.org")))
 
 ;MobileOrg
 (if (eq window-system 'w32)
@@ -64,9 +65,9 @@
 	 (setq org-mobile-directory "z:/org/")
 	 (setq org-mobile-inbox-for-pull "~/Documents/My Dropbox/memo/mobile.org"))
 	(progn
-      (setq org-mobile-files org-agenda-files)
-	 (setq org-mobile-directory "~/Dropbox/MobileOrg/")
-	 (setq org-mobile-inbox-for-pull "~/Dropbox/memo/mobile.org")))
+          (setq org-mobile-files org-agenda-files)
+          (setq org-mobile-directory "~/Dropbox/MobileOrg/")
+          (setq org-mobile-inbox-for-pull "~/Dropbox/memo/mobile.org")))
 (setq org-todo-keywords '((sequence "INBOX(i)" "NEXT-ACTION(n)" "INACTIVE(I)" "WAIT(W)" "PROJECT(p)" "|" "DONE(d)")))
 (setq org-fast-tag-selection-include-todo t)
 
@@ -100,7 +101,8 @@
 		 ((org-agenda-compact-blocks t)))
 		))
 
-(add-hook 'org-mode-hook 'howm-mode)
+;; anything-org-mode
+(package-install 'gist "746084" 'anything-org-mode)
+
 (add-to-list 'auto-mode-alist '("\\.howm$" . org-mode))
-(setq howm-view-title-header "*")
 (setq org-startup-folded nil)

@@ -1,5 +1,7 @@
 ;; ~/.emacs.d/init.el
 
+(setq inhibit-startup-screen t)
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
@@ -32,7 +34,7 @@
 (auto-image-file-mode t)
 
 (menu-bar-mode -1)
-(tool-bar-mode -1)
+; (tool-bar-mode -1)
 (blink-cursor-mode 0)
 
 ;; print all eval expression
@@ -68,7 +70,7 @@
 (setq completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
 ;; partial completion
-(partial-completion-mode t)
+;; (partial-completion-mode t)
 (icomplete-mode 1)
 
 ;; history

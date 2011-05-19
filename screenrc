@@ -1,3 +1,4 @@
+source ~/opt/screen-git/etc/screenrc
 escape ^t^t
 
  shelltitle "$ |zsh"

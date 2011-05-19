@@ -1,5 +1,17 @@
 ;; -*- coding: utf-8 -*-
 
+(set-frame-parameter nil 'alpha 90)
+
+(set-language-environment "Japanese")
+(prefer-coding-system 'utf-8-unix)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(add-hook 'after-init-hook '(lambda ()
+                             (setq default-buffer-file-coding-system 'utf-8)
+                             ))
+
 ;; font
 ;; http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
 ;; (set-default-font "Inconsolata-11")
@@ -50,6 +62,7 @@
                (setq previous-buffer (current-buffer))))))))
 
 (menu-bar-mode 1)
+(tool-bar-mode 0)
 
 (define-key global-map [?¥] [?\\])
 (define-key global-map [?\C-¥] [?\C-\\])
@@ -100,3 +113,79 @@
                        (setq spec (substring spec (- (length fulldoc) ea-width)))
                        (format "%s: %s" spec docstring))))))
         ad-do-it)))
+
+;; haskell mode
+(load "~/work/emacs/haskellmode-emacs/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(setq haskell-program-name "/usr/local/bin/ghci")
+
+;; twittering-mode with growl
+;; growl
+;; http://mitukiii.jp/2010/11/01/twittering-mode/
+(setq growl-program "/usr/local/bin/growlnotify")
+(defun growl (title message &optional app)
+  (start-process "Growl" "*Growl*" growl-program
+                 "-t" title
+                 "-m" message
+                 "-a" app))
+;; replyとdmをgrowlで出す
+(add-hook 'twittering-new-tweets-hook
+          '(lambda ()
+             (let ((spec (car twittering-new-tweets-spec))
+                   (title-format nil))
+               (cond ((eq spec 'replies)
+                      (setq title-format "%sから関連ツイート"))
+                     ((eq spec 'direct_messages)
+                      (setq title-format "%sから新規メッセージ")))
+               (unless (eq title-format nil)
+                 (dolist (el (reverse twittering-new-tweets-statuses))
+                   (growl (format title-format (cdr (assoc 'user-screen-name el)))
+                          (format "%s" (cdr (assoc 'text el)))
+                          "Emacs")
+                   (sleep-for 0 50))))))
+
+;; org-googlecl
+(package-install 'github "rileyrg/org-googlecl"  'org-googlecl)
+(setq googlecl-blogname "古賀の日記")
+(setq googlecl-username "colazero@mail.mkoga.net")
+
+(setq x-select-enable-clipboard nil)
+(setq x-select-enable-primary t)
+(setq select-active-regions nil)
+
+
+;; howm
+;; (setq howm-view-title-header "*")
+;; (require 'howm-mode)
+;; (load "snap.el")
+;; (setq howm-menu-lang 'ja)
+;; (global-set-key "\C-c,," 'howm-menu)
+;; (add-to-list 'auto-mode-alist '("\\.howm$" . org-mode))
+;; (mapc
+;;  (lambda (f)
+;;    (autoload f
+;;        "howm" "Hitori Otegaru Wiki Modoki" t))
+;;  '(howm-menu howm-list-all howm-list-recent
+;;    howm-list-grep howm-create
+;;    howm-keyword-to-kill-ring))
+;; (setq howm-process-coding-system 'utf-8)
+
+;; ;;http://howm.sourceforge.jp/cgi-bin/hiki/hiki.cgi?SaveAndKillBuffer
+;; (defun my-save-and-kill-buffer ()
+;;   (interactive)
+;;   (save-buffer)
+;;   (kill-buffer nil)
+;;   (elscreen-kill))
+
+;; (define-key howm-mode-map "\C-c\C-c" 'my-save-and-kill-buffer)
+
+;; ;; instamp.el
+;; ;; http://www.gentei.org/~yuuji/software/euc/instamp.el
+;; (autoload 'instamp "instamp" "Insert TimeStamp on the point" t)
+;; (define-key global-map "\C-cs" 'instamp)
+
+;; ;; nxml-mode
+;; ;; http://www.thaiopensource.com/nxml-mode/
+;; (add-to-list 'load-path
+;;              (expand-file-name "~/.emacs.d/site-lisp/nxml-mode"))

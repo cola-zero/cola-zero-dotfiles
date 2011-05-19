@@ -75,6 +75,11 @@ source ${HOME}/.zsh_aliases
  [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
 [[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source "$HOME/perl5/perlbrew/etc/bashrc"
 
+# http://cutter.sourceforge.net/reference/ja/tutorial.html
+#export ACLOCAL_ARGS="-I /usr/share/aclocal/ -I /usr/local/share/aclocal/"
+export ACLOCAL_ARGS="-I /usr/local/share/aclocal/ -I /usr/local/Cellar/cutter/1.1.0/share/aclocal/"
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+
 
 if [ "$TERM" = "screen-bce" ]; then
 	chpwd () { echo -n "_`dirs`\\" }
