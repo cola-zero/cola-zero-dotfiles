@@ -20,6 +20,7 @@ darwin10.*)
         export PATH=/Users/masahirokoga/opt/go/bin:$PATH
 		;;
 linux-gnu)
+		export PAGER='lv -ic'
 		export PATH=$HOME/.cabal/bin:$HOME/linux/opt/ghc-6.12.1/bin:$HOME/linux/local/app/haskell-platform-2010.1.0.0/bin:$GOBIN:$HOME/linux/opt/rurema:$HOME/linux/opt/ruby19/bin:$HOME/linux/opt/rsense-0.2/bin:$HOME/.cabal/bin:$HOME/local/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH
 		export PATH=$HOME/linux/local/app/emacs-23.2/bin:$PATH
 		export PATH=$HOME/linux/local/app/ruby18/bin:$PATH
@@ -28,18 +29,25 @@ linux-gnu)
 		export PATH=$HOME/opt/hatena-diary-writer:$PATH
 #		export PATH=$HOME/.gem/ruby/1.8/bin:$PATH
 		export PATH=$HOME/opt/firefox:$PATH
+export PATH=$HOME/opt/idea/bin:$PATH
 		export PATH=$HOME/.cabal/bin:$PATH
 		export PATH=/var/lib/gems/1.8/bin/:$PATH
+		export PATH=$HOME/opt/bin:$PATH
 		export GOROOT=$HOME/linux/opt/go
 		export GOBIN=$GOROOT/bin
 		export GOOS=linux
 		export GOARCH=amd64
 		export PYTHONPATH=/user/arch/koga/linux/local/lib64/python2.4/site-packages
 		export LD_LIBRARY_PATH=/user/arch/koga/linux/local/lib:/usr/lib64:/usr/local/bin/Mono/lib
-		export GCC_SENSE_HOME=/home/project/vglc/koga
+#		export GCC_SENSE_HOME=/home/project/vglc/koga
+	  export PATH=$HOME/opt/gccsense/bin:$PATH
     export TERM=xterm-color
 		export RSPEC=true
 		export EDITOR=emacs
+                                 keychain ~/.ssh/id_rsa
+                                 . ~/.keychain/$HOST-sh
+                                # . ~/.keychain/$HOST-sh-gpg
+
 		;;
 esac
 
@@ -64,7 +72,7 @@ esac
 source ${HOME}/.zsh_aliases
 
  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-# [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
+ [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
 [[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source "$HOME/perl5/perlbrew/etc/bashrc"
 
 
