@@ -8,8 +8,8 @@ Emacs*useXIM: false
 
 URxvt*font: xft:TakaoGothic:pixelsize=16:antialias=true
 URxvt*scrollBar: false
-! URxvt*VT100*EightBitInput: false
-! URxvt*background: black
+URxvt*VT100*EightBitInput: false
+URxvt*background: gray90
 ! URxvt*foreground: gray90
 ! URxvt*visualBell: true
 ! URxvt*color0: black
