@@ -13,6 +13,7 @@ import System.Exit
 import XMonad.Hooks.DynamicLog
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.SetWMName
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -20,7 +21,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "Terminal"
+myTerminal      = "urxvt"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -66,7 +67,7 @@ myWorkspaces    = ["1:term","2:im & IRC", "3:emacs", "4:web","5:win","6:vm","7:m
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#dddddd"
+myNormalBorderColor  = "#090909"
 myFocusedBorderColor = "#ff0000"
 
 ------------------------------------------------------------------------
@@ -307,8 +308,8 @@ main = do
       -- hooks, layouts
         -- layoutHook         = myLayout,
         layoutHook         = smartBorders (layoutHook conf),
-        manageHook         = myManageHook
+        manageHook         = myManageHook,
         -- handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
-        -- startupHook        = myStartupHook
+           startupHook        = setWMName "LG3D"
     }
