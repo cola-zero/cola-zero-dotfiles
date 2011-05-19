@@ -338,6 +338,7 @@
 
 ;; migemo
 ;; not auto-installed
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (when (require 'anything-migemo nil t)
   (progn
     (load "migemo.el")
