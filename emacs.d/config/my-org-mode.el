@@ -21,6 +21,12 @@
         ("w" "Want" entry (file+datetree "~/Dropbox/memo/journal.org")
          "* %? :Want:\nEntered on %U\n %i\n %a")))
 
+(defun open-gtd-file ()
+  (interactive)
+  (find-file org-default-notes-file))
+(global-set-key "\C-cg" 'open-gtd-file)
+
+
 (global-set-key "\C-ca" 'org-agenda)
 
 (defvar org-code-reading-software-name nil)
