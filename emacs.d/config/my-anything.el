@@ -6,7 +6,7 @@
                  'anything-startup)
 (require 'anything-startup)
 (define-key global-map (kbd "C-x b") 'anything-filelist+)
-(define-key global-map (kbd "C-x C-f") 'anything-filelist+)
+;; (define-key global-map (kbd "C-x C-f") 'anything-filelist+)
 (global-set-key (kbd "C-M-y") 'anything-show-kill-ring)
 (if (eq system-type 'darwin)
     (progn
