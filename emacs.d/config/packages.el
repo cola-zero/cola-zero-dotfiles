@@ -341,9 +341,9 @@
 (when (require 'anything-migemo nil t)
   (progn
     (load "migemo.el")
+    (setq migemo-command "/usr/bin/ruby")
     (if (eq system-type 'darwin)
         (progn
-          (setq migemo-command "/usr/bin/ruby")
           (setq migemo-command "/usr/local/bin/cmigemo")
           (setq migemo-options '("-q" "--emacs" "-i" "\a"))
           (setq migemo-dictionary "/usr/local/share/migemo/euc-jp/migemo-dict")
