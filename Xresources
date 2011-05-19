@@ -33,7 +33,7 @@ URxvt*background: gray90
 ! URxvt*termName: rxvt
 
 URxvt.perl-ext-common: default,matcher
-URxvt.urlLauncher: google-chrome
+URxvt.urlLauncher: firefox
 URxvt.matcher.button: 3
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
 
