@@ -37,7 +37,7 @@ linux-gnu)
 		export PYTHONPATH=/user/arch/koga/linux/local/lib64/python2.4/site-packages
 		export LD_LIBRARY_PATH=/user/arch/koga/linux/local/lib:/usr/lib64:/usr/local/bin/Mono/lib
 		export GCC_SENSE_HOME=/home/project/vglc/koga
-    export TERM=xterm-color
+    export TERM=rxvt-256color
 		export RSPEC=true
 		export EDITOR=emacs
 		;;
@@ -73,7 +73,7 @@ export ACLOCAL_ARGS="-I /usr/local/share/aclocal/ -I /usr/local/Cellar/cutter/1.
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 
-if [ "$TERM" = "screen-bce" ]; then
+if [ "$TERM" = "rxvt-256color" ]; then
 	chpwd () { echo -n "_`dirs`\\" }
 	preexec() {
 		# see [zsh-workers:13180]
