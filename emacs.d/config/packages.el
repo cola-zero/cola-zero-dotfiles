@@ -386,7 +386,8 @@
 
 ;; hiki-mode
 (setq hiki-site-list
-      '(("whale" "http://whale/hiki/hiki.cgi")))
+      '(("whale" "http://whale/hiki/hiki.cgi")
+        ("ngeda" "http://wiki.arch.cs.kumamoto-u.ac.jp/ngeda/hiki.cgi")))
 (setq hiki-site-info
       '("whale" "http://whale/hiki/hiki.cgi"))
 (setq hiki-browser-function 'browser-url)
@@ -447,6 +448,13 @@
          :username "colazero1986"
          :default-title "Hello World"
          :default-categories ("org2blog" "emacs")
+         :tags-as-categories nil
+         :keep-new-lines t)
+        ("whale"
+         :url "http://whale.arch.cs.kumamoto-u.ac.jp/blog/xmlrpc.php"
+         :username "koga"
+         :default-title "今日の日誌"
+         :default-categories ("日誌")
          :tags-as-categories nil
          :keep-new-lines t)))
 (defun my-org2blog/wp-post-and-publish-subtree ()
