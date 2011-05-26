@@ -117,10 +117,12 @@
 (auto-install-compatibility-setup)
 (add-to-list 'load-path "~/.emacs.d/auto-install")
 
-
+;; hl-line+.el
+(package-install 'emacswiki "hl-line+.el" 'hl-line+)
 
 ;; emacs-deferred
 (package-install 'github "kiwanami/emacs-deferred" 'deferred)
+(hl-line-when-idle-interval 5)
 
 ;; color-moccur.el
 ;; http://d.hatena.ne.jp/IMAKADO/20080724/1216882563
@@ -151,10 +153,9 @@
 
 ;; color-theme
 ;; not auto-installed.
-;; (when (require 'color-theme nil t)
-;;   (color-theme-initialize)
-;;   ;; http://elpa.gnu.org/themes/3LokbOLb
-;;   (load "~/.emacs.d/site-lisp/misterioso-theme"))
+(when (require 'color-theme nil t)
+  (color-theme-initialize)
+  (color-theme-billw))
 
 ;; mozc
 (if (eq window-system 'x)
@@ -362,7 +363,7 @@
 ;; evernote-mode
 (setq evernote-enml-formatter-command '("w3m" "-dump" "-I" "UTF8" "-O" "UTF8"))
 (add-to-list 'load-path (concat package-base-dir "/evernote-mode"))
-(require 'evernote-mode)
+(require 'evernote-mode nil t)
 (global-set-key "\C-cec" 'evernote-create-node)
 (global-set-key "\C-ceo" 'evernote-open-note)
 (global-set-key "\C-ces" 'evernote-search-notes)
@@ -374,7 +375,7 @@
 ;; rsense
 (setq rsense-home (expand-file-name "~/opt/rsense-0.3"))
 (add-to-list 'load-path (concat rsense-home "/etc"))
-(require 'rsense)
+(require 'rsense nil t)
 
 ;; hiki-mode
 (setq hiki-site-list
@@ -416,13 +417,13 @@
 
 ;; scala-mode
 (add-to-list 'load-path (expand-file-name "~/opt/scala-2.8.1.final/misc/scala-tool-support/emacs/"))
-(require 'scala-mode-auto)
+(require 'scala-mode-auto nil t)
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
 
 ;; ENSLIME
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/ensime_2.8.1-0.5.0/elisp"))
 (add-to-list 'exec-path (expand-file-name "~/opt/bin"))
-(require 'ensime)
+(require 'ensime nil t)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ;; http://launchpad.net/xml-rpc-el
