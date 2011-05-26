@@ -1,6 +1,7 @@
 ;; -*- coding: utf-8 -*-
 
 (set-frame-parameter nil 'alpha 90)
+(display-battery-mode t)
 
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8-unix)
