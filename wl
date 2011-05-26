@@ -14,7 +14,7 @@
 
 ;; IMAP サーバの設定
 (setq elmo-imap4-default-server "imap.gmail.com")
-(setq elmo-imap4-default-user "masahirokoga@gmail.com") ; メールアドレス
+(setq elmo-imap4-default-user "colazero@mail.mkoga.net") ; メールアドレス
 (setq elmo-imap4-default-authenticate-type 'clear)
 (setq elmo-imap4-default-port '993)
 (setq elmo-imap4-default-stream-type 'ssl)
@@ -24,12 +24,12 @@
 (setq wl-smtp-connection-type 'starttls)
 (setq wl-smtp-posting-port 587)
 (setq wl-smtp-authenticate-type "plain")
-(setq wl-smtp-posting-user "masahirokoga@gmail.com") ; 適宜修正
+(setq wl-smtp-posting-user "colazero@mail.mkoga.net") ; 適宜修正
 (setq wl-smtp-posting-server "smtp.gmail.com")
 (setq wl-local-domain "gmail.com")
 
 ;; 一意なmessage-ID 動的IPアドレスの場合に設定。何か適当な文字列を。例えばメールアドレスとか。
-(setq wl-from "Masahiro Koga <masahirokoga@gmail.com>")
+(setq wl-from "Masahiro Koga <colazero@mail.mkoga.net>")
 
 ;;;------------------------------------------
 ;;; その他の設定
@@ -141,7 +141,7 @@
 
 ;; プリフェッチの設定
 ; プリフェッチを有効にするフォルダ
-(setq wl-message-buffer-prefetch-folder-type-list t)
+(setq wl-message-buffer-prefetch-folder-type-list '(imap4))
 ; プリフェッチのサイズ制限. nil なら無限大
 (setq wl-message-buffer-prefetch-threshold nil)
 
@@ -150,3 +150,24 @@
 (add-hook 'mime-view-mode-hook
 	  (lambda ()
 	    (local-set-key "f" 'browse-url)))
+
+;; デフォルトのフォルダ
+(setq wl-default-folder "%inbox")
+
+;; フォルダ名補完時に使用するデフォルトのスペック
+(setq wl-default-spec "%")
+(setq wl-draft-folder "%[Gmail]/Drafts") ; Gmail IMAPの仕様に合わせて
+(setq wl-trash-folder "%[Gmail]/Trash")
+
+(setq wl-folder-check-async t) ; 非同期でチェックするように
+
+(setq wl-dispose-folder-alist
+      (cons '("^%inbox" . remove) wl-dispose-folder-alist))
+
+;; browse url key
+;; http://www.emacswiki.org/emacs/WanderLust
+;; (add-hook 'mime-view-mode-hook
+;; 	  (lambda ()
+;; 	    (local-set-key <return> 'w3m-view-url-with-external-browser)))
+
+(setq smtp-end-of-line "\n")
