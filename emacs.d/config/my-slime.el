@@ -34,6 +34,6 @@
 (slime-setup '(slime-fancy))
 
 ;; quicklisp
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
+;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
 
 ;; (add-to-list 'auto-mode-alist '("\\.asd$" . lisp-mode))

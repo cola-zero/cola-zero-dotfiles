@@ -34,7 +34,7 @@
 (auto-image-file-mode t)
 
 (menu-bar-mode -1)
-; (tool-bar-mode -1)
+(tool-bar-mode -1)
 (blink-cursor-mode 0)
 
 ;; print all eval expression
@@ -50,7 +50,7 @@
 (global-font-lock-mode t)
 
 
-(global-hl-line-mode t)
+(global-hl-line-mode nil)
 (column-number-mode t)
 (line-number-mode t)
 (require 'saveplace)
