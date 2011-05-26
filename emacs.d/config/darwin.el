@@ -1,6 +1,7 @@
 ;; -*- coding: utf-8 -*-
 
 (set-frame-parameter nil 'alpha 90)
+(display-battery-mode t)
 
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8-unix)
@@ -189,3 +190,16 @@
 ;; ;; http://www.thaiopensource.com/nxml-mode/
 ;; (add-to-list 'load-path
 ;;              (expand-file-name "~/.emacs.d/site-lisp/nxml-mode"))
+
+;; FLIM
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/flim-1.14.9"))
+
+;; SEMI
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/semi-1.14.6"))
+
+;; wanderlust
+(add-to-list 'load-path "/usr/local/Cellar/emacs/23.3/share/emacs/site-lisp/wl")
+(require 'mime-w3m)
+(autoload 'wl "wl" "Wanderlust" t)
+(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
