@@ -189,3 +189,13 @@
 ;; ;; http://www.thaiopensource.com/nxml-mode/
 ;; (add-to-list 'load-path
 ;;              (expand-file-name "~/.emacs.d/site-lisp/nxml-mode"))
+
+
+(progn
+  (setq migemo-command "/usr/bin/ruby")
+  (setq migemo-command "/usr/local/bin/cmigemo")
+  (setq migemo-options '("-q" "--emacs" "-i" "\a"))
+  (setq migemo-dictionary "/usr/local/share/migemo/euc-jp/migemo-dict")
+  (setq migemo-user-dictionary nil)
+  (setq migemo-regex-dictionary nil)
+  )
