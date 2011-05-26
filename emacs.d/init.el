@@ -44,7 +44,7 @@
 (setq show-paren-style 'mixed)
 
 ;; show trailing whitespace
-(setq-default show-trailing-whitespace t)
+(setq-default show-trailing-whitespace nil)
 
 ;; enable color in console
 (global-font-lock-mode t)
