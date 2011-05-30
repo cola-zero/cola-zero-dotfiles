@@ -128,3 +128,6 @@
 
 (if (eq system-type 'darwin)
     (load "config/darwin.el"))
+
+(if (featurep 'aquamacs)
+    (load "config/aquamacs"))
