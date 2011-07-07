@@ -1,132 +1,12 @@
-;; packages
+;; packages.el
 
-(require 'cl)
+(load "config/my-package-installer")
 
-(defvar package-base-dir "~/.emacs.d/packages")
-
-(defun package-path-basename (path)
-  (file-name-sans-extension (file-name-nondirectory path)))
-
-(defun package-directory (files)
-  (concat package-base-dir "/"
-          (package-path-basename (car files))))
-
-(defun package-run-shell-command (command)
-  (message (format "running...: %s" command))
-  (shell-command command))
-
-(defun package-install-from-coderepos (files)
-  (shell-command
-   (format (concat "svn co http://svn.coderepos.org/share/lang/elisp/%s/trunk %s")
-           (car files)
-           (package-directory files))))
-
-(defun package-install-from-yasnippet (files)
-  (shell-command
-   (format (concat "svn checkout http://yasnippet.googlecode.com/svn/trunk/ %s")
-           (package-directory files))))
-
-(defun package-install-from-orgmode (files)
-  (shell-command
-   (format (concat "git clone git://orgmode.org/org-mode.git %s")
-           (package-directory files))))
-
-(defun package-install-from-emacswiki (files)
-  (shell-command
-   (format "mkdir -p %s" (package-directory files)))
-  (package-run-shell-command
-   (format "wget --directory-prefix %s %s"
-           (package-directory files)
-           (mapconcat (lambda (name)
-                        (concat "http://www.emacswiki.org/emacs/download/"
-                                name))
-                      files
-                      " "))))
-
-(defun package-install-from-gist (gistid)
-  (package-run-shell-command
-   (format (concat "git clone git://gist.github.com/%s.git %s")
-           (car files)
-           (package-directory files))))
-
-(defun package-install-from-github (files)
-  (package-run-shell-command
-   (format (concat "git clone https://github.com/%s.git %s")
-           (car files)
-           (package-directory files))))
-
-(defun package-install-from-repo.or.cz (files)
-  (package-run-shell-command
-   (format (concat "git clone git://repo.or.cz/%s.git %s")
-           (car files)
-           (package-directory files))))
-
-(defun package-alist-value (alist key default-value)
-  (if (listp alist)
-      (let ((alist-item (assoc key alist)))
-        (if alist-item
-            (cdr alist-item)
-          default-value))
-    default-value))
-
-(defun package-install (type package-spec require-name &optional force)
-  (let ((files (package-alist-value package-spec 'files
-                                    (if (listp package-spec)
-                                        package-spec
-                                      (list package-spec))))
-        (base-path (package-alist-value package-spec 'base-path "."))
-        (additional-paths (package-alist-value package-spec 'additional-paths
-                                               nil))
-        (install-proc (case type
-                        (yasnippet
-                         'package-install-from-yasnippet)
-                        (orgmode
-                         'package-install-from-orgmode)
-                        (coderepos
-                         'package-install-from-coderepos)
-                        (emacswiki
-                         'package-install-from-emacswiki)
-                        (github
-                         'package-install-from-github)
-                        (gist
-                         'package-install-from-gist)
-                        (repo.or.cz
-                         'package-install-from-repo.or.cz)
-                        (t
-                         (error "unknown package type: <%s>(%s)"
-                                type package)))))
-    (add-to-list 'load-path
-                 (format "%s/%s"
-                         (package-directory files)
-                         base-path))
-    (dolist (additional-path additional-paths)
-      (add-to-list 'load-path (format "%s/%s"
-                                      (package-directory files)
-                                      additional-path)))
-    (condition-case err
-        (require require-name)
-      (error
-       (message (format "installing %s..." files))
-       (funcall install-proc files)))
-    (require require-name)))
-
-
-;; auto-install
-(package-install 'emacswiki "auto-install.el" 'auto-install)
-(auto-install-update-emacswiki-package-name t)
-(auto-install-compatibility-setup)
-(add-to-list 'load-path "~/.emacs.d/auto-install")
-
-;; hl-line+.el
-(package-install 'emacswiki "hl-line+.el" 'hl-line+)
-
-;; emacs-deferred
-(package-install 'github "kiwanami/emacs-deferred" 'deferred)
-(hl-line-when-idle-interval 5)
+(load "config/my-org-mode")
 
 ;; color-moccur.el
 ;; http://d.hatena.ne.jp/IMAKADO/20080724/1216882563
-(package-install 'emacswiki "color-moccur.el" 'color-moccur)
+(my-package-install 'emacswiki "color-moccur.el" 'color-moccur)
 ;; 複数の検索語や、特定のフェイスのみマッチ等の機能を有効にする
 ;; 詳細は http://www.bookshelf.jp/soft/meadow_50.html#SEC751
 (setq moccur-split-word t)
@@ -134,12 +14,9 @@
 (when (require 'migemo nil t) ;第三引数がnon-nilだとloadできなかった場合にエラーではなくnilを返す
   (setq moccur-use-migemo t))
 
-;; Anything
-(load "config/my-anything")
-
 ;; title-time.el
 ;; http://valvallow.blogspot.com/2011/01/emacs.html
-(package-install 'emacswiki "title-time.el" 'title-time)
+(my-package-install 'emacswiki "title-time.el" 'title-time)
 (defadvice title-time-set (around title-time-set-around)
   (setq frame-title-format
         (concat "%b" " - " display-time-string)))
@@ -151,63 +28,15 @@
                 dayname 24-hours minutes)))
 (display-time)
 
-;; color-theme
-;; not auto-installed.
-(when (require 'color-theme nil t)
-  (color-theme-initialize)
-  (color-theme-billw))
-
-;; mozc
-(if (eq window-system 'x)
-    (progn
-      (require 'mozc nil t)  ; or (load-file "path-to-mozc.el")
-      (set-language-environment "Japanese")
-      (setq default-input-method "japanese-mozc")))
-
-;; Elscreen
-;; not auto-installed.
-(require 'elscreen nil t)
-(require 'elscreen-color-theme nil t)
-(require 'elscreen-dired nil t)
-(require 'elscreen-server nil t)
-(require 'elscreen-howm nil t)
-(setq elscreen-display-tab t)
-(defun elscreen-frame-title-update ()
-  (when (elscreen-screen-modified-p 'elscreen-frame-title-update)
-    (let* ((screen-list (sort (elscreen-get-screen-list) '<))
-	   (screen-to-name-alist (elscreen-get-screen-to-name-alist))
-	   (title (mapconcat
-		   (lambda (screen)
-		     (format "%d%s %s"
-			     screen (elscreen-status-label screen)
-			     (get-alist screen screen-to-name-alist)))
-		   screen-list " ")))
-      (if (fboundp 'set-frame-name)
-	  (set-frame-name title)
-	(setq frame-title-format title)))))
-
-(eval-after-load "elscreen"
-    '(add-hook 'elscreen-screen-update-hook 'elscreen-frame-title-update))
-
-;; org-mode
-(load "config/my-org-mode")
-
-;; w3m
-;; not auto-installed
-(add-to-list 'exec-path "/usr/local/bin")
-(add-to-list 'load-path (expand-file-name "~/opt/emacs-w3m/share/emacs/site-lisp/w3m/"))
-(require 'w3m-load nil t)
-
-
 ;; e2wm
-(package-install 'github "kiwanami/emacs-window-layout" 'window-layout)
-(package-install 'github "kiwanami/emacs-window-manager" 'e2wm-config)
+(my-package-install 'github "kiwanami/emacs-window-layout" 'window-layout)
+(my-package-install 'github "kiwanami/emacs-window-manager" 'e2wm-config)
 (global-set-key (kbd "M-+") 'e2wm:start-management)
 
 ;; multi-term
 ;; http://sakito.jp/emacs/emacsshell.html#emacs-shell
 ;; curl -O http://www.emacswiki.org/emacs/download/multi-term.el
-(package-install 'emacswiki "multi-term.el" 'multi-term)
+(my-package-install 'emacswiki "multi-term.el" 'multi-term)
 (defun skt:shell ()
   (or (executable-find "zsh")
       (executable-find "bash")
@@ -218,23 +47,14 @@
 (setq explicit-shell-file-name shell-file-name)
 (setq milti-term-program shell-file-name)
 
-;; japanese-holiday.el
-;; not auto-installed
-(add-hook 'calendar-load-hook
-          (lambda ()
-            (require 'japanese-holidays nil t)
-            (setq calendar-holidays
-                  (append japanese-holidays holiday-local-holidays other-holidays))))
-
 ;; calfw.el
 ;; http://d.hatena.ne.jp/kiwanami/20110107/1294404952
-(package-install 'github "kiwanami/emacs-calfw" 'calfw)
-
+;;(my-package-install 'github "kiwanami/emacs-calfw" 'calfw)
 
 ;; popwin.el
 ;; https://github.com/m2ym/popwin-el
 ;; http://d.hatena.ne.jp/m2ym/20110120/1295524932
-(package-install 'github "m2ym/popwin-el" 'popwin)
+(my-package-install 'github "m2ym/popwin-el" 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
 (add-to-list 'popwin:special-display-config '(" *auto-async-byte-compile*" :height 5 :noselect t))
 (add-to-list 'popwin:special-display-config '("*YaTeX-typesetting*"))
@@ -242,7 +62,7 @@
 
 ;; grep-a-lot
 ;;http://d.hatena.ne.jp/kitokitoki/20110213/p1
-(package-install 'emacswiki "grep-a-lot.el" 'grep-a-lot)
+(my-package-install 'emacswiki "grep-a-lot.el" 'grep-a-lot)
 (grep-a-lot-setup-keys)
 (defvar my-grep-a-lot-search-word nil)
 (defun grep-a-lot-buffer-name (position)
@@ -254,7 +74,7 @@
   (setq my-grep-a-lot-search-word regexp))
 
 ;; yasnippet
-(package-install 'yasnippet "yasnippet" 'yasnippet)
+(my-package-install 'yasnippet "yasnippet" 'yasnippet)
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/packages/yasnippet/snippets")
 
@@ -271,29 +91,10 @@
                ad-do-it)))))
 (yas/advise-indent-function 'ruby-indent-line)
 
-;; cscope
-;; not auto-installed
-(require 'xcscope nil t)
-
-;; gtags
-;; not auto-installed
-(require 'gtags nil t)
-(setq c-mode-hook
-      '(lambda ()
-         (gtags-mode 1)))
-(setq gtags-mode-hook
-      '(lambda ()
-         (local-set-key "\M-t" 'gtags-find-tag)
-         (local-set-key "\M-r" 'gtags-find-rtag)
-         (local-set-key "\M-s" 'gtags-find-symbol)
-         (local-set-key "\C-t" 'gtags-pop-stack)
-         ))
-
-
 ;; eldoc-extension.el
 ;; http://d.hatena.ne.jp/rubikitch/20090207/1233936430
 (require 'eldoc)
-(package-install 'emacswiki "eldoc-extension.el" 'eldoc-extension)
+(my-package-install 'emacswiki "eldoc-extension.el" 'eldoc-extension)
 (setq eldoc-idle-delay 0)
 (setq eldoc-echo-area-use-multiline-p t)
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
@@ -301,7 +102,7 @@
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
 ;;c-eldoc.el
-(package-install 'emacswiki "c-eldoc.el" 'c-eldoc)
+(my-package-install 'emacswiki "c-eldoc.el" 'c-eldoc)
 ;; (load "c-eldoc")
 (add-hook 'c-mode-hook
           (lambda ()
@@ -326,51 +127,19 @@
       (add-to-list 'auto-mode-alist '("\\.tex\\'" . yatex-mode))))
 
 ;; auto-complete-mode
-(package-install 'github "m2ym/auto-complete" 'auto-complete-config)
+(my-package-install 'github "m2ym/auto-complete" 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/packages/auto-complete/ac-dict")
 (ac-config-default)
 (add-to-list 'ac-modes 'ruby-mode)
 (add-to-list 'ac-modes 'verilog-mode)
 
-;; http://d.hatena.ne.jp/rubikitch/20100423/bytecomp
-(package-install 'emacswiki "auto-async-byte-compile.el" 'auto-async-byte-compile)
-(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
-(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
-
 ;; migemo
-;; not auto-installed
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
-(when (require 'anything-migemo nil t)
-  (progn
-    (load "migemo.el")
-    (setq migemo-command "/usr/bin/ruby")
-    (migemo-init)))
-
-;; slime
-(load "config/my-slime")
-
-;; navi2ch
-(add-to-list 'load-path (concat package-base-dir "/navi2ch"))
-(autoload 'navi2ch "navi2ch" "Navigator for 2ch for Emacs" t)
-
-;; id-manager.el
-(package-install 'github "kiwanami/emacs-id-manager" 'id-manager)
-
-;; rvm.el
-(package-install 'github "senny/rvm.el" 'rvm)
-
-
-;; evernote-mode
-(setq evernote-enml-formatter-command '("w3m" "-dump" "-I" "UTF8" "-O" "UTF8"))
-(add-to-list 'load-path (concat package-base-dir "/evernote-mode"))
-(require 'evernote-mode nil t)
-(global-set-key "\C-cec" 'evernote-create-node)
-(global-set-key "\C-ceo" 'evernote-open-note)
-(global-set-key "\C-ces" 'evernote-search-notes)
-(global-set-key "\C-ceS" 'evernote-do-saved-search)
-(global-set-key "\C-cew" 'evernote-write-note)
-
-
+(load "migemo.el")
+(if (not (eq system-type 'darwin))
+    (setq migemo-command "/usr/bin/ruby"))
+(migemo-init)
+(require 'anything-migemo nil t)
 
 ;; rsense
 (setq rsense-home (expand-file-name "~/opt/rsense-0.3"))
@@ -390,10 +159,10 @@
 (require 'hiki-mode)
 
 ;; https://github.com/philjackson/magit.git
-(package-install 'github "philjackson/magit" 'magit)
+(my-package-install 'github "philjackson/magit" 'magit)
 
 ;; twittering-mode
-(package-install 'github "hayamiz/twittering-mode" 'twittering-mode)
+(my-package-install 'github "hayamiz/twittering-mode" 'twittering-mode)
 (setq twittering-use-master-password t)
 ;;http://mitukiii.jp/2010/11/01/twittering-mode/
 (setq twittering-initial-timeline-spec-string
@@ -413,20 +182,6 @@
              (define-key twittering-mode-map (kbd "N") 'twittering-update-status-interactive)
              (define-key twittering-mode-map (kbd "C-c C-f") 'twittering-home-timeline)))
 
-
-
-
-;; scala-mode
-(add-to-list 'load-path (expand-file-name "~/opt/scala-2.8.1.final/misc/scala-tool-support/emacs/"))
-(require 'scala-mode-auto nil t)
-(add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
-
-;; ENSLIME
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/ensime_2.8.1-0.5.0/elisp"))
-(add-to-list 'exec-path (expand-file-name "~/opt/bin"))
-(require 'ensime nil t)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
 ;; http://launchpad.net/xml-rpc-el
 ;; http://launchpadlibrarian.net/40270196/xml-rpc.el
 (require 'xml-rpc nil t)
@@ -434,7 +189,7 @@
 ;; org2blog
 ;; http://www.rlazo.org/2010/10/28/org-mode-wordpress-org2blog-awesomeness/
 ;; http://github.com/punchagan/org2blog
-(package-install 'github "punchagan/org2blog" 'org2blog)
+(my-package-install 'github "punchagan/org2blog" 'org2blog)
 (setq org2blog/wp-blog-alist
       '(("wordpress"
          :url "http://cola0.wordpress.com/xmlrpc.php"
@@ -454,3 +209,21 @@
   (interactive)
   (org2blog/wp-post-subtree t))
 (define-key global-map "\C-cd" 'org2blog/wp-post-subtree)
+
+
+;;CEDIT
+(load-file (concat package-base-dir "/cedet-1.0/common/cedet.el"))
+(global-ede-mode 1)                      ; Enable the Project management system
+(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
+(global-srecode-minor-mode 1)            ; Enable template insertion menu
+
+;; ecb
+(require 'ecb)
+
+;; elscreen
+(require 'elscreen nil t)
+(require 'elscreen-dired nil t)
+(require 'elscreen-server nil t)
+(require 'elscreen-speedbar nil t)
+(require 'elscreen-w3m nil t)
+(require 'elscreen-color-theme nil t)

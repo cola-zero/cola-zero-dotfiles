@@ -34,7 +34,7 @@
 (auto-image-file-mode t)
 
 (menu-bar-mode -1)
-(tool-bar-mode -1)
+;;(tool-bar-mode nil)
 (blink-cursor-mode 0)
 
 ;; print all eval expression
@@ -121,13 +121,32 @@
 ;; emacs-daemon
 (server-start)
 
+;; マイ.emacs探訪 - I am Cruby!
+;; http://d.hatena.ne.jp/authorNari/20091225/1261667956
+(define-key global-map [(C S n)] 'windmove-down)
+(define-key global-map [(C S p)] 'windmove-up)
+(define-key global-map [(C S b)] 'windmove-left)
+(define-key global-map [(C S f)] 'windmove-right)
 
 (load "config/builtins")
 
-(load "config/packages")
 
 (if (eq system-type 'darwin)
-    (load "config/darwin.el"))
+    (load "config/darwin"))
 
 (if (featurep 'aquamacs)
     (load "config/aquamacs"))
+
+(load "config/packages")
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.40"))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )

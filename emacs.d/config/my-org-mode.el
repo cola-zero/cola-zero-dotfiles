@@ -1,13 +1,13 @@
-; -*- coding: utf-8 -*-
-;org-mode
-(package-install 'orgmode '((files . ("org-mode"))
-                            (additional-paths . ("lisp" "contrib")))
-                 'org-install)
+;; -*- config: utf-8 -*-
+; org-mode
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/org-mode/lisp"))
+(require 'org)
 (setq org-startup-truncated nil)
 (setq org-return-follows-link t)
 (add-to-list `auto-mode-alist '("\\.org$" . org-mode))
 (setq org-tag-alist
 	  '(("@LABO" . ?l) ("@HOME" . ?h) ("@PROJECT" . ?p) ("@COMPUTER" . ?c) ("@READING" . ?r)))
+
 ;; (org-remember-insinuate)
 (if (eq window-system 'w32)
     (setq org-directory "~/Documents/My Dropbox/memo/")
@@ -27,32 +27,6 @@
 
 (global-set-key "\C-ca" 'org-agenda)
 
-(defvar org-code-reading-software-name nil)
-;; ~/memo/code-reading.org に記録する
-(defvar org-code-reading-file "code-reading.org")
-(defun org-code-reading-read-software-name ()
-  (set (make-local-variable 'org-code-reading-software-name)
-       (read-string "Code Reading Software: "
-                    (or org-code-reading-software-name
-                        (file-name-nondirectory
-                         (buffer-file-name))))))
-
-(defun org-code-reading-get-prefix (lang)
-  (concat "[" lang "]"
-          "[" (org-code-reading-read-software-name) "]"
-		  "[" hostname "]"))
-(defun org-remember-code-reading ()
-  (interactive)
-  (let* ((prefix (org-code-reading-get-prefix (substring (symbol-name major-mode) 0 -5)))
-         (org-remember-templates
-          `(("CodeReading" ?r "** %(identity prefix)%?\n   \n   %a\n   %t"
-             ,org-code-reading-file "Memo"))))
-    (org-remember)))
-
-(setq org-agenda-files (list (concat org-directory "agenda.org")
-                             (concat org-directory "code-reading.org")
-                             (concat org-directory "blog.org")))
-
 ;MobileOrg
 (if (eq window-system 'w32)
 	(progn
@@ -64,12 +38,6 @@
           (setq org-mobile-inbox-for-pull "~/Dropbox/memo/mobile.org")))
 (setq org-todo-keywords '((sequence "INBOX(i)" "NEXT-ACTION(n)" "INACTIVE(I)" "WAIT(W)" "PROJECT(p)" "|" "DONE(d)")))
 (setq org-fast-tag-selection-include-todo t)
-
-;diary
-;; (setq diary-file "~/memo/diary.gpg")
-(setq org-agenda-include-diary t)
-(setq auto-mode-alist
-	  (cons (cons "diary" 'org-mode) auto-mode-alist))
 
 ;custom agenda view
 (setq org-agenda-custom-commands
@@ -94,9 +62,3 @@
           (todo "READING"))
 		 ((org-agenda-compact-blocks t)))
 		))
-
-;; anything-org-mode
-(package-install 'gist "746084" 'anything-org-mode)
-
-(add-to-list 'auto-mode-alist '("\\.howm$" . org-mode))
-(setq org-startup-folded nil)

@@ -1,14 +1,11 @@
 ## .zsh_aliases
 ## Masahiro Koga
 if [[ $OSTYPE = darwin* ]]; then
-alias awk='gawk'
-alias ls='/usr/local/bin/ls -F --color=auto'
-# source /usr/local/Cellar/coreutils/8.5/aliases
+alias ls='ls -F --color=auto'
 alias emacs='emacs -geometry 80x30'
-alias ec='/usr/local/bin/emacsclient -c -n'
-alias et='/usr/local/bin/emacsclient -t -n'
-alias ecn='/usr/local/bin/emacsclient -t'
-echo 'a'
+alias ec='/opt/local/bin/emacsclient -c -n'
+alias et='/opt/local/bin/emacsclient -t -n'
+alias ecn='/opt/local/bin/emacsclient -t'
 fi
 
 # color option can't use in solaris

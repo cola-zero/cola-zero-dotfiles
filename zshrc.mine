@@ -11,13 +11,17 @@ darwin10.*)
         export PATH=/usr/texbin:$PATH
         export PATH=$HOME/opt/ocaml/bin:$PATH
         export PATH=$HOME/opt/screen-git/bin:$PATH
+				export PATH=/opt/local/libexec/gnubin:$PATH
+				export PATH=/opt/local/bin:/opt/local/sbin:$PATH
         export LANG=ja_JP.UTF-8
-        export TERM=xterm-color
+        export TERM=rxvt-256color
         export GOROOT=$HOME/opt/go
         export GOBIN=$GOROOT/bin
         export GOOS=darwin
         export GOARCH=amd64
         export PATH=/Users/masahirokoga/opt/go/bin:$PATH
+				export PATH="$HOME/Library/Haskell/bin:$PATH"
+				export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/usr/lib:$DYLD_FALLBACK_LIBRARY_PATH
 		;;
 linux-gnu)
 		export PATH=$HOME/.cabal/bin:$HOME/linux/opt/ghc-6.12.1/bin:$HOME/linux/local/app/haskell-platform-2010.1.0.0/bin:$GOBIN:$HOME/linux/opt/rurema:$HOME/linux/opt/ruby19/bin:$HOME/linux/opt/rsense-0.2/bin:$HOME/.cabal/bin:$HOME/local/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH

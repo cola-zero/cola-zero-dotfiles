@@ -241,7 +241,8 @@
         (wl-from . "Masahiro Koga <koga@arch.cs.kumamoto-u.ac.jp>")
         ("From" . wl-from)
         ("Organization" . "Kumamoto Univ")
-        (body . ""))	; 本文
+        ;; (body . "")	; 本文
+        (bottom-file . "~/Dropbox/conf_file/sig.txt"))
        ("gmail"
         (wl-from . "Masahiro Koga <colazero@mail.mkoga.net>")
         ("From" . wl-from)
@@ -254,7 +255,7 @@
 ;; 動的に変更する
 (setq wl-draft-config-alist
      '((reply				; 返信元のバッファを見る
-	 "^To: .*test-notsend-wl@lists\\.airs\\.net"
+	 "^To: *@arch\\.cs\\.kumamoto-u\\.ac\\.jp"
 	 (template . "default"))	; テンプレート
 	("^To: .*test-notsend-wl@lists\\.airs\\.net"
 	 ding				; 関数

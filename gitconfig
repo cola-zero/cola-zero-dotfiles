@@ -8,3 +8,5 @@
 	default = current
 [github]
 	user = cola-zero
+[color]
+	ui = auto

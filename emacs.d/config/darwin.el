@@ -1,13 +1,27 @@
-;; -*- coding: utf-8 -*-
+;; darwin.el
+
+;; macports
+(add-to-list 'exec-path "/opt/local/bin")
+(add-to-list 'exec-path "/opt/local/sbin")
+(add-to-list 'load-path "/opt/local/share/emacs/site-lisp")
+
+;; apel
+(add-to-list 'load-path "/opt/local/share/emacs/site-lisp/apel")
+(add-to-list 'load-path "/opt/local/share/emacs/23.3/site-lisp/emu")
 
 (set-frame-parameter nil 'alpha 90)
 (display-battery-mode t)
+
+(setq x-select-enable-clipboard nil)
+(setq x-select-enable-primary t)
+(setq select-active-regions nil)
+
 
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8-unix)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
-(set-buffer-file-coding-system 'utf-8)
+;; (set-buffer-file-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (add-hook 'after-init-hook '(lambda ()
                              (setq default-buffer-file-coding-system 'utf-8)
@@ -15,14 +29,12 @@
 
 ;; font
 ;; http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
-;; (set-default-font "Inconsolata-11")
-;; (set-face-font 'variable-pitch "Inconsolata-11")
 (add-hook 'window-setup-hook
           (lambda nil
             ;; font setting
             ;; (set-default-font "Inconsolata-12")
             ;; (set-face-font 'variable-pitch "Inconsolata-12")
-            (set-face-font 'variable-pitch "Droid Sans Mono Slashed-12")
+            (set-face-font 'variable-pitch "Droid Sans Mono Slashed-13")
             (set-fontset-font (frame-parameter nil 'font)
                               'japanese-jisx0208
                               ;; '("Takaoゴシック" . "unicode-bmp"))
@@ -43,27 +55,15 @@
                     ("-cdac$" . 1.3)
                     (".*Takao*" . 2.0)))))
 
-
-;; ;; macにおけるIMEの設定
-;; ;; http://tezfm.blogspot.com/2009/11/cocoa-emacs.html
+;; macにおけるIMEの設定
+;; http://tezfm.blogspot.com/2009/11/cocoa-emacs.html
 (if (eq window-system 'ns)
     (progn
       (set-language-environment "Japanese")
-      (setq default-input-method "MacOSX")
-      ;; minibufferは英数モードで始める
-      (add-hook 'minibuffer-setup-hook 'mac-change-language-to-us)
-      (load "cl")
-      (add-hook
-       'post-command-hook
-       (lexical-let ((previous-buffer nil))
-         #'(lambda ()
-             (unless (eq (current-buffer) previous-buffer)
-               ;; (message "Change IM %S -> %S" previous-buffer (current-buffer))
-               (if (bufferp previous-buffer) (mac-handle-input-method-change))
-               (setq previous-buffer (current-buffer))))))))
+      (setq default-input-method "MacOSX")))
 
 (menu-bar-mode 1)
-(tool-bar-mode 0)
+;;(tool-bar-mode 0)
 
 (define-key global-map [?¥] [?\\])
 (define-key global-map [?\C-¥] [?\C-\\])
@@ -115,12 +115,6 @@
                        (format "%s: %s" spec docstring))))))
         ad-do-it)))
 
-;; haskell mode
-(load "~/work/emacs/haskellmode-emacs/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(setq haskell-program-name "/usr/local/bin/ghci")
-
 ;; twittering-mode with growl
 ;; growl
 ;; http://mitukiii.jp/2010/11/01/twittering-mode/
@@ -146,51 +140,6 @@
                           "Emacs")
                    (sleep-for 0 50))))))
 
-;; org-googlecl
-(package-install 'github "rileyrg/org-googlecl"  'org-googlecl)
-(setq googlecl-blogname "古賀の日記")
-(setq googlecl-username "colazero@mail.mkoga.net")
-
-(setq x-select-enable-clipboard nil)
-(setq x-select-enable-primary t)
-(setq select-active-regions nil)
-
-
-;; howm
-;; (setq howm-view-title-header "*")
-;; (require 'howm-mode)
-;; (load "snap.el")
-;; (setq howm-menu-lang 'ja)
-;; (global-set-key "\C-c,," 'howm-menu)
-;; (add-to-list 'auto-mode-alist '("\\.howm$" . org-mode))
-;; (mapc
-;;  (lambda (f)
-;;    (autoload f
-;;        "howm" "Hitori Otegaru Wiki Modoki" t))
-;;  '(howm-menu howm-list-all howm-list-recent
-;;    howm-list-grep howm-create
-;;    howm-keyword-to-kill-ring))
-;; (setq howm-process-coding-system 'utf-8)
-
-;; ;;http://howm.sourceforge.jp/cgi-bin/hiki/hiki.cgi?SaveAndKillBuffer
-;; (defun my-save-and-kill-buffer ()
-;;   (interactive)
-;;   (save-buffer)
-;;   (kill-buffer nil)
-;;   (elscreen-kill))
-
-;; (define-key howm-mode-map "\C-c\C-c" 'my-save-and-kill-buffer)
-
-;; ;; instamp.el
-;; ;; http://www.gentei.org/~yuuji/software/euc/instamp.el
-;; (autoload 'instamp "instamp" "Insert TimeStamp on the point" t)
-;; (define-key global-map "\C-cs" 'instamp)
-
-;; ;; nxml-mode
-;; ;; http://www.thaiopensource.com/nxml-mode/
-;; (add-to-list 'load-path
-;;              (expand-file-name "~/.emacs.d/site-lisp/nxml-mode"))
-
 ;; migemo
 (progn
   (setq migemo-command "/usr/bin/ruby")
@@ -200,16 +149,3 @@
   (setq migemo-user-dictionary nil)
   (setq migemo-regex-dictionary nil)
   )
-
-;; FLIM
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/flim-1.14.9"))
-
-;; SEMI
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/semi-1.14.6"))
-
-;; wanderlust
-(add-to-list 'load-path "/usr/local/Cellar/emacs/23.3/share/emacs/site-lisp/wl")
-(require 'mime-w3m)
-(autoload 'wl "wl" "Wanderlust" t)
-(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
