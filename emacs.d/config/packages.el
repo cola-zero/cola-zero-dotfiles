@@ -161,6 +161,10 @@
 ;; https://github.com/philjackson/magit.git
 (my-package-install 'github "philjackson/magit" 'magit)
 
+;; git-status.el
+;; http://d.hatena.ne.jp/kitokitoki/20100824/p1
+(require 'git-status nil t)
+
 ;; twittering-mode
 (my-package-install 'github "hayamiz/twittering-mode" 'twittering-mode)
 (setq twittering-use-master-password t)
@@ -212,13 +216,13 @@
 
 
 ;;CEDIT
-(load-file (concat package-base-dir "/cedet-1.0/common/cedet.el"))
-(global-ede-mode 1)                      ; Enable the Project management system
-(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
-(global-srecode-minor-mode 1)            ; Enable template insertion menu
+;; (load-file (concat package-base-dir "/cedet-1.0/common/cedet.el"))
+;; (global-ede-mode 1)                      ; Enable the Project management system
+;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
+;; (global-srecode-minor-mode 1)            ; Enable template insertion menu
 
 ;; ecb
-(require 'ecb)
+;; (require 'ecb)
 
 ;; elscreen
 (require 'elscreen nil t)
@@ -227,3 +231,23 @@
 (require 'elscreen-speedbar nil t)
 (require 'elscreen-w3m nil t)
 (require 'elscreen-color-theme nil t)
+
+;; anything
+(my-package-install 'repo.or.cz '((files . ("anything-config"))
+                               (additional-paths . ("extensions")))
+                 'anything-startup)
+;; (require 'anything-startup)
+(define-key global-map (kbd "C-x b") 'anything-filelist+)
+
+;; http://d.hatena.ne.jp/rubikitch/20100423/bytecomp
+(my-package-install 'emacswiki "auto-async-byte-compile.el" 'auto-async-byte-compile)
+(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+
+;; popwin.el
+;; https://github.com/m2ym/popwin-el
+;; http://d.hatena.ne.jp/m2ym/20110120/1295524932
+(my-package-install 'github "m2ym/popwin-el" 'popwin)
+(setq display-buffer-function 'popwin:display-buffer)
+(add-to-list 'popwin:special-display-config '(" *auto-async-byte-compile*" :height 5 :noselect t))
+
