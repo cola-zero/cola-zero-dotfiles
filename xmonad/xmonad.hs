@@ -13,9 +13,17 @@ import System.Exit
 import XMonad.Hooks.DynamicLog
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.ManageHelpers
+import XMonad.Config.Gnome
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
+
+import Control.OldException
+import Control.Monad
+import DBus
+import DBus.Connection
+import DBus.Message
+
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -273,6 +281,17 @@ myManageHook = composeAll
 -- myStartupHook = return ()
 
 ------------------------------------------------------------------------
+-- Xmonad Gnome Applet
+getWellKnownName :: Connection -> IO()
+getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) -> getWellKnownName dbus)
+  where
+    tryGetName = do
+      namereq <- newMethodCall serviceDBus pathDBus interfaceDBus "RequestName"
+      addArgs namereq [String "org.xmonad.Log", Word32 5]
+      sendWithReplyAndBlock dbus namereq 0
+      return ()
+
+------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
 -- Run xmonad with the settings you specify. No need to modify this.
@@ -287,9 +306,21 @@ myManageHook = composeAll
 --
 -- defaults = defaultConfig {
 -- main = dzen $ \conf -> xmonad $ conf {
-main = do
-  conf <- dzen defaultConfig
-  xmonad $ conf{
+
+--　gnoemなし
+--main :: IO()
+-- main = do
+--  conf <- dzen defaultConfig
+--  conf <- dzen gnomeConfig
+--  xmonad $ conf{
+
+-- gnomeあり
+main::IO()
+main = withConnection Session $ \ dbus -> do
+  putStrLn "Getting well-known name."
+  getWellKnownName dbus
+  putStrLn "Got name, starting XMonad."
+  xmonad $ gnomeConfig{
       -- simple stuff
         terminal           = myTerminal,
         -- focusFollowsMouse  = myFocusFollowsMouse,
@@ -305,10 +336,43 @@ main = do
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        -- layoutHook         = myLayout,
-        layoutHook         = smartBorders (layoutHook conf),
-        manageHook         = myManageHook
+        --layoutHook         = myLayout,
+        layoutHook         = smartBorders (layoutHook gnomeConfig),
+        manageHook         = manageHook gnomeConfig <+> myManageHook,
         -- handleEventHook    = myEventHook,
-        -- logHook            = myLogHook,
+--        logHook            = logHook gnomeConfig  -- gnomeなし
+        logHook = do
+                logHook gnomeConfig
+                dynamicLogWithPP $ defaultPP{
+                  ppOutput = \ str -> do
+                     let str'  = "<span font=\"UmePlus P Gothic\" weight=\"bold\">" ++ str ++ "</span>"
+                     msg <- newSignal "/org/xmonad/Log" "org.xmonad.Log" "Update"
+                     addArgs msg [String str']
+                     -- If the send fails, ignore it.
+                     send dbus msg 0 `catchDyn` (\ (DBus.Error _name _msg) -> return 0)
+                     return ()
+                 , ppTitle    = pangoColor "#003366" . shorten 60 . escape
+                 , ppCurrent  = pangoColor "#003366" . wrap "[" "]"
+                 , ppVisible  = pangoColor "#006666" . wrap "_" ""
+                 , ppHidden   = wrap "" ""
+                 , ppUrgent   = pangoColor "red"
+                 }
+  }
+
+pangoColor :: String -> String -> String
+pangoColor fg = wrap left right
+ where
+  left  = "<span foreground=\"" ++ fg ++ "\">"
+  right = "</span>"
+
+escape :: String -> String
+escape = concatMap escapeChar
+escapeChar :: Char -> String
+escapeChar '<' = "&lt;"
+escapeChar '>' = "&gt;"
+escapeChar '&' = "&amp;"
+escapeChar '"' = "&quot;"
+escapeChar c = [c]
+
         -- startupHook        = myStartupHook
-    }
+    
