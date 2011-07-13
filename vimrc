@@ -19,6 +19,7 @@ Bundle 'thinca/vim-quickrun'
 Bundle 'tpope/vim-fugitive'
 " Bundle 'VimOrganizer'
 Bundle 'davidoc/taskpaper.vim'
+Bundle 'jceb/vim-orgmode'
 
 filetype plugin indent on " required!
 

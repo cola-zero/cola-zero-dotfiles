@@ -2,8 +2,8 @@
 # for macport
 case "${OSTYPE}" in
 darwin10.*)
-		export PATH=$HOME/opt/sbin:$HOME/opt/bin:$HOME/local/bin:$HOME/.cabal/bin:$PATH
-		export PATH=/Applications/Emacs.app/Contents/MacOS:/Applications/Emacs.app/Contents/MacOS/bin:$PATH
+	export PATH=$HOME/opt/sbin:$HOME/opt/bin:$HOME/local/bin:$HOME/.cabal/bin:$PATH
+	export PATH=/Applications/Emacs.app/Contents/MacOS:/Applications/Emacs.app/Contents/MacOS/bin:$PATH
         export PATH=$HOME/opt/sbcl/bin:$PATH
         export PATH=$HOME/perl5/perlbrew/bin:$PATH
         export PATH=/usr/local/sbin:/usr/local/bin:$PATH
@@ -11,8 +11,10 @@ darwin10.*)
         export PATH=/usr/texbin:$PATH
         export PATH=$HOME/opt/ocaml/bin:$PATH
         export PATH=$HOME/opt/screen-git/bin:$PATH
-				export PATH=/opt/local/libexec/gnubin:$PATH
-				export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+	export PATH=/opt/local/libexec/gnubin:$PATH
+	export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+        export SCALA_HOME=$HOME/opt/scala
+        export PATH=$SCALA_HOME/bin:$PATH
         export LANG=ja_JP.UTF-8
         export TERM=rxvt-256color
         export GOROOT=$HOME/opt/go
