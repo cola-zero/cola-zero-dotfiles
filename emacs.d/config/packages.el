@@ -251,3 +251,16 @@
 (setq display-buffer-function 'popwin:display-buffer)
 (add-to-list 'popwin:special-display-config '(" *auto-async-byte-compile*" :height 5 :noselect t))
 
+
+;; scala-mode
+(add-to-list 'load-path (expand-file-name "~/opt/scala-2.9.0.1/misc/scala-tool-support/emacs"))
+(require 'scala-mode-auto)
+
+;; haskell-mode
+(load-file "~/work/emacs/haskellmode-emacs/haskell-site-file.el")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+;;(add-to-list 'load-path (expand-file-name "~/work/emacs/haskellmode-emacs"))
