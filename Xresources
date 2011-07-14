@@ -27,9 +27,10 @@ urxvt*color13: #ef0051
 urxvt*color14: #4bb8fd
 urxvt*color15: #a020f0
 urxvt*transparent: false
-urxvt*shading: 50
+urxvt*shading: 30
 urxvt*fading: 50
 urxvt*scrollBar: false
+URxvt*inheritPixmap: True
 ! URxvt*VT100*EightBitInput: false
 ! URxvt*background: black
 ! URxvt*foreground: gray90
@@ -55,7 +56,7 @@ urxvt*scrollBar: false
 ! URxvt*termName: rxvt
 
 URxvt.perl-ext-common: default,matcher
-URxvt.urlLauncher: google-chrome
+URxvt.urlLauncher: firefox
 URxvt.matcher.button: 3
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
 
