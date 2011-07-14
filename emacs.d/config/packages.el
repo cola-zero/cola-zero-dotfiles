@@ -263,4 +263,7 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
-;;(add-to-list 'load-path (expand-file-name "~/work/emacs/haskellmode-emacs"))
+;; ghc-mod
+(autoload 'ghc-init "ghc" nil t)
+(add-to-list 'haskell-mode-hook (lambda () (ghc-init)))
+
