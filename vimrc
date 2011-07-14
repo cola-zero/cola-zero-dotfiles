@@ -29,7 +29,9 @@ if has('mac')
 endif
 
 " IM
-set noimdisableactivate
+if has('mac')
+  set noimdisableactivate
+endif
 
 source ~/.vim/config/neocomplcacherc.vim
 source ~/.vim/config/maprc.vim
