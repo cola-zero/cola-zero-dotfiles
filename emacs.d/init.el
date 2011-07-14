@@ -34,8 +34,8 @@
 (auto-image-file-mode t)
 
 (menu-bar-mode -1)
-;;(tool-bar-mode nil)
-(blink-cursor-mode 0)
+(tool-bar-mode -1)
+(blink-cursor-mode t)
 
 ;; print all eval expression
 (setq eval-expression-print-length nil)
