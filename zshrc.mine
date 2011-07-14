@@ -46,8 +46,17 @@ linux-gnu)
     export TERM=rxvt-256color
 		export RSPEC=true
 		export EDITOR=emacs
+		export PAGER='lv -ic'
 		;;
 esac
+
+case `hostname` in
+whale)
+  export AMDAPPSDKROOT=$HOME/opt/AMD-APP-SDK-v2.4-lnx64
+  export AMDAPPSDKSAMPLEROOT=$AMDAPPSDKROOT/samples
+  export LD_LIBRARY_PATH=$AMDAPPSDKROOT/lib/x86_64:$LD_LIBRARY_PATH
+esac
+
 
 # http://d.hatena.ne.jp/mollifier/20090814/p1
 autoload -Uz vcs_info
@@ -77,6 +86,11 @@ source ${HOME}/.zsh_aliases
 #export ACLOCAL_ARGS="-I /usr/share/aclocal/ -I /usr/local/share/aclocal/"
 export ACLOCAL_ARGS="-I /usr/local/share/aclocal/ -I /usr/local/Cellar/cutter/1.1.0/share/aclocal/"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+
+keychain ~/.ssh/id_rsa
+. ~/.keychain/$HOST-sh
+. ~/.keychain/$HOST-sh-gpg
+
 
 
 if [ "$TERM" = "rxvt-256color" ]; then
