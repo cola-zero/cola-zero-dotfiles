@@ -70,7 +70,7 @@ myNumlockMask   = mod2Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 -- myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces    = ["1:term","2:im & IRC", "3:emacs", "4:web","5:win","6:vm","7:mail","8:music","8","9"]
+myWorkspaces    = ["1:term", "2:emacs", "3:web","4:vm", "5:mail","6:music","7","8", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -239,10 +239,11 @@ myLayout = smartBorders $ (tiled ||| Mirror tiled ||| Full)
 --     , resource  =? "desktop_window" --> doIgnore
 --     , resource  =? "kdesktop"       --> doIgnore ]
 myManageHook = composeAll
-    [ className =? "Emacs"          --> doShift "3:emacs"
-    , className =? "Empathy"        --> doShift "2:im & IRC"
-    , className =? "VirtualBox"     --> doShift "5:win"
-    , className =? "Firefox"        --> doShift "4:web"
+    [ className =? "Emacs"          --> doShift "2:emacs"
+    , className =? "VirtualBox"     --> doShift "4:vm"
+    , className =? "Firefox"        --> doShift "3:web"
+    , className =? "Mail"           --> doShift "5:mail"
+    , className =? "Thunderbird"    --> doShift "5:mail"
     , className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
