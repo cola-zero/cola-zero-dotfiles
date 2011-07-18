@@ -31,7 +31,13 @@
 ;; e2wm
 (my-package-install 'github "kiwanami/emacs-window-layout" 'window-layout)
 (my-package-install 'github "kiwanami/emacs-window-manager" 'e2wm-config)
+(require 'e2wm-vcs)
 (global-set-key (kbd "M-+") 'e2wm:start-management)
+(e2wm:add-keymap
+ e2wm:pst-minor-mode-keymap
+ '(("M-w" . e2wm:dp-magit))
+ e2wm:prefix-key)
+
 
 ;; multi-term
 ;; http://sakito.jp/emacs/emacsshell.html#emacs-shell
