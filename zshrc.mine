@@ -93,6 +93,7 @@ keychain ~/.ssh/id_rsa
 
 
 if [ "$TERM" = "screen-256-color" ]; then
+   export TERM=screen
 	chpwd () { echo -n "_`dirs`\\" }
 	preexec() {
 		# see [zsh-workers:13180]
