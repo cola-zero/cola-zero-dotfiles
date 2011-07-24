@@ -70,7 +70,9 @@
 (define-key global-map [?\M-¥] [?\M-\\])
 (define-key global-map [?\C-\M-¥] [?\C-\M-\\])
 
-(global-set-key (kbd "M-<RET>") 'ns-toggle-fullscreen)
+(if (not (featurep 'aquamacs))
+    (global-set-key (kbd "M-<RET>") 'ns-toggle-fullscreen))
+
 (setq mac-pass-control-to-system nil)
 (setq ns-command-modifier (quote meta))
 (setq ns-alternate-modifier (quote super))
