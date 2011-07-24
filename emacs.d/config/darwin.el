@@ -140,12 +140,3 @@
                           "Emacs")
                    (sleep-for 0 50))))))
 
-;; migemo
-(progn
-  (setq migemo-command "/usr/bin/ruby")
-  (setq migemo-command "/usr/local/bin/cmigemo")
-  (setq migemo-options '("-q" "--emacs" "-i" "\a"))
-  (setq migemo-dictionary "/usr/local/share/migemo/euc-jp/migemo-dict")
-  (setq migemo-user-dictionary nil)
-  (setq migemo-regex-dictionary nil)
-  )

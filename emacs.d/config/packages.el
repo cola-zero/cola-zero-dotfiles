@@ -132,8 +132,9 @@
 ;; migemo
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (load "migemo.el")
-(if (not (eq system-type 'darwin))
-    (setq migemo-command "/usr/bin/ruby"))
+;; (if (not (eq system-type 'darwin))
+;;     (setq migemo-command "/usr/bin/ruby"))
+(setq migemo-command "/usr/bin/ruby")
 (migemo-init)
 (require 'anything-migemo nil t)
 
