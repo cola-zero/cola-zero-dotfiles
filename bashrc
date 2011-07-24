@@ -19,8 +19,8 @@ ulimit -c 0
 PS1='\[\033k\033\\\][\u@\h](\W)\$ '
 
 # for macport
-if [ $OSTYPE == "darwin10.0" ]; then
-export PATH=$HOME/opt/sbin:$HOME/opt/bin:$HOME/local/bin:$PATH
+if [ $OSTYPE == "darwin11" ]; then
+export PATH=/opt/local/sbin:/opt/local/bin:$HOME/opt/bin:$PATH
 elif [ $OSTYPE == "linux-gnu" ]; then
 export PATH=$HOME/linux/opt/screen-git/bin:$HOME/local/opt/firefox:$HOME/.cabal/bin:$HOME/local/bin:/opt/ruby19/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH
 fi
