@@ -138,10 +138,21 @@
 (migemo-init)
 (require 'anything-migemo nil t)
 
+;; rvm
+(my-package-install 'github "senny/rvm.el" 'rvm)
+(rvm-use-default)
+
 ;; rsense
 (setq rsense-home (expand-file-name "~/opt/rsense-0.3"))
 (add-to-list 'load-path (concat rsense-home "/etc"))
 (require 'rsense nil t)
+
+;; myrurema
+(require 'myrurema nil t)
+(add-hook 'ruby-mode-hook
+          '(lambda ()
+             (define-key ruby-mode-map "\C-hr" 'rurema:at-point)))
+
 
 ;; hiki-mode
 (setq hiki-site-list
