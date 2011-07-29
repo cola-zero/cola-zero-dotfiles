@@ -4,9 +4,9 @@ if [[ $OSTYPE = darwin* ]]; then
   source /usr/local/Cellar/coreutils/8.12/aliases
 alias ls='gls -F --color=auto'
 alias emacs='emacs -geometry 80x30'
-alias ec='/opt/local/bin/emacsclient -c -n'
-alias et='/opt/local/bin/emacsclient -t -n'
-alias ecn='/opt/local/bin/emacsclient -t'
+alias ec='/usr/local/bin/emacsclient -c -n'
+alias et='/usr/local/bin/emacsclient -t -n'
+alias ecn='/usr/local/bin/emacsclient -t'
 fi
 
 # color option can't use in solaris
