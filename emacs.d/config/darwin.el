@@ -2,6 +2,8 @@
 
 ;; brew
 (add-to-list 'load-path "/usr/local/Cellar/emacs/23.3/share/emacs/site-lisp")
+(add-to-list 'exec-path "/usr/local/bin")
+(add-to-list 'exec-path "/usr/local/sbin")
 
 ;; apel
 (add-to-list 'load-path "/usr/local/Cellar/emacs/23.3/share/emacs/site-lisp/apel")
