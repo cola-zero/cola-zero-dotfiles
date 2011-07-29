@@ -1,13 +1,11 @@
 ;; darwin.el
 
-;; macports
-(add-to-list 'exec-path "/opt/local/bin")
-(add-to-list 'exec-path "/opt/local/sbin")
-(add-to-list 'load-path "/opt/local/share/emacs/site-lisp")
+;; brew
+(add-to-list 'load-path "/usr/local/Cellar/emacs/23.3/share/emacs/site-lisp")
 
 ;; apel
-(add-to-list 'load-path "/opt/local/share/emacs/site-lisp/apel")
-(add-to-list 'load-path "/opt/local/share/emacs/23.3/site-lisp/emu")
+(add-to-list 'load-path "/usr/local/Cellar/emacs/23.3/share/emacs/site-lisp/apel")
+(add-to-list 'load-path "/usr/local/Cellar/emacs/23.3/share/emacs/site-lisp/emu")
 
 (set-frame-parameter nil 'alpha 90)
 (display-battery-mode t)
