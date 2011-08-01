@@ -5,3 +5,5 @@ set guioptions -=T
 if has('kaoriya')
 	set transparency=20
 endif
+
+set clipboard=unnamed

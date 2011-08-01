@@ -1,7 +1,10 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+nnoremap <Space>s.
+      \  :<C-u>source $MYVIMRC<CR>
+
+set runtimepath& runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -21,6 +24,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'davidoc/taskpaper.vim'
 Bundle 'jceb/vim-orgmode'
 Bundle 'motemen/git-vim' 
+Bundle 'tyru/open-browser.vim.git'
+Bundle 'basyura/unite-hiki'
 
 filetype plugin indent on " required!
 
