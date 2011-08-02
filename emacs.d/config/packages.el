@@ -180,6 +180,10 @@
 (autoload 'hiki-edit-url "hiki-mode" nil t)
 (autoload 'hiki-index "hiki-mode" nil t)
 (require 'hiki-mode)
+(add-hook 'hiki-index-mode-hook
+          '(lambda ()
+              (define-key hiki-index-mode-map (kbd "n") 'next-line)
+              (define-key hiki-index-mode-map (kbd "p") 'previous-line)))
 
 ;; https://github.com/philjackson/magit.git
 (my-package-install 'github "philjackson/magit" 'magit)
