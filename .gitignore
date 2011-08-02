@@ -9,4 +9,5 @@ xmonad/xmonad-i386-darwin
 xmonad/xmonad.errors
 xmonad/*.hi
 xmonad/*.o
-
+*~
+vim/bundle
