@@ -10,3 +10,8 @@
 	user = cola-zero
 [color]
 	ui = auto
+[alias]
+	co = checkout
+  ci = commit
+	unstage = reset HEAD --
+  st = status  
