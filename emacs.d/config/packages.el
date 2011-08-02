@@ -83,6 +83,12 @@
 (add-hook 'ruby-mode-hook
          '(lambda ()
            (inf-ruby-keys)))
+(setq ruby-indent-level 2)
+(setq ruby-indent-tabs-mode nil)
+
+;;ruby-electric
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
 
 ;; yasnippet
 (my-package-install 'yasnippet "yasnippet" 'yasnippet)
