@@ -183,6 +183,11 @@
 (add-to-list 'ac-modes 'ruby-mode)
 (add-to-list 'ac-modes 'verilog-mode)
 
+;; as-slime
+(my-package-install 'github "purcell/ac-slime" 'ac-slime)
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+
 ;; migemo
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (load "migemo.el")
@@ -345,3 +350,14 @@
 (autoload 'po-find-file-coding-system "po-compat")
 (modify-coding-system-alist 'file "\\.po\\'\\|\\.po\\."
                             'po-find-file-coding-system)
+
+;; slime
+;; http://modern-cl.blogspot.com/2011/04/3-slime.html
+(setq inferior-lisp-program "ccl")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/slime"))
+(require 'slime)
+(slime-setup '(slime-repl slime-fancy slime-banner))
+(setq slime-net-coding-system 'utf-8-unix)
+
+;; clojure
+(add-to-list 'exec-path (expand-file-name "~/opt/leiningen/bin/n"))
