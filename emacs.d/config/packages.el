@@ -51,10 +51,39 @@
 ;; https://github.com/m2ym/popwin-el
 ;; http://d.hatena.ne.jp/m2ym/20110120/1295524932
 (my-package-install 'github "m2ym/popwin-el" 'popwin)
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/popwin-el/misc"))
 (setq display-buffer-function 'popwin:display-buffer)
-(add-to-list 'popwin:special-display-config '(" *auto-async-byte-compile*" :height 5 :noselect t))
-(add-to-list 'popwin:special-display-config '("*YaTeX-typesetting*"))
-(add-to-list 'popwin:special-display-config '("*anything moccur*" :position top))
+;; anything
+(setq anything-samewindow nil)
+(add-to-list 'popwin:special-display-config '("*anything*" :height 20))
+;; dired M-x dired-jump-other-window
+(add-to-list 'popwin:special-display-config '(dired-mode :position top))
+;; yatex
+;; (require 'popwin-yatex)
+;; (add-to-list 'popwin:special-display-config '(*YaTeX-typesetting*))
+;; slime
+(add-to-list 'popwin:special-display-config '("*slime-apropos*"))
+(add-to-list 'popwin:special-display-config '("*slime-macroexpansion*"))
+(add-to-list 'popwin:special-display-config '("*slime-description*"))
+(add-to-list 'popwin:special-display-config '("*slime-compilation*" :noselect t))
+(add-to-list 'popwin:special-display-config '("*slime-xref*"))
+(add-to-list 'popwin:special-display-config '(sldb-mode :stick t))
+(add-to-list 'popwin:special-display-config '(slime-repl-mode))
+(add-to-list 'popwin:special-display-config '(slime-connection-list-mode))
+(add-to-list 'popwin:special-display-config '(" *auto-async-byte-compile*" :noselect t))
+
+
+;; cl-indent-paches.el
+;; http://boinkor.net/lisp/cl-indent-patches.el
+(when (require 'cl-indent-patches nil t)
+  ;; emacs-lispのインデントと混同しないように
+  (setq lisp-indent-function
+        (lambda (&rest args)
+          (apply (if (memq major-mode '(emacs-lisp-mode lisp-interaction-mode))
+                     'lisp-indent-function
+                   'common-lisp-indent-function)
+                 args))))
+
 
 ;; grep-a-lot
 ;;http://d.hatena.ne.jp/kitokitoki/20110213/p1
@@ -280,13 +309,7 @@
 (my-package-install 'emacswiki "auto-async-byte-compile.el" 'auto-async-byte-compile)
 (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
 (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
-
-;; popwin.el
-;; https://github.com/m2ym/popwin-el
-;; http://d.hatena.ne.jp/m2ym/20110120/1295524932
-(my-package-install 'github "m2ym/popwin-el" 'popwin)
-(setq display-buffer-function 'popwin:display-buffer)
-(add-to-list 'popwin:special-display-config '(" *auto-async-byte-compile*" :height 5 :noselect t))
+(setq auto-async-byte-compile-display-function 'popwin:display-buffer)
 
 
 ;; scala-mode
