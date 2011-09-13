@@ -1,0 +1,3 @@
+;; ghc-mod
+(autoload 'ghc-init "ghc" nil t)
+(add-to-list 'haskell-mode-hook (lambda () (ghc-init)))

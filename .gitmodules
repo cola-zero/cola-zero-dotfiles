@@ -1,3 +1,36 @@
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = http://github.com/gmarik/vundle.git
+[submodule "color-theme"]
+	path = color-theme
+	url = https://github.com/emacsmirror/color-theme.git
+[submodule "emacs.d/vendor/color-theme"]
+	path = emacs.d/vendor/color-theme
+	url = https://github.com/emacsmirror/color-theme.git
+[submodule "emacs.d/vendor/popwin-el"]
+	path = emacs.d/vendor/popwin-el
+	url = https://github.com/m2ym/popwin-el
+[submodule "emacs.d/vendor/popwin"]
+	path = emacs.d/vendor/popwin
+	url = https://github.com/m2ym/popwin-el
+[submodule "emacs.d/vendor/scala-mode"]
+	path = emacs.d/vendor/scala-mode
+	url = https://github.com/Yasushi/scala-mode.git
+[submodule "emacs.d/vendor/scala-mode-auto"]
+	path = emacs.d/vendor/scala-mode-auto
+	url = https://github.com/Yasushi/scala-mode.git
+[submodule "emacs.d/vendor/haskell-mode"]
+	path = emacs.d/vendor/haskell-mode
+	url = https://github.com/emacsmirror/haskell-mode.git
+[submodule "emacs.d/vendor/emacs-window-layout"]
+	path = emacs.d/vendor/emacs-window-layout
+	url = https://github.com/kiwanami/emacs-window-layout
+[submodule "emacs.d/vendor/emacs-window-manager"]
+	path = emacs.d/vendor/emacs-window-manager
+	url = https://github.com/kiwanami/emacs-window-manager
+[submodule "emacs.d/vendor/magit"]
+	path = emacs.d/vendor/magit
+	url = https://github.com/magit/magit.git
+[submodule "emacs.d/vendor/auto-complete"]
+	path = emacs.d/vendor/auto-complete
+	url = https://github.com/m2ym/auto-complete.git

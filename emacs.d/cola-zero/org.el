@@ -1,6 +1,5 @@
 ;; -*- config: utf-8 -*-
 ; org-mode
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/org-mode/lisp"))
 (require 'org)
 (setq org-startup-truncated nil)
 (setq org-return-follows-link t)
