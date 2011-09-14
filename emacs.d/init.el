@@ -16,7 +16,6 @@
 (load "cola-zero/dired")
 (load "cola-zero/ido")
 (load "cola-zero/iswitchb")
-;;(load "cola-zero/popwin")
 (if (eq system-type 'darwin)
     (load "cola-zero/darwin"))
 
