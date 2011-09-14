@@ -42,3 +42,4 @@
 (vendor 'slime)
 (vendor 'ac-slime)
 (vendor 'cl-indent-patches)
+(vendor 'clojure-mode)

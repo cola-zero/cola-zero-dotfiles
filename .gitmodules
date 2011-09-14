@@ -55,3 +55,6 @@
 [submodule "emacs.d/vendor/ac-slime"]
 	path = emacs.d/vendor/ac-slime
 	url = https://github.com/purcell/ac-slime.git
+[submodule "emacs.d/vendor/clojure-mode"]
+	path = emacs.d/vendor/clojure-mode
+	url = https://github.com/jochu/clojure-mode.git
