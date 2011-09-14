@@ -49,3 +49,6 @@
 [submodule "emacs.d/vendor/yaml-mode"]
 	path = emacs.d/vendor/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode.git
+[submodule "emacs.d/vendor/slime"]
+	path = emacs.d/vendor/slime
+	url = https://github.com/technomancy/slime.git

@@ -40,3 +40,4 @@
 (vendor 'rinari)
 (vendor 'ri-emacs)
 (vendor 'yaml-mode)
+(vendor 'slime)
