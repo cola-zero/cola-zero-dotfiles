@@ -34,3 +34,18 @@
 [submodule "emacs.d/vendor/auto-complete"]
 	path = emacs.d/vendor/auto-complete
 	url = https://github.com/m2ym/auto-complete.git
+[submodule "emacs.d/vendor/rvm"]
+	path = emacs.d/vendor/rvm
+	url = https://github.com/senny/rvm.el.git
+[submodule "emacs.d/vendor/rsense"]
+	path = emacs.d/vendor/rsense
+	url = https://github.com/m2ym/rsense.git
+[submodule "emacs.d/vendor/rinari"]
+	path = emacs.d/vendor/rinari
+	url = https://github.com/eschulte/rinari.git
+[submodule "emacs.d/vendor/ri-emacs"]
+	path = emacs.d/vendor/ri-emacs
+	url = https://github.com/pedz/ri-emacs.git
+[submodule "emacs.d/vendor/yaml-mode"]
+	path = emacs.d/vendor/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode.git
