@@ -52,3 +52,6 @@
 [submodule "emacs.d/vendor/slime"]
 	path = emacs.d/vendor/slime
 	url = https://github.com/technomancy/slime.git
+[submodule "emacs.d/vendor/ac-slime"]
+	path = emacs.d/vendor/ac-slime
+	url = https://github.com/purcell/ac-slime.git

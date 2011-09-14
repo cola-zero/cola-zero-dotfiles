@@ -40,3 +40,4 @@
 (vendor 'ri-emacs)
 (vendor 'yaml-mode)
 (vendor 'slime)
+(vendor 'ac-slime)
