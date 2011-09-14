@@ -41,3 +41,4 @@
 (vendor 'yaml-mode)
 (vendor 'slime)
 (vendor 'ac-slime)
+(vendor 'cl-indent-patches)
