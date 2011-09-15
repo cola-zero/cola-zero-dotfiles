@@ -5,9 +5,14 @@
 (server-start)
 
 ;; use utf-8 coding system
+(set-language-environment "japanese")
 (prefer-coding-system 'utf-8)
-(setq file-name-coding-system 'utf-8)
-(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)

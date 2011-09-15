@@ -43,3 +43,6 @@
 (vendor 'ac-slime)
 (vendor 'cl-indent-patches)
 (vendor 'clojure-mode)
+(vendor 'po-mode)
+(vendor 'deferred)
+(vendor 'dict-osx)

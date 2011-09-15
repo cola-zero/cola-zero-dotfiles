@@ -58,3 +58,15 @@
 [submodule "emacs.d/vendor/clojure-mode"]
 	path = emacs.d/vendor/clojure-mode
 	url = https://github.com/jochu/clojure-mode.git
+[submodule "emacs.d/vendor/po-mode"]
+	path = emacs.d/vendor/po-mode
+	url = https://github.com/emacsmirror/po-mode.git
+[submodule "dict-osx"]
+	path = dict-osx
+	url = git://gist.github.com/1158955.git
+[submodule "emacs.d/vendor/deferred"]
+	path = emacs.d/vendor/deferred
+	url = https://github.com/kiwanami/emacs-deferred.git
+[submodule "emacs.d/vendor/dict-osx"]
+	path = emacs.d/vendor/dict-osx
+	url = git://gist.github.com/1158955.git
