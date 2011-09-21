@@ -34,6 +34,7 @@
 (vendor 'auto-complete)
 (vendor 'migemo)
 (vendor 'ruby-mode)
+(vendor 'ruby-block)
 (vendor 'rvm)
 (vendor 'rsense)
 (vendor 'rinari)
