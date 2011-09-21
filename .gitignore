@@ -4,6 +4,7 @@ emacs.d/auto-install
 emacs.d/auto-save-list
 emacs.d/anything-c-adaptive-history
 emacs.d/history
+emacs.d/ac-comphist.dat
 *.elc
 xmonad/xmonad-i386-darwin
 xmonad/xmonad.errors
