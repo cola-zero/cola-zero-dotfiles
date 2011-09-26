@@ -35,6 +35,8 @@
 (vendor 'migemo)
 (vendor 'ruby-mode)
 (vendor 'ruby-block)
+(vendor 'haml-mode)
+(vendor 'sass-mode)
 (vendor 'rvm)
 (vendor 'rsense)
 (vendor 'rinari)
