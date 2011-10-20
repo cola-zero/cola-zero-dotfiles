@@ -66,3 +66,6 @@
 
 ;; zap-up-to-char, forward-to-word, backward-to-word, etc
 (require 'misc)
+
+;; use spaces instead of tabs
+(setq-default tab-width 4 indent-tabs-mode nil)
