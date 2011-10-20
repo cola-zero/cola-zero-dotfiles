@@ -76,3 +76,24 @@
 [submodule "emacs.d/vendor/sass-mode"]
 	path = emacs.d/vendor/sass-mode
 	url = https://github.com/nex3/sass-mode.git
+[submodule "emacs.d/vendor/ecb"]
+	path = emacs.d/vendor/ecb
+	url = https://github.com/emacsmirror/ecb.git
+[submodule "emacs.d/vendor/yari"]
+	path = emacs.d/vendor/yari
+	url = https://github.com/hron/yari.el.git
+[submodule "emacs.d/vendor/yasnippet"]
+	path = emacs.d/vendor/yasnippet
+	url = https://github.com/emacsmirror/yasnippet.git
+[submodule "emacs.d/vendor/markdown-mode"]
+	path = emacs.d/vendor/markdown-mode
+	url = git://jblevins.org/git/markdown-mode.git
+[submodule "emacs.d/vendor/org-mode"]
+	path = emacs.d/vendor/org-mode
+	url = git://orgmode.org/org-mode.git
+[submodule "emacs.d/vendor/ORGMODE-Markdown"]
+	path = emacs.d/vendor/ORGMODE-Markdown
+	url = https://github.com/alexhenning/ORGMODE-Markdown.git
+[submodule "emacs.d/vendor/org-jekyll"]
+	path = emacs.d/vendor/org-jekyll
+	url = https://github.com/juanre/org-jekyll.git
