@@ -52,3 +52,8 @@
 (vendor 'deferred)
 (vendor 'dict-osx)
 (vendor 'po-mode)
+(vendor 'ecb)
+(vendor 'yasnippet)
+(vendor 'markdown-mode)
+(vendor 'org-mode)
+(vendor 'org-jekyll)
