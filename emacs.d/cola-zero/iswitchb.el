@@ -5,7 +5,7 @@
 ;; Common ignores
 (add-to-list 'iswitchb-buffer-ignore "^ ")
 (add-to-list 'iswitchb-buffer-ignore "*ECB")
-(add-to-list 'iswitchb-buffer-ignore "*Messages")
+;;(add-to-list 'iswitchb-buffer-ignore "*Messages")
 (add-to-list 'iswitchb-buffer-ignore "*Buffer")
 (add-to-list 'iswitchb-buffer-ignore "*Completions")
 (add-to-list 'iswitchb-buffer-ignore "*ftp ")
