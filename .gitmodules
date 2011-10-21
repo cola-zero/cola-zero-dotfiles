@@ -97,3 +97,21 @@
 [submodule "emacs.d/vendor/org-jekyll"]
 	path = emacs.d/vendor/org-jekyll
 	url = https://github.com/juanre/org-jekyll.git
+[submodule "emacs.d/vendor/semi"]
+	path = emacs.d/vendor/semi
+	url = https://github.com/wanderlust/semi.git
+[submodule "emacs.d/vendor/flim"]
+	path = emacs.d/vendor/flim
+	url = https://github.com/wanderlust/flim.git
+[submodule "emacs.d/vendor/wanderlust"]
+	path = emacs.d/vendor/wanderlust
+	url = https://github.com/wanderlust/wanderlust.git
+[submodule "emacs.d/vendor/bbdb"]
+	path = emacs.d/vendor/bbdb
+	url = https://github.com/emacsmirror/bbdb.git
+[submodule "gist.el"]
+	path = gist.el
+	url = git://github.com/defunkt/gist.el.git
+[submodule "emacs.d/vendor/gist.el"]
+	path = emacs.d/vendor/gist.el
+	url = git://github.com/defunkt/gist.el.git

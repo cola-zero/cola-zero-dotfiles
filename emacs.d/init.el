@@ -31,6 +31,7 @@
 (vendor 'haskell-mode)
 (vendor 'ghc-mode)
 (vendor 'magit)
+(vendor 'gist)
 (vendor 'e2wm)
 (vendor 'c-eldoc)
 (vendor 'auto-complete)
@@ -57,3 +58,7 @@
 (vendor 'markdown-mode)
 (vendor 'org-mode)
 (vendor 'org-jekyll)
+
+(vendor 'bbdb)
+(vendor 'gnus)
+
