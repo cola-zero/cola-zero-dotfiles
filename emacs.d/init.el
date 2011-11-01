@@ -62,3 +62,4 @@
 (vendor 'bbdb)
 (vendor 'gnus)
 
+(vendor 'calfw)
