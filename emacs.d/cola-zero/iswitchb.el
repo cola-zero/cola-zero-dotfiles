@@ -15,6 +15,8 @@
 (add-to-list 'iswitchb-buffer-ignore "*ediff")
 (add-to-list 'iswitchb-buffer-ignore "*vc#")
 (add-to-list 'iswitchb-buffer-ignore "*cvs-commit*")
+(add-to-list 'iswitchb-buffer-ignore "*org-ja.po*")
+
 
 ;; Case sensitivity
 ;; (setq iswitchb-case nil) ; nil for case sensitive
