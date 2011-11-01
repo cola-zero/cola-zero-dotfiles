@@ -1,9 +1,10 @@
 [user]
 	name = Masahiro Koga
-	email = masahirokoga@gmail.com
+	email = colazero@mail.mkoga.net
 [core]
 	excludefiles = /Users/kogamasahiro/.gitignore
     editor=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
+	excludesfile = /Users/masahirokoga/.gitignore
 [push]
 	default = current
 [github]
