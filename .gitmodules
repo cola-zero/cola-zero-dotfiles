@@ -118,3 +118,12 @@
 [submodule "emacs.d/vendor/calfw"]
 	path = emacs.d/vendor/calfw
 	url = https://github.com/kiwanami/emacs-calfw.git
+[submodule "emacs.d/vendor/apel"]
+	path = emacs.d/vendor/apel
+	url = https://github.com/wanderlust/apel.git
+[submodule "emacs.d/vendor/emacs-w3m"]
+	path = emacs.d/vendor/emacs-w3m
+	url = https://github.com/sjatkinson/emacs-w3m.git
+[submodule "emacs.d/vendor/emacs-id-manager"]
+	path = emacs.d/vendor/emacs-id-manager
+	url = https://github.com/kiwanami/emacs-id-manager.git

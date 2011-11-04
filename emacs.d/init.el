@@ -21,6 +21,7 @@
 
 (load "cola-zero/builtin")
 
+(vendor 'apel)
 (vendor 'color-theme)
 (vendor 'popwin)
 (vendor 'elscreen)
@@ -63,3 +64,9 @@
 (vendor 'gnus)
 
 (vendor 'calfw)
+(vendor 'emacs-id-manager)
+
+(vendor 'flim)
+(vendor 'semi)
+(vendor 'emacs-w3m)
+(vendor 'wanderlust)

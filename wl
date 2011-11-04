@@ -17,6 +17,7 @@
 
 ;; HTML パートを表示しない
 ;; mime-setup がロードされる前に記述する必要があります。
+;; (setq mime-setup-enable-inline-html nil)
 (setq mime-setup-enable-inline-html nil)
 
 ;; 大きいメッセージを送信時に分割しない
@@ -29,7 +30,7 @@
 ;;; [[ 個人情報の設定 ]]
 
 ;; From: の設定
-(setq wl-from "Masahiro Koga <koga@arch.cs.kumamoto-u.ac.jp>")
+(setq wl-from "Masahiro Koga <colazero@mail.mkoga.net>")
 
 ;; (system-name) が FQDN を返さない場合、
 ;; `wl-local-domain' にホスト名を除いたドメイン名を設定してください。
@@ -38,8 +39,9 @@
 ;; 自分のメールアドレスのリスト
 (setq wl-user-mail-address-list
       (list (wl-address-header-extract-address wl-from)
-            "koga@arch.cs.kumamoto-u.ac.jp"
             "colazero@mail.mkoga.net"
+            "colazero0@gmail.com"
+            "koga@arch.cs.kumamoto-u.ac.jp"
             "masahirokoga@gmail.com"
 	    ;; "e-mail2@example.com"
 	    ;; "e-mail3@example.net" ...
@@ -87,14 +89,18 @@
 
 ;;; [[ 基本的な設定 ]]
 
+(setq wl-folder-desktop-name "GMAIL" )
+
+
+
 ;; `wl-summary-goto-folder' の時に選択するデフォルトのフォルダ
-;(setq wl-default-folder "+inbox")
+(setq wl-default-folder "+inbox")
 
 ;; フォルダ名補完時に使用するデフォルトのスペック
 ;(setq wl-default-spec "+")
 
 ;; Folder Carbon Copy
-;(setq wl-fcc "+outbox")
+;; (setq wl-fcc "+outbox")
 
 ;; 終了時に確認する
 (setq wl-interactive-exit t)
@@ -327,14 +333,22 @@
 ;; 隠したいヘッダの設定
 (setq wl-message-ignored-field-list
       '(".*Received:" ".*Path:" ".*Id:" "^References:"
-	"^Replied:" "^Errors-To:"
-	"^Lines:" "^Sender:" ".*Host:" "^Xref:"
-	"^Content-Type:" "^Precedence:"
-	"^Status:" "^X-VM-.*:"))
+        "^Replied:" "^Errors-To:"
+        "^Lines:" "^Sender:" ".*Host:" "^Xref:"
+        "^Content-Type:" "^Precedence:"
+        "^Status:" "^X-VM-.*:" "^X-ML*" "^List-*"
+        "^X-Spam"))
 
+;; summary-mode ですべての header を一旦除去
+(setq mime-view-ignored-field-list '("^.*"))
 ;; 表示するヘッダの設定
 ;; 'wl-message-ignored-field-list' より優先される
-(setq wl-message-visible-field-list '("^Message-Id:"))
+(setq wl-message-visible-field-list
+      (append mime-view-visible-field-list
+              '("^Subject:" "^From:" "^To:" "^Cc:"
+                "^X-Mailer:" "^X-Newsreader:" "^User-Agent:"
+                "^X-Face:" "^X-Mail-Count:" "^X-ML-COUNT:"
+                )))
 
 ;; 分割されたメッセージは自動的に結合する
 ;(setq wl-message-auto-reassemble-message/partial t)
@@ -414,5 +428,9 @@
 ;  (setq wl-auto-refile-guess-functions
 ;	(append wl-auto-refile-guess-functions
 ;		'(wl-refile-guess-by-spam))))
+
+;; 削除をGmail仕様に
+(setq wl-dispose-folder-alist
+(cons '("^%inbox" . remove) wl-dispose-folder-alist))
 
 ;;; dot.wl ends here

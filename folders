@@ -9,13 +9,15 @@
 
 ## IMAP ユーザのメールボックス
 %inbox
+#%:colazero@mail.mkoga.net:993!/
+%[Gmail]/All Mail "~All Mail " 
 
 ## POP ユーザのメールボックス
 # &USERNAME@POPSERVER.EXAMPLE.COM
 
 ## [ POP ユーザにはパイプフォルダが役に立ちます ]
 ## [ パイプフォルダを使えば、メールを取り込むことが可能です ]
-|&koga@archl.cs.kumamoto-u.a.jp|:+inbox
+# |&koga@archl.cs.kumamoto-u.a.jp|:+inbox
 
 ## ゴミ箱・草稿・送信箱
 +trash
@@ -68,3 +70,11 @@
 
 ## IMAP フォルダのアクセスグループの例
 # % /
+# %inbox "受信トレイ"
+# %[Gmail]/Starred "☆"
+# +Drafts "下書き"
+# %work "仕事"
+# %[Gmail]/All Mail "全てのメール"
+# %[Gmail]/Sent Mail "送信済みメール"
+# %[Gmail]/Trash "ゴミ箱"
+# %[Gmail]/Spam "迷惑メール"
