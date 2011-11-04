@@ -60,8 +60,8 @@
 (vendor 'org-mode)
 (vendor 'org-jekyll)
 
-(vendor 'bbdb)
-(vendor 'gnus)
+;; (vendor 'bbdb)
+;; (vendor 'gnus)
 
 (vendor 'calfw)
 (vendor 'emacs-id-manager)
