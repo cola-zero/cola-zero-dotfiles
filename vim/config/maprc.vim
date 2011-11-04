@@ -14,6 +14,8 @@ map tp :tabprevious<CR>
 map tc :tabclose<CR>
 map tb :tabnew<CR>:ls<CR>:buffer
 
+nnoremap <C-h> :h<Space>
+
 "nmap <unique> <silent> <Leader>ub \
 "  :<C-u>Unite \
 "    script:perl:~/.vim/bundle/unite-script/examples/bookmarks.pl<CR>
