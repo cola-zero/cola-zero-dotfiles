@@ -3,8 +3,8 @@
 if [[ $OSTYPE = darwin* ]]; then
   source /usr/local/Cellar/coreutils/8.12/aliases
 alias ls='gls -F --color=auto'
-alias emacs='emacs -geometry 80x30'
-alias ec='/usr/local/bin/emacsclient -c -n'
+alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
+alias ec='/usr/local/bin/emacsclient -t -n'
 alias et='/usr/local/bin/emacsclient -t -n'
 alias ecn='/usr/local/bin/emacsclient -t'
 fi
@@ -21,3 +21,8 @@ alias l='ls -F'
 alias eterm='xterm -en euc-jp'
 alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
 # alias screen='screen -s /bin/zsh'
+
+# ruby development
+alias be='bundle exec'
+alias p='padrino'
+alias r='rails'
