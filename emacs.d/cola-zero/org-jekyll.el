@@ -1,7 +1,8 @@
+(require 'org-publish)
 (require 'org-jekyll)
 (setq org-publish-blog "~/work/blog.mkoga.net/source")
 (add-to-list 'org-publish-project-alist
-             `("my-blog"
+             `("my-posts"
                :base-directory "~/work/blog.mkoga.net/org"
                :recursive t
                :base-extension "org"
