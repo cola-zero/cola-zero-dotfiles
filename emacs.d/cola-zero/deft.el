@@ -1,0 +1,5 @@
+(require 'deft)
+(setq deft-extension "org")
+(setq deft-text-mode 'org-mode)
+(setq deft-directory "~/Dropbox/memo")
+(global-set-key (kbd "M-8") 'deft)

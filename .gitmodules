@@ -127,3 +127,6 @@
 [submodule "emacs.d/vendor/emacs-id-manager"]
 	path = emacs.d/vendor/emacs-id-manager
 	url = https://github.com/kiwanami/emacs-id-manager.git
+[submodule "emacs.d/vendor/deft"]
+	path = emacs.d/vendor/deft
+	url = git://jblevins.org/git/deft.git
