@@ -59,6 +59,7 @@
 (vendor 'markdown-mode)
 (vendor 'org-mode)
 (vendor 'org-jekyll)
+(vendor 'deft)
 
 ;; (vendor 'bbdb)
 ;; (vendor 'gnus)
