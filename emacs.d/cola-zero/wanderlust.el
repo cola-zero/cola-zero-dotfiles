@@ -9,3 +9,6 @@
 (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 (setq wl-icon-directory
       (expand-file-name "~/.emacs.d/vendor/wanderlust/etc/icons"))
+(setq wl-message-buffer-prefetch-depth 3)
+(setq wl-auto-prefetch-first t)
+
