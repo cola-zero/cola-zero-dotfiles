@@ -3,7 +3,7 @@
 	email = colazero@mail.mkoga.net
 [core]
 	excludefiles = /Users/kogamasahiro/.gitignore
-    editor=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
+    editor=/usr/local/bin/emacsclient
 	excludesfile = /Users/masahirokoga/.gitignore
 [push]
 	default = current
