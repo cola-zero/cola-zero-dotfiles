@@ -39,3 +39,6 @@
 
 ;; org-export-general.el
 (require 'org-export-generic)
+
+;; org-protocol
+(require 'org-protocol)

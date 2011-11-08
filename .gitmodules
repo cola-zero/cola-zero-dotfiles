@@ -130,3 +130,12 @@
 [submodule "emacs.d/vendor/deft"]
 	path = emacs.d/vendor/deft
 	url = git://jblevins.org/git/deft.git
+[submodule "emacs.d/vendor/anything-config"]
+	path = emacs.d/vendor/anything-config
+	url = git://repo.or.cz/anything-config.git
+[submodule "emacs.d/vendor/org-mac-protocol"]
+	path = emacs.d/vendor/org-mac-protocol
+	url = https://github.com/claviclaws/org-mac-protocol.git
+[submodule "emacs.d/snippets/org-mode"]
+	path = emacs.d/snippets/org-mode
+	url = https://github.com/RickMoynihan/yasnippet-org-mode.git
