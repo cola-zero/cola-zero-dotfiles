@@ -6,20 +6,17 @@
 
 (load "cola-zero/defuns")
 (load "cola-zero/font")
-;(load "cola-zero/builtin")
+(load "cola-zero/builtin")
 (load "cola-zero/keybind")
 (load "cola-zero/hi-line-mode")
 (load "cola-zero/mode-line")
 (load "cola-zero/tramp")
 (load "cola-zero/gdb")
-;; (load "cola-zero/org")
 (load "cola-zero/dired")
 (load "cola-zero/ido")
 (load "cola-zero/iswitchb")
 (if (eq system-type 'darwin)
     (load "cola-zero/darwin"))
-
-(load "cola-zero/builtin")
 
 (vendor 'apel)
 (vendor 'color-theme)
@@ -61,8 +58,8 @@
 (vendor 'org-jekyll)
 (vendor 'deft)
 
-;; (vendor 'bbdb)
-;; (vendor 'gnus)
+(vendor 'bbdb)
+(vendor 'gnus)
 
 (vendor 'calfw)
 (vendor 'emacs-id-manager)
