@@ -42,3 +42,14 @@
 
 ;; org-protocol
 (require 'org-protocol)
+
+;;[[http://hpcgi1.nifty.com/spen/?OrgMode%252FOrgForGTD#i26][OrgMode/OrgForGTD - Org-mode¤ÇGTD:Google Chrome]]
+(defun gtd ()
+  (interactive)
+  (find-file (expand-file-name "~/Dropbox/memo/mygtd.org")))
+(global-set-key "\M-9" 'gtd)
+(defun journal ()
+  (interactive)
+  (find-file (expand-file-name "~/Dropbox/memo/journal.org")))
+(global-set-key "\M-0" 'journal)
+
