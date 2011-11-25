@@ -40,10 +40,10 @@
 
 ;; macにおけるIMEの設定
 ;; http://tezfm.blogspot.com/2009/11/cocoa-emacs.html
-(if (eq window-system 'ns)
-    (progn
-      (set-language-environment "Japanese")
-      (setq default-input-method "MacOSX")))
+;; (if (eq window-system 'ns)
+;;     (progn
+;;       (set-language-environment "Japanese")
+;;       (setq default-input-method "MacOSX")))
 
 (menu-bar-mode 1)
 
