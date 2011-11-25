@@ -9,7 +9,7 @@
 (add-to-list 'load-path "/usr/local/Cellar/emacs/23.3a/share/emacs/site-lisp/apel")
 (add-to-list 'load-path "/usr/local/Cellar/emacs/23.3a/share/emacs/site-lisp/emu")
 
-(set-frame-parameter nil 'alpha 100)
+(add-to-list 'default-frame-alist '(alpha 85 50))
 (display-battery-mode t)
 
 (setq x-select-enable-clipboard nil)
