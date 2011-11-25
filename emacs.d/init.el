@@ -55,12 +55,12 @@
 (vendor 'yasnippet)
 (vendor 'markdown-mode)
 (vendor 'org-mode)
-(vendor 'org-jekyll)
+;; (vendor 'org-jekyll)
 (vendor 'org-mac-protocol)
-(vendor 'deft)
+;; (vendor 'deft)
 
-(vendor 'bbdb)
-(vendor 'gnus)
+;; (vendor 'bbdb)
+;; (vendor 'gnus)
 
 (vendor 'calfw)
 (vendor 'emacs-id-manager)
@@ -69,3 +69,5 @@
 (vendor 'semi)
 (vendor 'emacs-w3m)
 (vendor 'wanderlust)
+
+(server-start)
