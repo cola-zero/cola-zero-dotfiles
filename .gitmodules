@@ -139,3 +139,6 @@
 [submodule "emacs.d/snippets/org-mode"]
 	path = emacs.d/snippets/org-mode
 	url = https://github.com/RickMoynihan/yasnippet-org-mode.git
+[submodule "emacs.d/vendor/org-ja"]
+	path = emacs.d/vendor/org-ja
+	url = git@github.com:org-mode-doc-ja/org-ja.git
