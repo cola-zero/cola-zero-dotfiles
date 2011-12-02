@@ -142,3 +142,6 @@
 [submodule "emacs.d/vendor/org-ja"]
 	path = emacs.d/vendor/org-ja
 	url = git@github.com:org-mode-doc-ja/org-ja.git
+[submodule "emacs.d/vendor/paredit"]
+	path = emacs.d/vendor/paredit
+	url = https://github.com/emacsmirror/paredit.git
