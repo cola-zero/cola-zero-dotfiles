@@ -65,9 +65,9 @@
 (vendor 'calfw)
 (vendor 'emacs-id-manager)
 
-(vendor 'flim)
-(vendor 'semi)
+;; (vendor 'flim)
+;; (vendor 'semi)
 (vendor 'emacs-w3m)
-(vendor 'wanderlust)
+;; (vendor 'wanderlust)
 
 (server-start)
