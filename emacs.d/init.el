@@ -55,7 +55,7 @@
 (vendor 'yasnippet)
 (vendor 'markdown-mode)
 (vendor 'org-mode)
-;; (vendor 'org-jekyll)
+(vendor 'org-jekyll)
 (vendor 'org-mac-protocol)
 ;; (vendor 'deft)
 
