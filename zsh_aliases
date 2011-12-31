@@ -1,7 +1,7 @@
 ## .zsh_aliases
 ## Masahiro Koga
 if [[ $OSTYPE = darwin* ]]; then
-  source /usr/local/Cellar/coreutils/8.12/aliases
+source /usr/local/Cellar/coreutils/8.14/aliases
 alias ls='gls -F --color=auto'
 alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias ec='/usr/local/bin/emacsclient -t -n'
