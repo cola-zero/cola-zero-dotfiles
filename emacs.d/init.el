@@ -21,6 +21,7 @@
 (load "cola-zero/gtags")
 
 (vendor 'apel)
+(vendor 'auto-async-byte-compile)
 (vendor 'color-theme)
 (vendor 'popwin)
 ;(vendor 'elscreen)

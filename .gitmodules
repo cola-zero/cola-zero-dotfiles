@@ -160,3 +160,6 @@
 [submodule "emacs.d/vendor/gnus"]
 	path = emacs.d/vendor/gnus
 	url = https://github.com/emacsmirror/gnus.git
+[submodule "emacs.d/vendor/auto-async-byte-compile"]
+	path = emacs.d/vendor/auto-async-byte-compile
+	url = https://github.com/emacsmirror/auto-async-byte-compile.git

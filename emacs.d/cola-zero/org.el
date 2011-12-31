@@ -1,6 +1,5 @@
 ;; -*- config: utf-8 -*-
 ; org-mode
-(require 'org)
 (setq org-startup-truncated nil)
 (setq org-return-follows-link t)
 (add-to-list `auto-mode-alist '("\\.org$" . org-mode))

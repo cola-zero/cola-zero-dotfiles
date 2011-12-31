@@ -1,6 +1,5 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/org-mode/lisp"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/org-mode/contrib/lisp"))
-(require 'org)
 (add-to-list `auto-mode-alist '("\\.org$" . org-mode))
 
 (global-set-key "\C-ca" 'org-agenda)
@@ -52,4 +51,3 @@
   (interactive)
   (find-file (expand-file-name "~/Dropbox/memo/journal.org")))
 (global-set-key "\M-0" 'journal)
-
