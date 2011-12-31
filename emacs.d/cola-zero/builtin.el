@@ -71,3 +71,6 @@
 (setq-default tab-width 4 indent-tabs-mode nil)
 
 (setenv "DYLD_FALLBACK_LIBRARY_PATH" "/usr/local/lib")
+
+;; delete trailing whitespace when save buffere
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
