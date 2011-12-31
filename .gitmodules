@@ -145,3 +145,18 @@
 [submodule "emacs.d/vendor/paredit"]
 	path = emacs.d/vendor/paredit
 	url = https://github.com/emacsmirror/paredit.git
+[submodule "emacs.d/vendor/emacs-test-unit"]
+	path = emacs.d/vendor/emacs-test-unit
+	url = http://github.com/rocky/emacs-test-unit.git
+[submodule "emacs.d/vendor/emacs-load-relative"]
+	path = emacs.d/vendor/emacs-load-relative
+	url = http://github.com/rocky/emacs-load-relative.git
+[submodule "emacs.d/vendor/emacs-loc-changes"]
+	path = emacs.d/vendor/emacs-loc-changes
+	url = http://github.com/rocky/emacs-loc-changes.git
+[submodule "emacs.d/vendor/emacs-dbgr"]
+	path = emacs.d/vendor/emacs-dbgr
+	url = http://github.com/rocky/emacs-dbgr.git
+[submodule "emacs.d/vendor/gnus"]
+	path = emacs.d/vendor/gnus
+	url = https://github.com/emacsmirror/gnus.git
