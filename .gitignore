@@ -6,6 +6,7 @@ emacs.d/anything-c-adaptive-history
 emacs.d/history
 emacs.d/ac-comphist.dat
 emacs.d/vendor/*
+emacs.d/swank
 emacs.d_old
 *.elc
 xmonad/xmonad-i386-darwin
