@@ -13,7 +13,6 @@
 (load "cola-zero/tramp")
 (load "cola-zero/gdb")
 (load "cola-zero/dired")
-(load "cola-zero/ido")
 (load "cola-zero/iswitchb")
 (if (eq system-type 'darwin)
     (load "cola-zero/darwin"))
@@ -22,6 +21,8 @@
 
 (vendor 'apel)
 (vendor 'auto-async-byte-compile)
+(vendor 'minibuf-isearch)
+(vendor 'session)
 (vendor 'color-theme)
 (vendor 'popwin)
 ;(vendor 'elscreen)
