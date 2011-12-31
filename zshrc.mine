@@ -81,8 +81,8 @@ esac
 source ${HOME}/.zsh_aliases
 
 #rbenv
-# eval "$(rbenv init -)"
-# [[ -s "$HOME/.rbenv/completions/rbenv.zsh" ]] && source "$HOME/.rbenv/completions/rbenv.zsh"
+eval "$(rbenv init -)"
+[[ -s "$HOME/.rbenv/completions/rbenv.zsh" ]] && source "$HOME/.rbenv/completions/rbenv.zsh"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 
