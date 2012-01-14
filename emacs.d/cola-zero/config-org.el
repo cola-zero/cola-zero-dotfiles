@@ -31,7 +31,7 @@
 	 (setq org-mobile-directory "z:/org/")
 	 (setq org-mobile-inbox-for-pull "~/Documents/My Dropbox/memo/mobile.org"))
 	(progn
-          (setq org-mobile-files org-agenda-files)
+          ;; (setq org-mobile-files org-agenda-files)
           (setq org-mobile-directory "~/Dropbox/MobileOrg/")
           (setq org-mobile-inbox-for-pull "~/Dropbox/memo/mobile.org")))
 (setq org-todo-keywords '((sequence "INBOX(i)" "NEXT-ACTION(n)" "INACTIVE(I)" "WAIT(W)" "PROJECT(p)" "|" "DONE(d)")))

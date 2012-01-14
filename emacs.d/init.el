@@ -1,80 +1,90 @@
 (add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/vendor")
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+
+(defvar my-emacs-config-dir (expand-file-name "~/.emacs.d/cola-zero"))
 
 (setq custom-file "~/.emacs.d/cola-zero/custom.el")
 (load custom-file 'noerror)
 
-(load "cola-zero/defuns")
-(load "cola-zero/font")
-(load "cola-zero/builtin")
-(load "cola-zero/keybind")
-(load "cola-zero/hi-line-mode")
-(load "cola-zero/mode-line")
-(load "cola-zero/tramp")
-(load "cola-zero/gdb")
-(load "cola-zero/dired")
-(load "cola-zero/iswitchb")
+;; https://github.com/okkez/dotfiles/blob/master/emacs-config/start.el
+(defun my-emacs-load-config (name)
+  "Load NAME as a configure file in `my-emacs-config-dir'.
+Assume that the filename should be config-NAME.el."
+  (load (concat my-emacs-config-dir "/config-" name ".el")))
+
+(defvar my-emacs-pre-config '("elpa" "el-get"))
+
+(defvar my-emacs-misc-config
+  '("font"
+    "builtin"
+    "keybind"
+    "hi-line-mode"
+    "mode-line"
+    "tramp"
+    "gdb"
+    "dired"
+    "iswitchb"
+    "apel"
+    "auto-async-byte-compile"
+    "minibuf-isearch"
+    "session"
+    "color-theme"
+    "popwin"
+    ;; "elscreen"
+    ;; "elscreen-color-theme"
+    ;; "elscreen-dired"
+    ;; "elscreen-server"
+    "scala-mode-auto"
+    "haskell-mode"
+    "ghc-mode"
+    "dsvn"
+    "magit"
+    "gist"
+    "e2wm"
+    "c-eldoc"
+    "auto-complete"
+    "migemo"
+    "ruby-mode"
+    "ruby-block"
+    "ruby-electric"
+   ;; "haml-mode"
+   ;; "sass-mode"
+    "yari"
+    ;; "rvm"
+    "rsense"
+    "rinari"
+    "ri-emacs"
+    "yaml-mode"
+    ;; "slime" ;broken
+    ;; "ac-slime"
+    "cl-indent-patches"
+    "clojure-mode"
+    "deferred"
+    ;; "dict-osx" ;; broken
+    "po-mode"
+    "ecb"
+    "yasnippet"
+    "markdown-mode"
+    "org-mode"
+    "org-ja"
+    "org-jekyll"
+    "org-mac-protocol"
+    ;; "deft"
+    ;; "bbdb"
+    "calfw"
+    "id-manager"
+    ;; "flim"
+    ;; "semi"
+    ;; "emacs-w3m"
+    ;; "wanderlust"
+    "evernote-mode"
+    ))
+
 (if (eq system-type 'darwin)
-    (load "cola-zero/darwin"))
-(load "cola-zero/windows")
-(load "cola-zero/gtags")
+    (add-to-list 'my-emacs-misc-config "darwin"))
 
-(vendor 'apel)
-(vendor 'auto-async-byte-compile)
-(vendor 'minibuf-isearch)
-(vendor 'session)
-(vendor 'color-theme)
-(vendor 'popwin)
-;(vendor 'elscreen)
-;; (vendor 'elscreen-color-theme)
-;; (vendor 'elscreen-dired)
-;; (vendor 'elscreen-server)
-(vendor 'scala-mode-auto)
-(vendor 'haskell-mode)
-(vendor 'ghc-mode)
-(vendor 'magit)
-(vendor 'gist)
-(vendor 'e2wm)
-(vendor 'c-eldoc)
-(vendor 'auto-complete)
-(vendor 'migemo)
-(vendor 'ruby-mode)
-(vendor 'ruby-block)
-(vendor 'haml-mode)
-(vendor 'sass-mode)
-(vendor 'yari)
-;; (vendor 'rvm)
-(vendor 'rsense)
-(vendor 'rinari)
-(vendor 'ri-emacs)
-(vendor 'yaml-mode)
-(vendor 'slime)
-(vendor 'ac-slime)
-(vendor 'cl-indent-patches)
-(vendor 'clojure-mode)
-(vendor 'deferred)
-(vendor 'dict-osx)
-(vendor 'po-mode)
-(vendor 'ecb)
-(vendor 'yasnippet)
-(vendor 'markdown-mode)
-(vendor 'org-mode)
-(vendor 'org-ja)
-(vendor 'org-jekyll)
-(vendor 'org-mac-protocol)
-;; (vendor 'deft)
+(defvar my-emacs-post-config nil)
+(defvar my-emacs-config
+  (append nil my-emacs-pre-config my-emacs-misc-config my-emacs-post-config))
 
-;; (vendor 'bbdb)
-(vendor 'gnus)
-
-(vendor 'calfw)
-(vendor 'emacs-id-manager)
-
-;; (vendor 'flim)
-;; (vendor 'semi)
-;; (vendor 'emacs-w3m)
-;; (vendor 'wanderlust)
-
-(vendor 'evernote-mode)
-
-(server-start)
+(mapcar 'my-emacs-load-config my-emacs-config)

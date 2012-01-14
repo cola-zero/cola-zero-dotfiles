@@ -1,0 +1,7 @@
+(:name rsense
+       :description nil
+       :type git
+       :url "https://github.com/m2ym/rsense.git"
+       :load-path ("./etc")
+       :build '("ant build")
+       :features "rsense")

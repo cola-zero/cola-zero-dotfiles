@@ -10,7 +10,7 @@
     (setq org-directory "~/Documents/My Dropbox/memo/")
     (setq org-directory "~/Dropbox/memo/"))
 (setq org-default-notes-file (concat org-directory "mygtd.org"))
-(add-to-list 'org-agenda-files org-default-notes-file)
+(setq org-agenda-files org-default-notes-file)
 (add-to-list 'org-agenda-files (concat org-directory "journal.org"))
 
 (setq org-capture-templates

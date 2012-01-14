@@ -2,6 +2,7 @@
 ;; https://github.com/m2ym/popwin-el
 ;; http://d.hatena.ne.jp/m2ym/20110120/1295524932
 ;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/popwin-el/misc"))
+(require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
 ;; anything
 (setq anything-samewindow nil)
