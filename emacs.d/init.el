@@ -78,6 +78,7 @@ Assume that the filename should be config-NAME.el."
     ;; "emacs-w3m"
     ;; "wanderlust"
     "evernote-mode"
+    "windows"
     ))
 
 (if (eq system-type 'darwin)
