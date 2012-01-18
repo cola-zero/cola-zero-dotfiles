@@ -8,8 +8,8 @@
 
 ;; (org-remember-insinuate)
 (if (eq window-system 'w32)
-    (setq org-directory "~/Documents/My Dropbox/memo/")
-    (setq org-directory "~/Dropbox/memo/"))
+    (setq org-directory (expand-file-name "~/Documents/My Dropbox/memo/"))
+    (setq org-directory (expand-file-name "~/Dropbox/memo/")))
 (setq org-default-notes-file (concat org-directory "mygtd.org"))
 (define-key global-map "\C-cc" 'org-capture)
 

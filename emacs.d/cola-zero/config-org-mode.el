@@ -7,18 +7,20 @@
 
 ;; org-capture
 (if (eq window-system 'w32)
-    (setq org-directory "~/Documents/My Dropbox/memo/")
-    (setq org-directory "~/Dropbox/memo/"))
+    (setq org-directory (expand-file-name "~/Documents/My Dropbox/memo/"))
+    (setq org-directory (expand-file-name "~/Dropbox/memo/")))
 (setq org-default-notes-file (concat org-directory "mygtd.org"))
-(setq org-agenda-files org-default-notes-file)
+(setq org-agenda-files '("~/Dropbox/memo/mygtd.org"))
 (add-to-list 'org-agenda-files (concat org-directory "journal.org"))
+;; (setq org-agenda-files ((concat org-directory "mygtd.org")
+;;                         (concat org-directory "journal.org")))
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline (concat org-directory "mygtd.org") "Tasks")
          "* INBOX %?\n %i\n %a")
-        ("j" "Journal" entry (file+datetree "~/Dropbox/memo/journal.org")
+        ("j" "Journal" entry (file+datetree (concat org-directory "journal.org"))
          "* %?\nEntered on %U\n %i\n %a")
-        ("w" "Want" entry (file+datetree "~/Dropbox/memo/journal.org")
+        ("w" "Want" entry (file+datetree (concat org-directory "journal.org"))
          "* %? :Want:\nEntered on %U\n %i\n %a")))
 
 (setq org-todo-keywords '((sequence "INBOX(i)" "NEXT-ACTION(n)"
@@ -30,11 +32,11 @@
 (if (eq window-system 'w32)
 	(progn
 	 (setq org-mobile-directory "z:/org/")
-	 (setq org-mobile-inbox-for-pull "~/Documents/My Dropbox/memo/mobile.org"))
+	 (setq org-mobile-inbox-for-pull (concat org-directory "mobile.org")))
 	(progn
           (setq org-mobile-files org-agenda-files)
-          (setq org-mobile-directory "~/Dropbox/MobileOrg/")
-          (setq org-mobile-inbox-for-pull "~/Dropbox/memo/mobile.org")))
+          (setq org-mobile-directory (expand-file-name "~/Dropbox/MobileOrg/"))
+          (setq org-mobile-inbox-for-pull (concat org-directory "mobile.org"))))
 
 ;; org-export-general.el
 (require 'org-export-generic)
@@ -45,9 +47,9 @@
 ;;[[http://hpcgi1.nifty.com/spen/?OrgMode%252FOrgForGTD#i26][OrgMode/OrgForGTD - Org-mode¤ÇGTD:Google Chrome]]
 (defun gtd ()
   (interactive)
-  (find-file (expand-file-name "~/Dropbox/memo/mygtd.org")))
+  (find-file (concat org-directory "mygtd.org")))
 (global-set-key "\M-9" 'gtd)
 (defun journal ()
   (interactive)
-  (find-file (expand-file-name "~/Dropbox/memo/journal.org")))
+  (find-file (concat org-directory "journal.org")))
 (global-set-key "\M-0" 'journal)
