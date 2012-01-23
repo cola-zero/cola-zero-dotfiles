@@ -1,3 +1,4 @@
+;; (setq debug-on-error t)
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
@@ -12,7 +13,7 @@
 Assume that the filename should be config-NAME.el."
   (load (concat my-emacs-config-dir "/config-" name ".el")))
 
-(defvar my-emacs-pre-config '("elpa" "el-get"))
+(defvar my-emacs-pre-config '("elpa" "el-get" "package24"))
 
 (defvar my-emacs-misc-config
   '("font"
@@ -24,7 +25,7 @@ Assume that the filename should be config-NAME.el."
     "gdb"
     "dired"
     "iswitchb"
-    "apel"
+    ;; "apel"
     "auto-async-byte-compile"
     "minibuf-isearch"
     "session"
@@ -49,10 +50,11 @@ Assume that the filename should be config-NAME.el."
     "ruby-electric"
    ;; "haml-mode"
    ;; "sass-mode"
-    "yari"
-    ;; "rvm"
+;;    "yari"
     "rsense"
+    "inf-ruby"
     "rinari"
+    "rvm"
     "ri-emacs"
     "yaml-mode"
     "slime"
@@ -75,10 +77,11 @@ Assume that the filename should be config-NAME.el."
     "id-manager"
     ;; "flim"
     ;; "semi"
-    ;; "emacs-w3m"
+    "emacs-w3m"
     ;; "wanderlust"
     "evernote-mode"
     "windows"
+    "nognus"
     ))
 
 (if (eq system-type 'darwin)
@@ -89,3 +92,4 @@ Assume that the filename should be config-NAME.el."
   (append nil my-emacs-pre-config my-emacs-misc-config my-emacs-post-config))
 
 (mapcar 'my-emacs-load-config my-emacs-config)
+;;(dolist 'my-emacs-config 'my-emacs-load-config)

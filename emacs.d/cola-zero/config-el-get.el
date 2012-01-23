@@ -98,5 +98,5 @@
 ;;           japanese-holidays
 ;;           grep-edit))
 
-(el-get-emacswiki-refresh (concat my-emacs-config-dir "/../el-get/el-get/recipes/emacswiki"))
+;; (el-get-emacswiki-refresh (concat my-emacs-config-dir "/../el-get/el-get/recipes/emacswiki"))
 (el-get 'sync my-el-get-packages)

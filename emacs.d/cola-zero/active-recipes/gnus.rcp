@@ -1,0 +1,5 @@
+(:name gnus
+       :description "GNUS is the one-stop shopping center dedicated to all things Gnus, the Emacs newsreader."
+       :type git
+       :url "http://git.gnus.org/gnus.git"
+       :

@@ -1,0 +1,4 @@
+(:name rinari
+       :description "Rinari Is Not A Rails IDE"
+       :features rinari
+       :type elpa)
