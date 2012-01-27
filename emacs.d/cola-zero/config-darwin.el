@@ -85,3 +85,5 @@
 		   (setq spec (substring spec (- (length fulldoc) ea-width)))
 		   (format "%s: %s" spec docstring))))))
     ad-do-it))
+
+(provide 'config-darwin)

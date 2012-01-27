@@ -6,3 +6,5 @@
                      'lisp-indent-function
                      'common-lisp-indent-function)
                  args))))
+
+(provide 'config-cl-indent-patches)

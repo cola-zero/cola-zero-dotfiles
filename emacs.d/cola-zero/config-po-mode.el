@@ -5,3 +5,5 @@
 ;; (autoload 'po-find-file-coding-system "po-compat")
 ;; (modify-coding-system-alist 'file "\\.po\\'\\|\\.po\\."
 ;;                             'po-find-file-coding-system)
+
+(provide 'config-po-mode)

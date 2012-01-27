@@ -1,16 +1,25 @@
 (setq user-mail-address "colazero@mail.mkoga.net"
       user-full-name "Masahiro Koga")
 
+(setq gnus-ignored-from-addresses "masahirokoga")
+
 (setq gnus-select-method
-      '(nnimap "gmail"
+      '(nnimap "Mail"
+               (nnimap-address "localhost")
+               (nnimap-stream network)
+               (nnir-search-engine imap)
+               ))
+(add-to-list 'gnus-secondary-select-methods
+             '(nntp "news.gnus.org"))
+
+(add-to-list 'gnus-secondary-select-methods
+                   '(nnimap "gmail"
                (nnimap-address "imap.gmail.com")
                (nnimap-server-port 993)
                (nnimap-authinfo-file "~/.emacs.d/.authinfo")
                (nnimap-stream ssl)
                (nnir-search-engine imap)
                ))
-(add-to-list 'gnus-secondary-select-methods
-             '(nntp "news.gnus.org"))
 
 (setq gnus-posting-styles
       '((".*"

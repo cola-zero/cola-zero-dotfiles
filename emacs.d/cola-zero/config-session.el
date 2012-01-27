@@ -10,3 +10,5 @@
 ;;                                   (file-name-history 10000)))
 ;;   (add-hook 'after-init-hook 'session-initialize)
 ;;   (setq session-undo-check -1))
+
+(provide 'config-session)

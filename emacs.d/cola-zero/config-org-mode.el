@@ -53,3 +53,5 @@
   (interactive)
   (find-file (concat org-directory "journal.org")))
 (global-set-key "\M-0" 'journal)
+
+(provide 'config-org-mode)

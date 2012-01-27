@@ -20,3 +20,5 @@
 
 ;; Case sensitivity
 ;; (setq iswitchb-case nil) ; nil for case sensitive
+
+(provide 'config-iswitchb)

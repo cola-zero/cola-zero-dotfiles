@@ -6,8 +6,10 @@ emacs.d/anything-c-adaptive-history
 emacs.d/history
 emacs.d/ac-comphist.dat
 emacs.d/el-get
+emacs.d/elpa
 emacs.d/swank
 emacs.d_old
+emacs.d.old
 *.elc
 xmonad/xmonad-i386-darwin
 xmonad/xmonad.errors

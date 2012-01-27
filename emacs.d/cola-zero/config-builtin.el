@@ -74,3 +74,5 @@
 
 ;; delete trailing whitespace when save buffere
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(provide 'config-builtin)

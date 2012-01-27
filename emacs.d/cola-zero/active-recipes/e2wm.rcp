@@ -1,1 +1,6 @@
-../emacsmirror-rcp/e2wm.rcp
+(:name e2wm
+       :description "A simple window manager for emacs (Concept implementation)"
+       :type git
+       :url "https://github.com/kiwanami/emacs-window-manager.git"
+       :depends (window-layout magit)
+       :features "e2wm")

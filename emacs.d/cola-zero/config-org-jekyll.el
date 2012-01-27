@@ -18,3 +18,5 @@
                :auto-preamble nil
                :body-only t
                :auto-postamble nil))
+
+(provide 'config-org-jekyll)

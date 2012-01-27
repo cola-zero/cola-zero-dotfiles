@@ -17,3 +17,5 @@
 
 ;; 行番号を表示
 (line-number-mode t)
+
+(provide 'config-mode-line)

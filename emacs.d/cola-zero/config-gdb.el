@@ -6,3 +6,5 @@
 (setq gdb-use-separate-io-buffer t)
 ;;; t にすると mini buffer に値が表示される
 (setq gud-tooltip-echo-area nil)
+
+(provide 'config-gdb)

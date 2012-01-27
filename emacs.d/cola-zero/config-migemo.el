@@ -1,3 +1,4 @@
+(require 'migemo)
 (if (eq system-type 'darwin)
     (progn
       (setq migemo-command "cmigemo")
@@ -9,3 +10,5 @@
       (load-library "migemo"))
   (setq migemo-command "/usr/bin/ruby"))
 (migemo-init)
+
+(provide 'config-migemo)

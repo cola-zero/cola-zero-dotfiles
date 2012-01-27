@@ -22,3 +22,5 @@
 (add-to-list 'popwin:special-display-config '(slime-repl-mode))
 (add-to-list 'popwin:special-display-config '(slime-connection-list-mode))
 (add-to-list 'popwin:special-display-config '(" *auto-async-byte-compile*" :noselect t))
+
+(provide 'config-popwin)

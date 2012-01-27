@@ -23,3 +23,5 @@
       (define-key global-map [?\C-\M-¥] [?\C-\M-\\])
       (global-set-key (kbd "M-<RET>") 'ns-toggle-fullscreen)
       ))
+
+(provide 'config-keybind)

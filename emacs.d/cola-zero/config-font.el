@@ -31,3 +31,5 @@
 
 (if window-system
     (my-default-font))
+
+(provide 'config-font)

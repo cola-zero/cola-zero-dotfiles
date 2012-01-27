@@ -1,95 +1,54 @@
-;; (setq debug-on-error t)
-(add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/cola-zero"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
 
-(defvar my-emacs-config-dir (expand-file-name "~/.emacs.d/cola-zero"))
-
-(setq custom-file "~/.emacs.d/cola-zero/custom.el")
-(load custom-file 'noerror)
-
-;; https://github.com/okkez/dotfiles/blob/master/emacs-config/start.el
-(defun my-emacs-load-config (name)
-  "Load NAME as a configure file in `my-emacs-config-dir'.
-Assume that the filename should be config-NAME.el."
-  (load (concat my-emacs-config-dir "/config-" name ".el")))
-
-(defvar my-emacs-pre-config '("elpa" "el-get" "package24"))
-
-(defvar my-emacs-misc-config
-  '("font"
-    "builtin"
-    "keybind"
-    "hi-line-mode"
-    "mode-line"
-    "tramp"
-    "gdb"
-    "dired"
-    "iswitchb"
-    ;; "apel"
-    "auto-async-byte-compile"
-    "minibuf-isearch"
-    "session"
-    ;; "color-theme"
-    "popwin"
-    ;; "elscreen"
-    ;; "elscreen-color-theme"
-    ;; "elscreen-dired"
-    ;; "elscreen-server"
-    "scala-mode-auto"
-    "haskell-mode"
-    "ghc-mode"
-    "dsvn"
-    "magit"
-    "gist"
-    "e2wm"
-    "c-eldoc"
-    "auto-complete"
-    "migemo"
-    "ruby-mode"
-    "ruby-block"
-    "ruby-electric"
-   ;; "haml-mode"
-   ;; "sass-mode"
-;;    "yari"
-    "rsense"
-    "inf-ruby"
-    "rinari"
-    "rvm"
-    "ri-emacs"
-    "yaml-mode"
-    "slime"
-    "ac-slime"
-    "cl-indent-patches"
-    "clojure-mode"
-    "deferred"
-    ;; "dict-osx" ;; broken
-    "po-mode"
-    "ecb"
-    "yasnippet"
-    "markdown-mode"
-    "org-mode"
-    "org-ja"
-    "org-jekyll"
-    "org-mac-protocol"
-    ;; "deft"
-    ;; "bbdb"
-    "calfw"
-    "id-manager"
-    ;; "flim"
-    ;; "semi"
-    "emacs-w3m"
-    ;; "wanderlust"
-    "evernote-mode"
-    "windows"
-    "nognus"
-    ))
-
+(require 'config-builtin)
+(require 'config-keybind)
+(require 'config-elpa)
+(require 'config-el-get)
+(require 'config-auto-async-byte-compile)
+(require 'config-dired)
+(require 'config-popwin)
+(require 'config-rvm)
+(require 'config-ruby-electric)
+(require 'config-rinari)
+(require 'config-ri-emacs)
+(require 'config-sass-mode)
+(require 'config-calfw)
+(require 'config-auto-complete)
+(require 'config-c-eldoc)
+(require 'config-cl-indent-patches)
+(require 'config-slime)
+(require 'config-ac-slime)
+(require 'config-clojure-mode)
+(require 'config-e2wm)
+(require 'config-evernote-mode)
+(require 'config-gdb)
+(require 'config-gist)
+(require 'config-gtags)
+(require 'config-haml-mode)
+(require 'config-haskell-mode)
+(require 'config-hi-line-mode)
+(require 'config-id-manager)
+(require 'config-iswitchb)
+(require 'config-magit)
+(require 'config-markdown-mode)
 (if (eq system-type 'darwin)
-    (add-to-list 'my-emacs-misc-config "darwin"))
-
-(defvar my-emacs-post-config nil)
-(defvar my-emacs-config
-  (append nil my-emacs-pre-config my-emacs-misc-config my-emacs-post-config))
-
-(mapcar 'my-emacs-load-config my-emacs-config)
-;;(dolist 'my-emacs-config 'my-emacs-load-config)
+    (progn
+      (require 'config-darwin)
+      (require 'config-font)
+      ))
+(require 'config-migemo)
+(require 'config-minibuf-isearch)
+(require 'config-mode-line)
+(require 'config-nognus)
+(require 'config-org-ja)
+(require 'config-org-mode)
+(require 'config-org-jekyll)
+(require 'config-paredit)
+(require 'config-po-mode)
+(require 'config-rsense)
+(require 'config-session)
+(require 'config-tramp)
+(require 'config-windows)
+(require 'config-yaml-mode)

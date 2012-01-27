@@ -7,3 +7,5 @@
     (t (:bold t)))
   "hl-line's my face")
 (setq hl-line-face 'my-hl-line-face)
+
+(provide 'config-hi-line-mode)

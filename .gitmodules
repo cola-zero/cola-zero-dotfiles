@@ -7,3 +7,6 @@
 [submodule "emacs.d/cola-zero/emacsmirror-rcp"]
 	path = emacs.d/cola-zero/emacsmirror-rcp
 	url = https://github.com/edenc/emacsmirror-rcp.git
+[submodule "emacs.d/org-ja"]
+	path = emacs.d/org-ja
+	url = git@github.com:org-mode-doc-ja/org-ja.git

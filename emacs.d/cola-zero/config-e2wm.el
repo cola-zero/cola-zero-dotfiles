@@ -6,3 +6,5 @@
  e2wm:pst-minor-mode-keymap
  '(("M-g" . e2wm:dp-magit))
  e2wm:prefix-key)
+
+(provide 'config-e2wm)

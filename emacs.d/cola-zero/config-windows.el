@@ -13,3 +13,5 @@
 (define-key ctl-x-map "C" 'see-you-again)
 (define-key win:switch-map "\C-z" 'win-toggle-window)
 (run-with-idle-timer 30 t 'win-save-all-configurations)
+
+(provide 'config-windows)
