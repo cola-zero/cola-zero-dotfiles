@@ -70,7 +70,15 @@
 ;; use spaces instead of tabs
 (setq-default tab-width 4 indent-tabs-mode nil)
 
-(setenv "DYLD_FALLBACK_LIBRARY_PATH" "/usr/local/lib")
+(setenv "DYLD_FALLBACK_LIBRARY_PATH" "/usr/local/lib:/usr/lib")
+
+(dolist (dir (mapcar 'expand-file-name
+                     '("/usr/local/bin"
+                       "/opt/local/bin"
+                       "/opt/local/lib/postgresql83/bin"
+                       "~/bin")))
+  (setenv "PATH" (concat dir ":" (getenv "PATH")))
+  (setq exec-path (append (list dir) exec-path)))
 
 ;; delete trailing whitespace when save buffere
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
