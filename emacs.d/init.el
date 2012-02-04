@@ -14,6 +14,7 @@
 (require 'config-rinari)
 (require 'config-ri-emacs)
 (require 'config-sass-mode)
+(require 'config-tdd-bgcolor)
 (require 'config-calfw)
 (require 'config-auto-complete)
 (require 'config-c-eldoc)
