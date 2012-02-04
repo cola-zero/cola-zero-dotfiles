@@ -2,6 +2,9 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/cola-zero"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
 
+(setq custom-file (expand-file-name "~/.emacs.d/custom.el"))
+(load custom-file 'noerror)
+
 (require 'config-builtin)
 (require 'config-keybind)
 (require 'config-elpa)
