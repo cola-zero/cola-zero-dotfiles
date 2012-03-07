@@ -10,20 +10,9 @@
 import XMonad
 import Data.Monoid
 import System.Exit
-import XMonad.Hooks.DynamicLog
-import XMonad.Layout.NoBorders
 import XMonad.Hooks.ManageHelpers
-import XMonad.Config.Gnome
-
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
-
-import Control.OldException
-import Control.Monad
-import DBus
-import DBus.Connection
-import DBus.Message
-
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -43,22 +32,8 @@ myBorderWidth   = 1
 -- ("right alt"), which does not conflict with emacs keybindings. The
 -- "windows key" is usually mod4Mask.
 --
-myModMask       = mod1Mask
+myModMask       = mod4Mask
 
--- The mask for the numlock key. Numlock status is "masked" from the
--- current modifier status, so the keybindings will work with numlock on or
--- off. You may need to change this on some systems.
---
--- You can find the numlock modifier by running "xmodmap" and looking for a
--- modifier with Num_Lock bound to it:
---
--- > $ xmodmap | grep Num
--- > mod2        Num_Lock (0x4d)
---
--- Set numlockMask = 0 if you don't have a numlock key, or want to treat
--- numlock status separately.
---
-myNumlockMask   = mod2Mask
 
 -- The default number of workspaces (virtual screens) and their names.
 -- By default we use numeric strings, but any string may be used as a
@@ -86,7 +61,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    , ((modm,               xK_p     ), spawn "dmenu_run")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -204,7 +179,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = smartBorders $ (tiled ||| Mirror tiled ||| Full)
+myLayout = tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -261,7 +236,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
--- myEventHook = mempty
+myEventHook = mempty
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -269,7 +244,7 @@ myManageHook = composeAll
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
--- myLogHook = return ()
+myLogHook = return ()
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -279,25 +254,13 @@ myManageHook = composeAll
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
--- myStartupHook = return ()
+myStartupHook = return ()
 
-------------------------------------------------------------------------
--- Xmonad Gnome Applet
-getWellKnownName :: Connection -> IO()
-getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) -> getWellKnownName dbus)
-  where
-    tryGetName = do
-      namereq <- newMethodCall serviceDBus pathDBus interfaceDBus "RequestName"
-      addArgs namereq [String "org.xmonad.Log", Word32 5]
-      sendWithReplyAndBlock dbus namereq 0
-      return ()
-
-------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
--- main = xmonad defaults
+main = xmonad defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
@@ -305,29 +268,12 @@ getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) -> getWellKnow
 --
 -- No need to modify this.
 --
--- defaults = defaultConfig {
--- main = dzen $ \conf -> xmonad $ conf {
-
---　gnoemなし
---main :: IO()
--- main = do
---  conf <- dzen defaultConfig
---  conf <- dzen gnomeConfig
---  xmonad $ conf{
-
--- gnomeあり
-main::IO()
-main = withConnection Session $ \ dbus -> do
-  putStrLn "Getting well-known name."
-  getWellKnownName dbus
-  putStrLn "Got name, starting XMonad."
-  xmonad $ gnomeConfig{
+defaults = defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
-        -- focusFollowsMouse  = myFocusFollowsMouse,
-        -- borderWidth        = myBorderWidth,
+        focusFollowsMouse  = myFocusFollowsMouse,
+        borderWidth        = myBorderWidth,
         modMask            = myModMask,
-        numlockMask        = myNumlockMask,
         workspaces         = myWorkspaces,
         normalBorderColor  = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
@@ -337,43 +283,9 @@ main = withConnection Session $ \ dbus -> do
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        --layoutHook         = myLayout,
-        layoutHook         = smartBorders (layoutHook gnomeConfig),
-        manageHook         = manageHook gnomeConfig <+> myManageHook,
-        -- handleEventHook    = myEventHook,
---        logHook            = logHook gnomeConfig  -- gnomeなし
-        logHook = do
-                logHook gnomeConfig
-                dynamicLogWithPP $ defaultPP{
-                  ppOutput = \ str -> do
-                     let str'  = "<span font=\"UmePlus P Gothic\" weight=\"bold\">" ++ str ++ "</span>"
-                     msg <- newSignal "/org/xmonad/Log" "org.xmonad.Log" "Update"
-                     addArgs msg [String str']
-                     -- If the send fails, ignore it.
-                     send dbus msg 0 `catchDyn` (\ (DBus.Error _name _msg) -> return 0)
-                     return ()
-                 , ppTitle    = pangoColor "#003366" . shorten 60 . escape
-                 , ppCurrent  = pangoColor "#003366" . wrap "[" "]"
-                 , ppVisible  = pangoColor "#006666" . wrap "_" ""
-                 , ppHidden   = wrap "" ""
-                 , ppUrgent   = pangoColor "red"
-                 }
-  }
-
-pangoColor :: String -> String -> String
-pangoColor fg = wrap left right
- where
-  left  = "<span foreground=\"" ++ fg ++ "\">"
-  right = "</span>"
-
-escape :: String -> String
-escape = concatMap escapeChar
-escapeChar :: Char -> String
-escapeChar '<' = "&lt;"
-escapeChar '>' = "&gt;"
-escapeChar '&' = "&amp;"
-escapeChar '"' = "&quot;"
-escapeChar c = [c]
-
-        -- startupHook        = myStartupHook
-    
+        layoutHook         = myLayout,
+        manageHook         = myManageHook,
+        handleEventHook    = myEventHook,
+        logHook            = myLogHook,
+        startupHook        = myStartupHook
+    }
