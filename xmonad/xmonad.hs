@@ -11,6 +11,8 @@ import XMonad
 import Data.Monoid
 import System.Exit
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.DynamicLog ( xmobar )
+import XMonad.Hooks.ICCCMFocus ( takeTopFocus )
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -25,7 +27,7 @@ myFocusFollowsMouse = True
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 1
+myBorderWidth   = 2
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -49,7 +51,7 @@ myWorkspaces    = ["1:term", "2:emacs", "3:web","4:vm", "5:mail","6:music","7","
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#dddddd"
+myNormalBorderColor  = "#00ff00"
 myFocusedBorderColor = "#ff0000"
 
 ------------------------------------------------------------------------
@@ -244,7 +246,8 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+-- myLogHook = return ()
+myLogHook = takeTopFocus
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -260,7 +263,7 @@ myStartupHook = return ()
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
+main = xmonad =<< xmobar defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
