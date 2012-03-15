@@ -56,3 +56,7 @@
 (require 'config-tramp)
 (require 'config-windows)
 (require 'config-yaml-mode)
+(if (eq system-type 'gnu/linux)
+    (progn
+      (require 'config-mozc))
+    )
