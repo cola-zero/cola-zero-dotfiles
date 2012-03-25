@@ -72,8 +72,6 @@
 (require-package 'mic-paren)
 (require-package 'rainbow-delimiters)
 (require-package 'marmalade)
-
-;; I maintain this chunk:
 (require-package 'ac-slime)
 (require-package 'vc-darcs)
 (require-package 'color-theme-sanityinc-solarized)
