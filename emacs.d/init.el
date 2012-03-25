@@ -14,6 +14,7 @@
 (require 'config-popwin)
 (require 'config-rvm)
 (require 'config-ruby-electric)
+(require 'config-ruby-mode)
 (require 'config-rinari)
 (require 'config-ri-emacs)
 (require 'config-sass-mode)
@@ -60,3 +61,4 @@
     (progn
       (require 'config-mozc))
     )
+(require 'config-evil)
