@@ -30,6 +30,7 @@
         "windows"
         "rvm" ;; https://github.com/senny/rvm.el/issues/18
         "autotest"
+        "evil"
         ))
 (el-get 'sync my-el-get-packages)
 
