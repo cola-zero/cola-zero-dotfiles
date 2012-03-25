@@ -13,6 +13,9 @@ import System.Exit
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog ( xmobar )
 import XMonad.Hooks.ICCCMFocus ( takeTopFocus )
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run (spawnPipe)
+import XMonad.Util.EZConfig (additionalKeys)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -47,12 +50,12 @@ myModMask       = mod4Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 -- myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces    = ["1:term", "2:emacs", "3:web","4:vm", "5:mail","6:music","7","8", "9"]
+myWorkspaces    = ["1:work", "2:irc", "3:web","4:vm", "5:mail","6:music","7","8", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#00ff00"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "#006600"
+myFocusedBorderColor = "#00ffff"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -116,6 +119,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
+    -- XF86AudioMute
+    , ((0            , 0x1008ff12), spawn "amixer -q set PCM toggle")
+
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
@@ -130,6 +136,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Lock screen
     , ((modm .|. shiftMask, xK_z    ), spawn "xscreensaver-command -lock")
+    -- XF86AudioLowerVolume
+    , ((0            , 0x1008ff11), spawn "aumix -v -2")
+    -- XF86AudioRaiseVolume
+    , ((0            , 0x1008ff13), spawn "aumix -v +2")
     ]
     ++
 
@@ -181,7 +191,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -215,10 +225,8 @@ myLayout = tiled ||| Mirror tiled ||| Full
 --     , className =? "Gimp"           --> doFloat
 --     , resource  =? "desktop_window" --> doIgnore
 --     , resource  =? "kdesktop"       --> doIgnore ]
-myManageHook = composeAll
-    [ className =? "Emacs"          --> doShift "2:emacs"
-    , className =? "VirtualBox"     --> doShift "4:vm"
-    , className =? "Firefox"        --> doShift "3:web"
+myManageHook = manageDocks <+> composeAll
+    [ className =? "VirtualBox"     --> doShift "4:vm"
     , className =? "Mail"           --> doShift "5:mail"
     , className =? "Thunderbird"    --> doShift "5:mail"
     , className =? "MPlayer"        --> doFloat
