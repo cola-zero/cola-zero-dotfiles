@@ -83,4 +83,10 @@
 ;; delete trailing whitespace when save buffere
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; create backupfile at Temp directory
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
 (provide 'config-builtin)
