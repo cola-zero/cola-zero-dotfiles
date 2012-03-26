@@ -10,3 +10,6 @@
 [submodule "emacs.d/org-ja"]
 	path = emacs.d/org-ja
 	url = git@github.com:org-mode-doc-ja/org-ja.git
+[submodule "oh-my-zsh"]
+	path = oh-my-zsh
+	url = git://github.com/robbyrussell/oh-my-zsh.git
