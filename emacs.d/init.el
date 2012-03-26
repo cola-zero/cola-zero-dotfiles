@@ -12,6 +12,7 @@
 (require 'config-auto-async-byte-compile)
 (require 'config-dired)
 (require 'config-popwin)
+(require 'config-flymake)
 (require 'config-rvm)
 (require 'config-ruby-electric)
 (require 'config-ruby-mode)

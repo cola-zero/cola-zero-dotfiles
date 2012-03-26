@@ -17,5 +17,11 @@
 (add-to-list 'auto-mode-alist '("thor$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("gemspec$" . ruby-mode))
 
+(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+
+(add-hook
+ 'ruby-mode-hook
+ '(lambda ()
+    (define-key ruby-mode-map "\C-cd" 'flymake-display-err-menu-for-current-line)))
 
 (provide 'config-ruby-mode)
