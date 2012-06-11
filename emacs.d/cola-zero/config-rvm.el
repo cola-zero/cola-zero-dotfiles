@@ -1,5 +1,5 @@
-;; (require 'rvm)
-;; (rvm-use-default)
-;; ;; (rvm-autodetect-ruby)
+(require 'rvm)
+(rvm-use-default)
+;; (rvm-autodetect-ruby)
 
 (provide 'config-rvm)

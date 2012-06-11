@@ -1,8 +1,6 @@
 (setq user-mail-address "colazero@mail.mkoga.net"
       user-full-name "Masahiro Koga")
 
-(setq gnus-ignored-from-addresses "masahirokoga")
-
 (setq gnus-select-method
       '(nnimap "Mail"
                (nnimap-address "localhost")

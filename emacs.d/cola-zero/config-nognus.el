@@ -1,3 +1,3 @@
-(setq mm-text-html-render 'w3m)
+;(setq mm-text-html-render 'w3m)
 
 (provide 'config-nognus)

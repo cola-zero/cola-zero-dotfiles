@@ -12,17 +12,16 @@
 (el-get-emacswiki-refresh (expand-file-name "~/.emacs.d/el-get/el-get/recipes/emacswiki"))
 
 (setq my-el-get-packages
-      '("auto-complete"
+      '("auto-complete" ;; *
         "calfw"
         "auto-async-byte-compile"
-        "apel"
+;;        "apel"
         "deferred"
         "e2wm"
         "window-layout"
         "emacs-w3m"
         "id-manager"
         "nognus"
-        "org-mode"
         "org-jekyll"
         "po-mode"
         "ri-emacs"
@@ -31,6 +30,7 @@
         "rvm" ;; https://github.com/senny/rvm.el/issues/18
         "autotest"
         "evil"
+        "org-mode"
         ))
 (el-get 'sync my-el-get-packages)
 

@@ -39,7 +39,7 @@
           (setq org-mobile-inbox-for-pull (concat org-directory "mobile.org"))))
 
 ;; org-export-general.el
-(require 'org-export-generic)
+(require 'org-export-generic nil t)
 
 ;; org-protocol
 (require 'org-protocol)

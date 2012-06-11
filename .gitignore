@@ -1,4 +1,6 @@
 emacs.d/abbrev_defs
+emacs.d/bookmarks
+emacs.d/url/cookies
 emacs.d/custom.el
 emacs.d/oauth2.plstore
 emacs.d/tramp

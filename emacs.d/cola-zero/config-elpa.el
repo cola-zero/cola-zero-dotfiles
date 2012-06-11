@@ -16,6 +16,7 @@
     (setq load-path (remove package-el-site-lisp-dir load-path))))
 
 (require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 
@@ -24,6 +25,11 @@
 (require-package 'ido-ubiquitous)
 (when (< emacs-major-version 24)
   (require-package 'color-theme))
+(require-package 'magit)
+(require-package 'deferred)
+;(require-package 'e2wm)
+(require-package 'rvm)
+(require-package 'auto-complete)
 (require-package 'popwin)
 (require-package 'c-eldoc)
 (require-package 'ecb)
@@ -103,5 +109,6 @@
 (require-package 'ruby-compilation)
 (require-package 'iy-go-to-char)
 (require-package 'scala-mode)
+(require-package 'offlineimap)
 
 (provide 'config-elpa)

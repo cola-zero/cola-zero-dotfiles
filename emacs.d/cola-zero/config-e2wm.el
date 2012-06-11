@@ -1,5 +1,6 @@
-(require 'window-layout)
-(require 'e2wm-config)
+;(require 'window-layout)
+;(require 'e2wm-config)
+(require 'e2wm)
 (require 'e2wm-vcs)
 (global-set-key (kbd "M-+") 'e2wm:start-management)
 (e2wm:add-keymap
