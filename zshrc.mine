@@ -29,16 +29,18 @@ darwin11.*)
         export PATH="${HOME}/opt/bin:$PATH"
 		;;
 linux-gnu)
+        export PATH=$HOME/opt/bin:$PATH
 		export PATH=$HOME/.cabal/bin:$HOME/linux/opt/ghc-6.12.1/bin:$HOME/linux/local/app/haskell-platform-2010.1.0.0/bin:$GOBIN:$HOME/linux/opt/rurema:$HOME/linux/opt/ruby19/bin:$HOME/linux/opt/rsense-0.2/bin:$HOME/.cabal/bin:$HOME/local/bin:$HOME/linux/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/$HOME/.gem/ruby/1.9.1/bin:/opt/ruby19/lib/ruby/gems/1.9.1:$HOME/.gem/ruby/1.8/bin:$PATH
 		export PATH=$HOME/linux/local/app/emacs-23.2/bin:$PATH
 		export PATH=$HOME/linux/local/app/ruby18/bin:$PATH
 		export PATH=$HOME/linux/local/app/gcc-code-assist-0.1.4.4.4/bin:$PATH
 		export PATH=$HOME/linux/local/app/global-5.8.2/bin:$PATH
-		export PATH=$HOME/opt/hatena-diary-writer:$PATH
+		export PATH=$HOME/opt/emacs/bin:$PATH
 #		export PATH=$HOME/.gem/ruby/1.8/bin:$PATH
 		export PATH=$HOME/opt/firefox:$PATH
 		export PATH=$HOME/.cabal/bin:$PATH
 		export PATH=/var/lib/gems/1.8/bin/:$PATH
+        export PATH=$HOME/opt/gauche/bin:$PATH
 		export GOROOT=$HOME/linux/opt/go
 		export GOBIN=$GOROOT/bin
 		export GOOS=linux
@@ -48,7 +50,8 @@ linux-gnu)
 		export GCC_SENSE_HOME=/home/project/vglc/koga
 		export RSPEC=true
 		export EDITOR=emacs
-		export PAGER='lv -ic'
+		export PAGER='less'
+    unset RUBYOPT
 		;;
 esac
 
@@ -64,6 +67,8 @@ source ${HOME}/.zsh_aliases
 #rbenv
 #eval "$(rbenv init -)"
 #[[ -s "$HOME/.rbenv/completions/rbenv.zsh" ]] && source "$HOME/.rbenv/completions/rbenv.zsh"
+#export RBX_ROOT=$HOME/.rbenv/versions/rbx-2.0.0-dev
+#export PATH=$RBX_ROOT/gems/1.9/bin:$PATH
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 

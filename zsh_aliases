@@ -4,22 +4,23 @@ if [[ $OSTYPE = darwin* ]]; then
 source /usr/local/Cellar/coreutils/8.14/aliases
 alias ls='gls -F --color=auto'
 alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
-alias ec='/usr/local/bin/emacsclient -t -n'
-alias et='/usr/local/bin/emacsclient -t -n'
-alias ecn='/usr/local/bin/emacsclient -t'
+alias ec='/usr/local/bin/emacsclient -t -n -a ""'
+alias et='/usr/local/bin/emacsclient -t -n -a ""'
+alias ecn='/usr/local/bin/emacsclient -t -a ""'
 fi
 
 # color option can't use in solaris
 if [[ $OSTYPE = linux-gnu ]]; then
 alias ls='ls -F --color=auto'
-alias ec='emacsclient -c -n'
-alias et='emacsclient -t -n'
-alias ecn='emacsclient -t'
+alias ec='emacsclient -c -n -a ""'
+alias et='emacsclient -t -n -a ""'
+alias ecn='emacsclient -t -a ""'
 fi
 alias la='ls -lag'
 alias l='ls -F'
 alias eterm='xterm -en euc-jp'
 alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
+alias less='lv -ic'
 # alias screen='screen -s /bin/zsh'
 
 # ruby development

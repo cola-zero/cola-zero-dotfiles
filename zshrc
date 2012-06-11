@@ -5,7 +5,10 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="wezm"
+#ZSH_THEME="wezm"
+#ZSH_THEME="sunrise"
+#ZSH_THEME="crunch"
+ZSH_THEME="simple"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -25,7 +28,7 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rails ruby gem heroku rails3 rake rbenv bundler command-not-found debian)
+plugins=(git rails ruby gem heroku rails3 rake rvm debian)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -54,3 +57,5 @@ bindkey "\\ep" history-beginning-search-backward-end
 bindkey "\\en" history-beginning-search-forward-end
 
 source $HOME/.zshrc.mine
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
