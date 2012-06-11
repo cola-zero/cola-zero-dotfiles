@@ -1,7 +1,7 @@
 " taskpaper.vim
 " map carriage return to create new todo entry
-autocmd filetype taskpaper :nnoremap <buffer> <C-m> o- 
-autocmd filetype taskpaper :inoremap <buffer> <C-m> <ESC>o- 
+"autocmd filetype taskpaper :nnoremap <buffer> <C-m> o- 
+"autocmd filetype taskpaper :inoremap <buffer> <C-m> <ESC>o- 
 
 nmap <Space>b :ls<CR>:buffer
 nmap <Space>f :edit .<CR>
