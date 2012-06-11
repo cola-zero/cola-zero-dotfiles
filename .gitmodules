@@ -1,9 +1,6 @@
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = http://github.com/gmarik/vundle.git
-[submodule "emacs.d/el-get/el-get"]
-	path = emacs.d/el-get/el-get
-	url = http://github.com/dimitri/el-get.git
 [submodule "emacs.d/cola-zero/emacsmirror-rcp"]
 	path = emacs.d/cola-zero/emacsmirror-rcp
 	url = https://github.com/edenc/emacsmirror-rcp.git
