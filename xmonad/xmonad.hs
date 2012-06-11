@@ -14,6 +14,8 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog ( xmobar )
 import XMonad.Hooks.ICCCMFocus ( takeTopFocus )
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Layout.NoBorders
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.EZConfig (additionalKeys)
 import qualified XMonad.StackSet as W
@@ -22,7 +24,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "urxvt"
+myTerminal      = "Terminal"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -50,7 +52,7 @@ myModMask       = mod4Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 -- myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces    = ["1:work", "2:irc", "3:web","4:vm", "5:mail","6:music","7","8", "9"]
+myWorkspaces    = ["1:work", "2:web", "3:music","4:vm", "5:mail","6","7","8", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -120,13 +122,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- XF86AudioMute
-    , ((0            , 0x1008ff12), spawn "amixer -q set PCM toggle")
+    , ((0            , 0x1008ff12), spawn "amixer sset Master,0 toggle")
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
@@ -136,10 +138,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Lock screen
     , ((modm .|. shiftMask, xK_z    ), spawn "xscreensaver-command -lock")
+    , ((modm .|. shiftMask, xK_l    ), spawn "xscreensaver-command -lock")
     -- XF86AudioLowerVolume
-    , ((0            , 0x1008ff11), spawn "aumix -v -2")
+    , ((0            , 0x1008ff11), spawn "amixer -c 0 sset Master,0 3dB- unmute")
     -- XF86AudioRaiseVolume
-    , ((0            , 0x1008ff13), spawn "aumix -v +2")
+    , ((0            , 0x1008ff13), spawn "amixer -c 0 sset Master,0 3dB+ unmute")
     ]
     ++
 
@@ -191,7 +194,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full
+myLayout = smartBorders (avoidStruts $ tiled  ||| Mirror tiled ||| (noBorders Full))
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -233,7 +236,10 @@ myManageHook = manageDocks <+> composeAll
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
-    , resource  =? "Rhythmbox"      --> doShift "8:music"
+    , resource  =? "Rhythmbox"      --> doShift "3:music"
+    , resource  =? "gmpc"           --> doShift "3:music"
+    , className =? "Goldendict"     --> doIgnore
+    , className =? "java-lang-Thread" --> doFloat
     , isFullscreen                  --> doFullFloat
     ]
 
@@ -246,7 +252,7 @@ myManageHook = manageDocks <+> composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
