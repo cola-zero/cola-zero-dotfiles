@@ -1,3 +1,7 @@
+emacs.d/abbrev_defs
+emacs.d/custom.el
+emacs.d/oauth2.plstore
+emacs.d/tramp
 emacs.d/site-lisp
 emacs.d/packages
 emacs.d/auto-install
@@ -8,12 +12,17 @@ emacs.d/ac-comphist.dat
 emacs.d/el-get
 emacs.d/elpa
 emacs.d/swank
+emacs.d/session.*
 emacs.d_old
 emacs.d.old
 *.elc
 xmonad/xmonad-i386-darwin
+xmonad/xmonad-x86_64-linux
 xmonad/xmonad.errors
 xmonad/*.hi
 xmonad/*.o
+xmonad/xmonad
 *~
+\#*\#
+*.old
 vim/bundle
