@@ -6,6 +6,7 @@
                (nnimap-address "localhost")
                (nnimap-stream network)
                (nnir-search-engine imap)
+               (nnimap-expunge nil)
                ))
 (add-to-list 'gnus-secondary-select-methods
              '(nntp "news.gnus.org"))
@@ -17,6 +18,7 @@
                (nnimap-authinfo-file "~/.emacs.d/.authinfo")
                (nnimap-stream ssl)
                (nnir-search-engine imap)
+               (nnimap-expunge nil)
                ))
 
 (setq gnus-posting-styles
