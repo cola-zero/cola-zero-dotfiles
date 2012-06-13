@@ -1,4 +1,4 @@
-;(require 'window-layout)
+(require 'window-layout)
 ;(require 'e2wm-config)
 (require 'e2wm)
 (require 'e2wm-vcs)
