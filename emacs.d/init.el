@@ -50,7 +50,7 @@
 (require 'config-nognus)
 (require 'config-org-ja)
 (require 'config-org-mode)
-(require 'config-org-jekyll)
+(require 'config-org-octopress)
 (require 'config-paredit)
 (require 'config-po-mode)
 (require 'config-rsense)
