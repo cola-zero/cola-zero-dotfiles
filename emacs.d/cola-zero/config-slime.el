@@ -1,7 +1,7 @@
-(setq inferior-lisp-program "ccl")
-(require 'slime)
-;; (require 'slime-fuzzy)
-(require 'slime-repl)
+;; (setq inferior-lisp-program "ccl")
+;; (require 'slime)
+;; ;; (require 'slime-fuzzy)
+;; (require 'slime-repl)
 ;;(require 'slime-fancy)
 ;; (slime-setup '(slime-repl slime-fuzzy))
 ;; (require 'slime-autoloads)
@@ -12,5 +12,7 @@
 ;; (eval-after-load "slime"
 ;;    '(slime-setup '(slime-fancy slime-banner)))
 ;; (setq slime-net-coding-system 'utf-8-unix)
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
 
 (provide 'config-slime)

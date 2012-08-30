@@ -34,8 +34,8 @@
 (setq transient-mark-mode t)
 
 ;; Emacs gurus don't need no stinking scroll bars
-(when (fboundp 'toggle-scroll-bar)
-  (toggle-scroll-bar -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 
 ;; Explicitly show the end of a buffer
 (set-default 'indicate-empty-lines t)
@@ -88,5 +88,7 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+
+(setq visible-bell t)
 
 (provide 'config-builtin)

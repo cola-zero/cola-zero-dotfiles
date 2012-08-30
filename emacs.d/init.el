@@ -57,16 +57,12 @@
 (require 'config-rsense)
 (require 'config-session)
 (require 'config-tramp)
-;(require 'config-windows)
 (require 'config-yaml-mode)
-(if (eq system-type 'gnu/linux)
-    (progn
-      (require 'config-mozc)
-      )
-    )
-;(require 'config-evil)
+(require 'config-skk)
+(require 'config-sdic)
+(require 'config-znc)
+(require 'config-multi-term)
+(require 'config-helm)
 
-(color-theme-sanityinc-solarized-light)
-(set-frame-parameter (selected-frame) 'alpha '(85 70))
-(add-to-list 'default-frame-alist '(alpha 85 70))
-(setq visible-bell t)
+;; capture-mylife.el
+(load "capture-mylife.el")
