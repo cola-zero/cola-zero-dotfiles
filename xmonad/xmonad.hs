@@ -52,7 +52,7 @@ myModMask       = mod4Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 -- myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces    = ["1:work", "2:web", "3:music","4:vm", "5:mail","6","7","8", "9"]
+myWorkspaces    = ["1:work", "2:web", "3:vm","4:mail", "5","6","7","8:music", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -229,15 +229,15 @@ myLayout = smartBorders (avoidStruts $ tiled  ||| Mirror tiled ||| (noBorders Fu
 --     , resource  =? "desktop_window" --> doIgnore
 --     , resource  =? "kdesktop"       --> doIgnore ]
 myManageHook = manageDocks <+> composeAll
-    [ className =? "VirtualBox"     --> doShift "4:vm"
-    , className =? "Mail"           --> doShift "5:mail"
-    , className =? "Thunderbird"    --> doShift "5:mail"
+    [ className =? "VirtualBox"     --> doShift "3:vm"
+    , className =? "Mail"           --> doShift "4:mail"
+    , className =? "Thunderbird"    --> doShift "4:mail"
     , className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
-    , resource  =? "Rhythmbox"      --> doShift "3:music"
-    , resource  =? "gmpc"           --> doShift "3:music"
+    , resource  =? "Rhythmbox"      --> doShift "8:music"
+    , resource  =? "gmpc"           --> doShift "8:music"
     , className =? "Goldendict"     --> doIgnore
     , className =? "java-lang-Thread" --> doFloat
     , isFullscreen                  --> doFullFloat

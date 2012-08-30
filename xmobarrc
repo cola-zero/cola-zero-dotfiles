@@ -18,4 +18,5 @@ Config { font = "xft:VL Gothic-10"
        , sepChar = "%"
        , alignSep = "}{"
        , template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %battery% | %wlan0wi% | %default:Master% <fc=#ee9a00>%date%</fc>"
+--       , template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %battery% | %wlan0wi% | <fc=#ee9a00>%date%</fc>"
        }
