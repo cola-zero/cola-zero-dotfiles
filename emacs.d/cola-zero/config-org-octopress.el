@@ -11,10 +11,12 @@
                  :body-only t))))
 
 (defun auto-export-my-blog ()
-  (let* ((project (assoc "blog" org-publish-project-alist))
-         (files (org-publish-get-base-files project)))
-    (if (member buffer-file-name files)
-       (org-publish-current-file))))
+  (let* ((project-plist (cdr (assoc "blog" org-publish-project-alist)))
+         (project-dir (expand-file-name
+                       (plist-get project-plist :base-directory))))
+    (save-excursion
+      (if (string= project-dir (file-name-directory buffer-file-name))
+          (org-publish-current-file)))))
 
 (add-hook 'after-save-hook
           'auto-export-my-blog)
