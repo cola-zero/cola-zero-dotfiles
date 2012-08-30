@@ -15,6 +15,7 @@ emacs.d/el-get
 emacs.d/elpa
 emacs.d/swank
 emacs.d/session.*
+emacs.d/capture-mylife
 emacs.d_old
 emacs.d.old
 *.elc
