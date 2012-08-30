@@ -20,7 +20,6 @@ alias la='ls -lag'
 alias l='ls -F'
 alias eterm='xterm -en euc-jp'
 alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
-alias less='lv -ic'
 # alias screen='screen -s /bin/zsh'
 
 # ruby development
