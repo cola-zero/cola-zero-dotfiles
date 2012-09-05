@@ -14,9 +14,11 @@ Config { font = "xft:VL Gothic-10"
                     , Run StdinReader
                     , Run Wireless "wlan0" ["-t","( <essid> <quality>% )","-L","25","-H","75","--low","#FF0000","--normal","#F9FF00","--high","#00FF00"] 100
                     , Run Volume "default" "Master" [] 50
+                    , Run DiskU [("/home", "/home: <usedbar>"), ("/", "/: <usedbar>")]
+                                ["-L", "20", "-H", "50", "-m", "1", "-p", "3"]
+                                60
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %battery% | %wlan0wi% | %default:Master% <fc=#ee9a00>%date%</fc>"
---       , template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %battery% | %wlan0wi% | <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %disku% | %battery% | %wlan0wi% | %default:Master% <fc=#ee9a00>%date%</fc>"
        }
