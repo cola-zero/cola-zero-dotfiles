@@ -29,3 +29,4 @@ xmonad/xmonad
 \#*\#
 *.old
 vim/bundle
+/lein/self-installs
