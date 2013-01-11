@@ -100,3 +100,5 @@ export QT_IM_MODULE=ibus
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$HOME/opt/bin:$PATH
+
+export GTK_IM_MODULE_FILE=/usr/lib/gtk-3.0/3.0.0/immodules.cache
