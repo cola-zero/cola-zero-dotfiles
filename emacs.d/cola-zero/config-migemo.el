@@ -9,7 +9,7 @@
       (setq migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict"))
   (progn
     (setq migemo-coding-system 'euc-jp-unix)
-    (setq migemo-dictionary "/usr/share/migemo/migemo-dict"))
+    (setq migemo-dictionary "/usr/share/migemo/euc-jp/migemo-dict"))
   )
 (load-library "migemo")
 (migemo-init)

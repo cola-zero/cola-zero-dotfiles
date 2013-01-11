@@ -5,5 +5,6 @@
 (add-hook 'ielm-mode-hook 'enable-paredit-mode)
 (add-hook 'clojure-mode-hook 'enable-paredit-mode)
 (add-hook 'slime-repl-mode-hook 'enable-paredit-mode)
+(add-hook 'nrepl-mode-hook 'enable-paredit-mode)
 
 (provide 'config-paredit)
