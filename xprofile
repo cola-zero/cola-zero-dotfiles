@@ -1,4 +1,6 @@
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
- export VTE_CJK_WIDTH=2
+export VTE_CJK_WIDTH=2
+ 
+export NSS_SSL_ENABLE_RENEGOTIATION=1
