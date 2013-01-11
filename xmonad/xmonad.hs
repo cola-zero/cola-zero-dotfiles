@@ -15,16 +15,24 @@ import XMonad.Hooks.DynamicLog ( xmobar )
 import XMonad.Hooks.ICCCMFocus ( takeTopFocus )
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.SetWMName ( setWMName )
+import XMonad.ManageHook
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.EZConfig (additionalKeys)
+import XMonad.Util.NamedScratchpad (NamedScratchpad(NS),
+                                    namedScratchpadAction,
+                                    namedScratchpadManageHook,
+                                    defaultFloating,
+                                    nonFloating,
+                                    customFloating)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "Terminal"
+myTerminal      = "terminator"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -32,7 +40,7 @@ myFocusFollowsMouse = True
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 3
+myBorderWidth   = 2
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -52,12 +60,35 @@ myModMask       = mod4Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 -- myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces    = ["1:work", "2:web", "3:vm","4:mail", "5","6","7","8:music", "9"]
+myWorkspaces    = ["1:work", "2:web", "3:irc","4:mail", "5:vm","6","7","8:music", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#006600"
-myFocusedBorderColor = "#00ffff"
+-- myNormalBorderColor  = "#eeeeee"
+-- myFocusedBorderColor = "#aa2a2f"
+myNormalBorderColor  = "green"
+myFocusedBorderColor = "red"
+
+-- Named scratchpad config
+scratchpads = [
+
+  NS "console" "terminator -e tmux --title=tmux"  (title =? "tmux") nonFloating,
+
+  -- run htop in terminator, find it by title, use default floating window placement
+  NS "htop" "terminator -e htop -T htop" (title =? "htop") defaultFloating ,
+
+
+  NS "messages" "terminator -T messages -x tail -f /var/log/messages.log" (title =? "messages") defaultFloating ,
+
+  -- run stardict, find it by class name, place it in the floating window
+  -- 1/6 of screen width from the left, 1/6 of screen height
+  -- from the top, 2/3 of screen width by 2/3 of screen height
+  NS "stardict" "stardict" (className =? "Stardict")
+     (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+
+  ] where role = stringProperty "WM_WINDOW_ROLE"
+
+
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -68,7 +99,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "synapse")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -162,6 +193,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    ++
+
+    --
+    -- launch named scratchpad
+    --
+    [ ((modm .|. controlMask .|. shiftMask, xK_c), namedScratchpadAction scratchpads "console")
+    , ((modm .|. controlMask .|. shiftMask, xK_h), namedScratchpadAction scratchpads "htop")
+    , ((modm .|. controlMask .|. shiftMask, xK_l), namedScratchpadAction scratchpads "messages")
+    , ((modm .|. controlMask .|. shiftMask, xK_s), namedScratchpadAction scratchpads "stardict")]
 
 
 ------------------------------------------------------------------------
@@ -228,19 +268,26 @@ myLayout = smartBorders (avoidStruts $ tiled  ||| Mirror tiled ||| (noBorders Fu
 --     , className =? "Gimp"           --> doFloat
 --     , resource  =? "desktop_window" --> doIgnore
 --     , resource  =? "kdesktop"       --> doIgnore ]
-myManageHook = manageDocks <+> composeAll
-    [ className =? "VirtualBox"     --> doShift "3:vm"
+myManageHook = namedScratchpadManageHook scratchpads <+> manageDocks <+> composeAll
+    [ className =? "VirtualBox"     --> doShift "5:vm"
+    , className =? "virt-manager"   --> doShift "5:vm"
     , className =? "Mail"           --> doShift "4:mail"
     , className =? "Thunderbird"    --> doShift "4:mail"
     , className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
+--    , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
     , resource  =? "Rhythmbox"      --> doShift "8:music"
     , resource  =? "gmpc"           --> doShift "8:music"
     , className =? "Goldendict"     --> doIgnore
     , className =? "java-lang-Thread" --> doFloat
+    , className =? "Quasselclient"  --> doShift "3:irc"
+    , className =? "Synapse"        --> doFloat
     , isFullscreen                  --> doFullFloat
+    , className =? "net-minecraft-LauncherFrame" --> doFloat
+    , className =? "magic-launcher-MagicLauncher" --> doFloat
+    , className =? "magic-launcher-Launcher" --> doFloat
+    , className =? "Synapse" --> doIgnore
     ]
 
 ------------------------------------------------------------------------
@@ -271,7 +318,7 @@ myLogHook = takeTopFocus
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
-myStartupHook = return ()
+myStartupHook = setWMName "LG3D"
 
 -- Now run xmonad with all the defaults we set up.
 

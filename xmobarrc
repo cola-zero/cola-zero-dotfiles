@@ -1,23 +1,32 @@
 Config { font = "xft:VL Gothic-10"
        , bgColor = "black"
        , fgColor = "grey"
-       , position = TopW L 93
+       , position = TopW L 90
        , lowerOnStart = True
-       , commands = [Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 50
---                     , Run CpuFreq ["-t", "Freq:<cpu0>|<cpu1>|<cpu2>|<cpu3>GHz",
---                                    "-L", "0", "-H", "2",
---                                    "-l", "lightblue", "-n","white", "-h", "red"] 50
-                    , Run Memory ["-t","M: <usedratio>%"] 100
-                    , Run Date "%a %b %_d %l:%M" "date" 30
-                    , Run Battery ["-t","B: <left>%","-L","25","-H","75","--low","#FF0000","--normal","#F9FF00","--high","#00FF00", "--", "-c", "energy_full"] 600
+       , commands = [Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 20
+                    , Run Memory ["-t","M: <usedratio>%"] 50
+                    , Run Date "%a %b %_d %l:%M" "date" 300
+                    , Run Battery ["-t","<acstatus><left>%",
+                                   "-L","25","-H","75",
+                                   "--low","#FF0000",
+                                   "--normal","#F9FF00",
+                                   "--high","#00FF00",
+                                   "--",
+                                   "-O", "<fc=green>+</fc>",
+                                   "-o", "<fc=red>-</fc>"] 100
                     , Run StdinReader
-                    , Run Wireless "wlan0" ["-t","( <essid> <quality>% )","-L","25","-H","75","--low","#FF0000","--normal","#F9FF00","--high","#00FF00"] 100
-                    , Run Volume "default" "Master" [] 50
-                    , Run DiskU [("/home", "/home: <usedbar>"), ("/", "/: <usedbar>")]
+                    , Run Wireless "wlan0" ["-t","<essid> <quality>%","-L","25","-H","75","--low","#FF0000","--normal","#F9FF00","--high","#00FF00"] 50
+                    , Run Volume "default" "Master" [] 20
+                    , Run DiskU [("/home", "/home:<usedp>%"), ("/", "/:<usedp>%")]
                                 ["-L", "20", "-H", "50", "-m", "1", "-p", "3"]
-                                60
+                                600
+                    , Run CoreTemp ["-t", "<core0>℃",
+                                    "-L", "50", "-H", "86",
+                                    "--low", "lightblue",
+                                    "--normal", "gray90",
+                                    "--high", "red"] 20
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% | %disku% | %battery% | %wlan0wi% | %default:Master% <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{ %cpu%|%memory%|%coretemp%|%battery%|%wlan0wi%|%default:Master%<fc=#ee9a00>%date%</fc>"
        }
