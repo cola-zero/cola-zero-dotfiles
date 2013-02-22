@@ -1,4 +1,5 @@
-(when (require 'skk nil t)
-  (global-set-key "\C-\\" 'skk-mode))
-
+;; (when (require 'skk nil t)
+;;   (global-set-key "\C-\\" 'skk-mode))
+(autoload 'skk "skk" nil t)
+(global-set-key "\C-\\" 'skk-mode)
 (provide 'config-skk)

@@ -1,4 +1,4 @@
-(require 'migemo)
+;(require 'migemo)
 (setq migemo-command "cmigemo")
 (setq migemo-options '("-q" "--emacs"))
 (setq migemo-user-dictionary nil)

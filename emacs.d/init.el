@@ -1,3 +1,11 @@
+(defadvice require (around require-benchmark activate)
+  (let* ((before (current-time))
+         (result ad-do-it)
+         (after  (current-time))
+         (time (+ (* (- (nth 1 after) (nth 1 before)) 1000)
+                  (/ (- (nth 2 after) (nth 2 before)) 1000))))
+    (when (> time 50)
+      (message "%s: %d msec" (ad-get-arg 0) time))))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/cola-zero"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
@@ -24,6 +32,7 @@
 (require 'config-cl-indent-patches)
 (require 'config-slime)
 (require 'config-clojure-mode)
+(require 'config-kibit-mode)
 (require 'config-ac-slime)
 (require 'config-scheme-mode)
 ;;(require 'config-e2wm)
@@ -70,5 +79,9 @@
 
 
 (require 'config-tabbar-mode)
+
+(require 'config-w3m)
+
+(require 'config-wanderlust)
 
 (cd (expand-file-name "~/"))

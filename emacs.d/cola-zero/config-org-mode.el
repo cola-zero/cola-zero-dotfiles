@@ -39,10 +39,12 @@
           (setq org-mobile-inbox-for-pull (concat org-directory "mobile.org"))))
 
 ;; org-export-general.el
-(require 'org-export-generic nil t)
+;(require 'org-export-generic nil t)
+(autoload 'org-export-generic "org-export-generic" nil t)
 
 ;; org-protocol
-(require 'org-protocol)
+;(require 'org-protocol)
+(autoload 'org-protocol "org-protocol" nil t)
 
 ;;[[http://hpcgi1.nifty.com/spen/?OrgMode%252FOrgForGTD#i26][OrgMode/OrgForGTD - Org-mode¤ÇGTD:Google Chrome]]
 (defun gtd ()

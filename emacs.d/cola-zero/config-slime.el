@@ -1,5 +1,5 @@
 ;; (setq inferior-lisp-program "ccl")
-(require 'slime)
+;(require 'slime)
 ;; ;; (require 'slime-fuzzy)
 ;; (require 'slime-repl)
 ;;(require 'slime-fancy)
@@ -15,24 +15,22 @@
 ;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
 ;; (setq inferior-lisp-program "sbcl")
 
-(let* ((ver  (package-version-join
-              (package-desc-vers (cdr (assq 'slime package-alist)))))
-       (path (package--dir "slime" ver)))
-  (add-to-list 'load-path (concat path "/contrib")))
-(require 'slime-fuzzy)
-(require 'slime-tramp)
+(eval-after-load "slime"
+  '(progn
+     (let* ((ver  (package-version-join
+                   (package-desc-vers (cdr (assq 'slime package-alist)))))
+            (path (package--dir "slime" ver)))
+       (add-to-list 'load-path (concat path "/contrib")))
+     (require 'slime-fuzzy)
+     (require 'slime-tramp)
 
-(push '(".*" #'convert-standard-filename #'identify)
-      slime-filename-translations)
-
-(push (slime-create-filename-translator :machine-instance "presice64"
-                                        :remote-host "presice64"
-                                        :username "vagrant")
-      slime-filename-translations)
-
-
-
-(slime-setup '(slime-fuzzy slime-tramp))
+     (push '(".*" #'convert-standard-filename #'identify)
+           slime-filename-translations)
+     (push (slime-create-filename-translator :machine-instance "presice64"
+                                             :remote-host "presice64"
+                                             :username "vagrant")
+           slime-filename-translations)
+     (slime-setup '(slime-fuzzy slime-tramp))))
 
 ;; ;; https://groups.google.com/forum/?fromgroups=#!topic/swank-clojure/av0vE-z54ZQ
 ;; (defun slime-tramp-local-filename (f)
