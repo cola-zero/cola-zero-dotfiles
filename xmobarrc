@@ -1,7 +1,7 @@
 Config { font = "xft:VL Gothic-10"
        , bgColor = "black"
        , fgColor = "grey"
-       , position = TopW L 90
+       , position = TopW L 89
        , lowerOnStart = True
        , commands = [Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 20
                     , Run Memory ["-t","M: <usedratio>%"] 50
