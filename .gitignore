@@ -18,6 +18,9 @@ emacs.d/session.*
 emacs.d/capture-mylife
 emacs.d_old
 emacs.d.old
+emacs.d/.session
+emacs.d/eshell/history
+
 *.elc
 xmonad/xmonad-i386-darwin
 xmonad/xmonad-x86_64-linux
@@ -30,3 +33,4 @@ xmonad/xmonad
 *.old
 vim/bundle
 /lein/self-installs
+/lein/indices
