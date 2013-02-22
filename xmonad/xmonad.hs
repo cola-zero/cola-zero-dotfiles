@@ -40,7 +40,7 @@ myFocusFollowsMouse = True
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 2
+myBorderWidth   = 3
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -78,7 +78,7 @@ scratchpads = [
   NS "htop" "terminator -e htop -T htop" (title =? "htop") defaultFloating ,
 
 
-  NS "messages" "terminator -T messages -x tail -f /var/log/messages.log" (title =? "messages") defaultFloating ,
+  NS "messages" "terminator -T messages -x tail -f /var/log/messages" (title =? "messages") defaultFloating ,
 
   -- run stardict, find it by class name, place it in the floating window
   -- 1/6 of screen width from the left, 1/6 of screen height
