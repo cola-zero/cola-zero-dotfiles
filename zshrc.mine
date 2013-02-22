@@ -81,6 +81,8 @@ source ${HOME}/.zsh_aliases
 export ACLOCAL_ARGS="-I /usr/local/share/aclocal/ -I /usr/local/Cellar/cutter/1.1.0/share/aclocal/"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
+[ -s "$HOME/work/gentoo/z/z.sh" ] && . $HOME/work/gentoo/z/z.sh
+
 if [ -x "`which keychain 2>/dev/null`" ]; then
     keychain ~/.ssh/id_rsa
     . ~/.keychain/$HOST-sh
