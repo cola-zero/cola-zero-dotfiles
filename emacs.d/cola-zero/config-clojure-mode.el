@@ -18,6 +18,7 @@
          (progn
            (nrepl-interaction-mode)
            (setq fill-column 80)
+           (auto-fill-mode)
            (fci-mode)))
 
        (setq nrepl-ritz-javadoc-local-paths
