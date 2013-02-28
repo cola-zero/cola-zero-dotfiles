@@ -11,12 +11,14 @@
 
        (add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
        (defun my-nrepl-mode-setup ()
-         (require 'nrepl-ritz)
-         (fci-mode))
+         (require 'nrepl-ritz))
 
        (add-hook 'clojure-mode-hook 'my-clojure-mode-setup)
        (defun my-clojure-mode-setup ()
-         (nrepl-interaction-mode))
+         (progn
+           (nrepl-interaction-mode)
+           (setq 'fill-column 80)
+           (fci-mode)))
 
        (setq nrepl-ritz-javadoc-local-paths
              (list (concat (expand-file-name "~") "/opt/share/docs/java")))
