@@ -126,5 +126,6 @@
 (require-package 'multi-term)
 (require-package 'calfw)
 (require-package 'color-moccur)
+(require-package 'fill-column-indicator)
 
 (provide 'config-elpa)
