@@ -17,7 +17,7 @@
        (defun my-clojure-mode-setup ()
          (progn
            (nrepl-interaction-mode)
-           (setq 'fill-column 80)
+           (setq fill-column 80)
            (fci-mode)))
 
        (setq nrepl-ritz-javadoc-local-paths
